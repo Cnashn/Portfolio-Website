@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { navLinks } from "../constants";
 import { linkedin, github, logo, menu, close } from "../assets";
 
 const Navbar = () => {
@@ -11,7 +10,7 @@ const Navbar = () => {
     {id: "", title: "Home" },
     { id: "about", title: "About" },
     { id: "work", title: "Work" },
-    { id: "tech", title: "Tech Stack" },
+    { id: "tech", title: "Tech" },
     { id: "projects", title: "Projects" },
   ];
 

@@ -1,97 +1,83 @@
 import {
-  mobile,
-  backend,
-  creator,
-  web,
-  javascript,
-  typescript,
-  html,
-  css,
-  reactjs,
-  redux,
-  tailwind,
-  nodejs,
-  mongodb,
-  git,
-  figma,
+
+  aws,
+  cpp,
+  python,
   docker,
+  scikit_learn,
+  git,
+  postgresql,
+  spark,
+  terraform,
+  fastapi,
+  pytorch,
+  reactjs,
+  tailwind,
+  streamlit,
   march_networks,
   uottawa,
-  carrent,
-  jobit,
-  tripguide,
-  threejs,
+  portfolio_website,
+  scdeepinsight,
+  f1,
 } from "../assets";
-
-export const navLinks = [
-  {
-    id: "about",
-    title: "About",
-  },
-  {
-    id: "work",
-    title: "Work",
-  },
-  {
-    id: "contact",
-    title: "Contact",
-  },
-];
-
 
 
 const technologies = [
   {
-    name: "HTML 5",
-    icon: html,
+    name: "Python",
+    icon: python,
   },
   {
-    name: "CSS 3",
-    icon: css,
+    name: "PyTorch",
+    icon: pytorch,
   },
   {
-    name: "JavaScript",
-    icon: javascript,
+    name: "C++",
+    icon: cpp,
   },
   {
-    name: "TypeScript",
-    icon: typescript,
+    name: "Scikit-Learn",
+    icon: scikit_learn,
+  },
+  {
+    name: "FastAPI",
+    icon: fastapi,
+  },
+  {
+    name: "Docker",
+    icon: docker,
+  },
+  {
+    name: "AWS",
+    icon: aws,
+  },
+  {
+    name: "PostgreSQL",
+    icon: postgresql,
+  },
+  {
+    name: "Apache Spark",
+    icon: spark,
+  },
+  {
+    name: "Terraform",
+    icon: terraform,
+  },
+  {
+    name: "Git",
+    icon: git,
+  },
+  {
+    name: "Streamlit",
+    icon: streamlit,
   },
   {
     name: "React JS",
     icon: reactjs,
   },
   {
-    name: "Redux Toolkit",
-    icon: redux,
-  },
-  {
     name: "Tailwind CSS",
     icon: tailwind,
-  },
-  {
-    name: "Node JS",
-    icon: nodejs,
-  },
-  {
-    name: "MongoDB",
-    icon: mongodb,
-  },
-  {
-    name: "Three JS",
-    icon: threejs,
-  },
-  {
-    name: "git",
-    icon: git,
-  },
-  {
-    name: "figma",
-    icon: figma,
-  },
-  {
-    name: "docker",
-    icon: docker,
   },
 ];
 
@@ -129,67 +115,67 @@ const experiences = [
 
 const projects = [
   {
-    name: "Car Rent",
+    name: "Cell Type Classification from Single-Cell RNA-seq Data",
     description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
+      "A cell-type classification project using the scDeepInsight deep learning framework to identify cell types from single-cell RNA-sequencing data across multiple datasets.",
     tags: [
       {
-        name: "react",
-        color: "blue-text-gradient",
+        name: "Python",
+        color: "text-green-500",
       },
       {
-        name: "mongodb",
-        color: "green-text-gradient",
+        name: "PyTorch",
+        color: "text-orange-400",
       },
       {
-        name: "tailwind",
-        color: "pink-text-gradient",
+        name: "Scikit-Learn",
+        color: "text-blue-400",
       },
     ],
-    image: carrent,
-    source_code_link: "https://github.com/",
+    image: scdeepinsight,
+    source_code_link: "https://github.com/Cnashn/Cell-Type-Classification-with-scDeepInsight",
   },
   {
-    name: "Job IT",
+    name: "Portfolio Website",
     description:
-      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "A personal portfolio built with React JS and Vite, using Tailwind CSS for styling, to showcase my projects and technical skills in one place.",
     tags: [
       {
-        name: "react",
-        color: "blue-text-gradient",
+        name: "React JS",
+        color: "text-yellow-300",
       },
       {
-        name: "restapi",
-        color: "green-text-gradient",
+        name: "Vite",
+        color: "text-blue-400",
       },
       {
-        name: "scss",
-        color: "pink-text-gradient",
+        name: "Tailwind CSS",
+        color: "text-green-500",
       },
     ],
-    image: jobit,
-    source_code_link: "https://github.com/",
+    image: portfolio_website,
+    source_code_link: "https://github.com/Cnashn/Portfolio-Website",
   },
   {
-    name: "Trip Guide",
+    name: "Formula 1 Race Predictor",
     description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
+      "Streamlit app that predicts race finishing order from grid positions using a 2025 season data.",
     tags: [
       {
-        name: "nextjs",
-        color: "blue-text-gradient",
+        name: "Python",
+        color: "text-blue-400",
       },
       {
-        name: "supabase",
-        color: "green-text-gradient",
+        name: "Scikit-Learn",
+        color: "text-yellow-300",
       },
       {
-        name: "css",
-        color: "pink-text-gradient",
+        name: "Streamlit",
+        color: "text-orange-400",
       },
     ],
-    image: tripguide,
-    source_code_link: "https://github.com/",
+    image: f1,
+    source_code_link: "https://github.com/Cnashn/f1_race_predictor",
   },
 ];
 
