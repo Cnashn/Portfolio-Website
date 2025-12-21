@@ -2,6 +2,8 @@
 
 A personal portfolio built with React, Vite, Tailwind CSS, Framer Motion, and react-three-fiber/Three.js for interactive visuals. Deployed via GitHub Pages with the custom domain `csahin.com`.
 
+**Live:** https://csahin.com
+
 ## Tech stack
 - React 19 + Vite
 - Tailwind CSS + PostCSS
@@ -31,4 +33,3 @@ npm run lint
 npm run build
 npm run preview
 ```
-
