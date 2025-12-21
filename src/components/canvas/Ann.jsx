@@ -76,7 +76,7 @@ const AnnCanvas = () => {
 
   return (
     <Canvas
-      className="absolute inset-0 pointer-events-none z-10"
+      className={`absolute inset-0 z-10 ${isMobile ? "pointer-events-none" : ""}`}
       frameloop="always"
       shadows={false}
       dpr={[1, 1.5]}
@@ -84,12 +84,14 @@ const AnnCanvas = () => {
       gl={{ preserveDrawingBuffer: true, antialias: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          minPolarAngle={1.38} // lock vertical angle so you can only rotate left/right (yaw)
-          maxPolarAngle={1.38}
-        />
+        {!isMobile && (
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            minPolarAngle={1.38} // lock vertical angle so you can only rotate left/right (yaw)
+            maxPolarAngle={1.38}
+          />
+        )}
         <hemisphereLight intensity={1.2} groundColor="black" />
         <directionalLight position={[6, 8, 6]} intensity={1.5} />
         <spotLight position={[-8, 12, 4]} angle={0.3} penumbra={0.7} intensity={1.6} />
@@ -102,5 +104,4 @@ const AnnCanvas = () => {
 };
 
 export default AnnCanvas;
-
 

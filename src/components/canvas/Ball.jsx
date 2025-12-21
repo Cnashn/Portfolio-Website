@@ -12,7 +12,12 @@ const Ball = (props) => {
   
   
   return (
-    <Float speed = {1.5} rotationIntensity={1} floatIntensity={2} floatingRange={[-0.15,0.15]}>
+    <Float
+      speed={1.5}
+      rotationIntensity={0.8}
+      floatIntensity={0}
+      floatingRange={[0, 0]} // lock vertical drift so rows stay aligned
+    >
       <ambientLight intensity={0.25} />
       <directionalLight position={[0,0,0.05]} />
       <mesh castShadow receiveShadow scale = {2.75}>
