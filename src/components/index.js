@@ -1,4 +1,4 @@
-import { AnnCanvas, BallCanvas, ComputersCanvas} from './canvas';
+import { AnnCanvas, BallCanvas} from './canvas';
 import Hero from './Hero';
 import Navbar from './Navbar';
 import About from './About';
@@ -15,6 +15,5 @@ export {
   Experience,
   Works,
   BallCanvas, 
-  ComputersCanvas, 
   AnnCanvas,
 }
