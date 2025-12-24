@@ -1,6 +1,6 @@
 import {motion} from 'framer-motion';
 import { styles } from '../styles';
-import { ComputersCanvas,AnnCanvas} from './canvas';
+import { AnnCanvas} from './canvas';
 
 
 
