@@ -18,7 +18,7 @@ const Hero = () => {
         <div>
           <h1 className={`${styles.heroHeadText} text-white`}>Hi, I'm <span className = "text-[#1cb9d7]">Can</span></h1>
           <p className = {`${styles.heroSubText} mt-2 text-white-100`}>
-            Passionate about the intersection of software engineering<br className="sm:block hidden" />  and machine learning. Focused on delivering meaningful<br className="sm:block hidden" />  results through intuitive digital experiences.
+            Software Engineer building backend systems and APIs in Python,<br className="sm:block hidden" />  with experience across data processing and machine learning projects.<br className="sm:block hidden" /> I enjoy turning requirements into working software and improving existing systems over time.
           </p>
         </div>
       </div>

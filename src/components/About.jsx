@@ -17,13 +17,13 @@ const About = () => {
     <motion.p variants={fadeIn("", "", 0.1, 1)}
     className="mt-4 text-secondary text-[18px] max-w-3xl leading-[30px]">
       
-      From early on, I was drawn to computers not just as tools, but as systems to understand.
-      That curiosity led me to spend time working across backend development and machine learning, focusing on how software behaves in practice rather than in theory.
+      From early on, I’ve been interested in how software systems behave in practice.
+      I’ve built backend services and data-driven applications using Python, REST APIs, SQL, and React, with a focus on writing clear, maintainable code and understanding system behavior end to end.
       I recently graduated from the {" "}<span className="font-bold">
               <a href="https://www.uottawa.ca/en" target="_blank">
                 University of Ottawa
               </a>
-            </span> and am actively seeking a role where I can work on real software, learn from experienced engineers, and continue improving my technical skills.
+            </span> and am looking for a software engineering role where I can contribute to real production systems, work closely with other engineers, and continue growing technically. My projects also include work with machine learning and data-intensive workflows, which has strengthened my approach to building and reasoning about complex systems.
     </motion.p>
 
     </>
