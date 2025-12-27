@@ -83,30 +83,27 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Technical Analyst",
+    title: "Software Engineer",
     company_name: "University of Ottawa",
     icon: uottawa,
     iconBg: "#ffffffff",
     date: "September 2023 - April 2024",
     points: [
-      "Built Python automation pipelines to clean, validate, and merge enterprise architecture datasets, eliminating manual QC workflows and improving data reliability for governance reviews.",
-      "Analyzed workflow and communication data across 30+ IT initiatives, identifying 15 duplicated processes and quantifying 20–30% potential efficiency gains through system automation.",
-      "Converted 50+ unstructured BAD/TAD architecture documents into structured, queryable datasets, enabling dependency analysis, risk scoring, and early automation feasibility assessments.",
-      " Delivered data-driven technical briefs and analytical summaries to 5 senior enterprise architects, directly supporting Architecture Review Board (ARB) decisionsand modernization roadmaps",
-      "Researched and evaluated 10+ ML and GenAI use cases across enterprise workflows, producing actionable recommendations for early-stage innovation initiatives."
+      "Improved enterprise architecture data reliability by developing Python scripts and validation workflows, reducing manual QA effort and enabling consistent inputs for governance reviews.",
+      "Identified duplicated workflows across 30+ IT initiatives by analyzing submission processes, contributing efficiency estimates of 20–30% referenced in Architecture Review Board discussions.",
+      "Enabled modernization and standards compliance decisions by preparing structured datasets and documentation used by senior enterprise architects in system design reviews.",
     ],
   },
   {
-    title: "Software Developer",
+    title: "Software Engineer",
     company_name: "March Networks",
     icon: march_networks,
     iconBg: "#ffffffff",
     date: "January 2023 - April 2023",
     points: [
-      "Developed a CSV comparison and validation tool to detect high-risk license changes, supporting compliance checks and accelerating software release approvals.",
-      "Optimized large-scale data processing workflows through algorithmic improvements and edge-case handling, reducing runtime by ~50% for critical reporting tasks.",
-      "Replaced Excel macros with tested Python pipelines to process license and vulnerability data for 3,000+ components, improving scalability and long-termmaintainability.",
-      "Automated Black Duck compliance report generation using Python, reducing manual processing effort by ~80% and improving data consistency for legal and R&D teams.",
+      "Reduced manual compliance reporting effort by ~80% by developing Python tooling that replaced Excel-based workflows for legal and R&D teams.",
+      "Improved consistency of license and vulnerability analysis across 3,000+ components by developing and maintaining data-processing scripts used in production reporting.",
+      "Cut reporting runtime by ~50% by optimizing data-processing logic and algorithms in large-scale compliance workflows.",
     ],
   },
 ];
