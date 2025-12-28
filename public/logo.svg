@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1222" viewBox="0 0 2000 1222">
+  <defs>
+    <!-- C: more navy earlier -->
+    <linearGradient id="csFillC" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#00B1D2"/>
+      <stop offset="50%" stop-color="#00B1D2"/>
+      <stop offset="58%" stop-color="#FDDB27"/>
+      <stop offset="100%" stop-color="#FDDB27"/>
+    </linearGradient>
+
+    <!-- S: less navy (push navy later) -->
+    <linearGradient id="csFillS" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#00B1D2"/>
+      <stop offset="50%" stop-color="#00B1D2"/>
+      <stop offset="58%" stop-color="#FDDB27"/>
+      <stop offset="100%" stop-color="#FDDB27"/>
+    </linearGradient>
+
+    <!-- Soft inner highlight -->
+    <linearGradient id="csHighlight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Subtle shadow -->
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/>
+      <feOffset in="blur" dx="0" dy="6" result="off"/>
+      <feColorMatrix in="off" type="matrix"
+        values="0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0.28 0" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Thin stroke gradient -->
+    <linearGradient id="csStroke" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#07163F" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#E5C100" stop-opacity="0.35"/>
+    </linearGradient>
+
+    <!-- Gloss mask -->
+    <mask id="glossMask">
+      <rect width="2000" height="1222" fill="black"/>
+      <ellipse cx="900" cy="430" rx="900" ry="340" fill="white" opacity="0.9"/>
+    </mask>
+  </defs>
+
+  <!-- Transparent background (nothing drawn behind) -->
+
+  <g filter="url(#softShadow)">
+    <!-- MAIN: C (bigger, more lacivert) -->
+    <text x="24%" y="57%"
+          text-anchor="middle" dominant-baseline="middle"
+          font-family="Georgia, 'Times New Roman', serif"
+          font-weight="700"
+          font-size="1400"
+          fill="url(#csFillC)"
+          stroke="url(#csStroke)"
+          stroke-width="3"
+          paint-order="stroke fill">C</text>
+
+    <!-- MAIN: S (bigger, less lacivert) -->
+    <text x="76%" y="57%"
+          text-anchor="middle" dominant-baseline="middle"
+          font-family="Georgia, 'Times New Roman', serif"
+          font-weight="700"
+          font-size="1400"
+          fill="url(#csFillS)"
+          stroke="url(#csStroke)"
+          stroke-width="3"
+          paint-order="stroke fill">S</text>
+
+    <!-- Gloss overlay for C -->
+    <g mask="url(#glossMask)">
+      <text x="24%" y="57%"
+            text-anchor="middle" dominant-baseline="middle"
+            font-family="Georgia, 'Times New Roman', serif"
+            font-weight="700"
+            font-size="1400"
+            fill="url(#csHighlight)">C</text>
+
+      <!-- Gloss overlay for S -->
+      <text x="76%" y="57%"
+            text-anchor="middle" dominant-baseline="middle"
+            font-family="Georgia, 'Times New Roman', serif"
+            font-weight="700"
+            font-size="1400"
+            fill="url(#csHighlight)">S</text>
+    </g>
+
+    <!-- Ultra-subtle outline -->
+    <text x="24%" y="57%"
+          text-anchor="middle" dominant-baseline="middle"
+          font-family="Georgia, 'Times New Roman', serif"
+          font-weight="700"
+          font-size="1400"
+          fill="none"
+          stroke="#000000"
+          stroke-opacity="0.10"
+          stroke-width="1.2">C</text>
+
+    <text x="76%" y="57%"
+          text-anchor="middle" dominant-baseline="middle"
+          font-family="Georgia, 'Times New Roman', serif"
+          font-weight="700"
+          font-size="1400"
+          fill="none"
+          stroke="#000000"
+          stroke-opacity="0.10"
+          stroke-width="1.2">S</text>
+  </g>
+</svg>
