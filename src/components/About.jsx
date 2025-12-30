@@ -19,7 +19,7 @@ const About = () => {
       
       From early on, I’ve been interested in how software systems behave in practice.
       I’ve built backend services and data-driven applications using Python, REST APIs, SQL, and React, with a focus on writing clear, maintainable code and understanding system behavior end to end.
-      I recently graduated from the {" "}<span className="font-bold">
+      I recently graduated from the {" "}<span className="text-[#1cb9d7] font-bold">
               <a href="https://www.uottawa.ca/en" target="_blank">
                 University of Ottawa
               </a>
