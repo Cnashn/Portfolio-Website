@@ -33,15 +33,7 @@ const Navbar = () => {
               Can Sahin
             </p>
           </Link>
-          <a
-            href="https://www.linkedin.com/in/cansahin1"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="LinkedIn"
-          >
-            <img src={linkedin} alt="LinkedIn" className="w-9 h-9 object-contain" />
-          </a>
-
+          
           <a
             href="https://github.com/cnashn"
             target="_blank"
@@ -50,7 +42,15 @@ const Navbar = () => {
           >
             <img src={github} alt="GitHub" className="w-9 h-9 object-contain" />
           </a>
-
+          
+          <a
+            href="https://www.linkedin.com/in/cansahin1"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn"
+          >
+            <img src={linkedin} alt="LinkedIn" className="w-9 h-9 object-contain" />
+          </a>
           
         </div>
 
