@@ -19,6 +19,20 @@ const Navbar = () => {
       <div className="w-full flex justify-between items-center mx-auto">
        
         <div className={`${toggle ? "hidden" : "flex"} items-center gap-6`}>
+
+          <Link
+            to="/"
+            className="flex items-center gap-2"
+            onClick={() => {
+              setActive("");
+              window.scrollTo(0, 0);
+            }}
+          >
+            <img src={logo} alt="logo" className="w-10 h-10 object-contain" />
+            <p className="text-white text-[22px] font-bold cursor-pointer">
+              Can Sahin
+            </p>
+          </Link>
           <a
             href="https://www.linkedin.com/in/cansahin1"
             target="_blank"
@@ -37,19 +51,7 @@ const Navbar = () => {
             <img src={github} alt="GitHub" className="w-9 h-9 object-contain" />
           </a>
 
-          <Link
-            to="/"
-            className="flex items-center gap-2"
-            onClick={() => {
-              setActive("");
-              window.scrollTo(0, 0);
-            }}
-          >
-            <img src={logo} alt="logo" className="w-10 h-10 object-contain" />
-            <p className="text-white text-[22px] font-bold cursor-pointer">
-              Can Sahin
-            </p>
-          </Link>
+          
         </div>
 
        
