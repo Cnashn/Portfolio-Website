@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#f87c0b" }) => {
+const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: -1000, y: -1000, active: false });
   const linesRef = useRef([]);

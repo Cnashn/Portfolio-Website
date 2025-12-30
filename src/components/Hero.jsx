@@ -9,12 +9,12 @@ const Hero = () => {
       >
         <div className="flex flex-row items-start gap-5 flex-1">
           <div className="flex flex-col justify-center items-center mt-5">
-            <div className="w-5 h-5 rounded-full bg-[#f87c0b]" />
-            <div className="w-1 sm:h-60 h-32 bg-[#f87c0b]" />
+            <div className="w-5 h-5 rounded-full bg-[#1cb9d7]" />
+            <div className="w-1 sm:h-60 h-32 bg-[#1cb9d7]" />
           </div>
           <div className="flex-1 text-left">
             <h1 className={`${styles.heroHeadText} text-white`}>
-              Hi, I'm <span className="text-[#f87c0b]">Can</span>
+              Hi, I'm <span className="text-[#1cb9d7]">Can</span>
             </h1>
             <p className={`${styles.heroSubText} mt-2 text-secondary max-w-3xl leading-[30px] `}>
               I’m a software engineer based in Canada, focused on building backend systems and data-driven applications, with a growing interest in machine learning. 
