@@ -89,21 +89,21 @@ const experiences = [
     iconBg: "#ffffffff",
     date: "September 2023 - April 2024",
     points: [
-      "Improved enterprise architecture data reliability by developing Python scripts and validation workflows, reducing manual QA effort and enabling consistent inputs for governance reviews.",
-      "Identified duplicated workflows across 30+ IT initiatives by analyzing submission processes, contributing efficiency estimates of 20–30% referenced in Architecture Review Board discussions.",
-      "Enabled modernization and standards compliance decisions by preparing structured datasets and documentation used by senior enterprise architects in system design reviews.",
+      "Developed Python scripts and data validation logic to improve the reliability of enterprise architecture datasets, eliminating manual QA steps and ensuring consistent inputs for governance reviews.",
+      "Implemented analysis scripts to surface duplicated workflows across 30+ IT initiatives, supporting consolidation discussions and contributing quantified efficiency estimates (20–30%).",
+      "Generated structured datasets and technical documentation consumed by senior enterprise architects to evaluate modernization and standards compliance in system design reviews.",
     ],
   },
   {
-    title: "Software Engineer",
+    title: "Software Developer",
     company_name: "March Networks",
     icon: march_networks,
     iconBg: "#ffffffff",
     date: "January 2023 - April 2023",
     points: [
-      "Reduced manual compliance reporting effort by ~80% by developing Python tooling that replaced Excel-based workflows for legal and R&D teams.",
-      "Improved consistency of license and vulnerability analysis across 3,000+ components by developing and maintaining data-processing scripts used in production reporting.",
-      "Cut reporting runtime by ~50% by optimizing data-processing logic and algorithms in large-scale compliance workflows.",
+      "Automated compliance reporting by developing Python tooling that replaced Excel-based workflows, reducing manual effort by ~80% for legal and R&D teams.",
+      "Improved consistency of license and vulnerability analysis across 3,000+ components by developing and maintaining production data-processing scripts.",
+      "Reduced reporting runtime by ~50% by optimizing data-processing logic and algorithms in large-scale compliance workflows.",
     ],
   },
 ];
