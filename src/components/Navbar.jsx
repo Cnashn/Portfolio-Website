@@ -15,7 +15,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="sm:px-16 px-6 w-full flex items-center py-4 fixed top-0 z-20 bg-primary">
+    <nav className="sm:px-16 px-6 w-full flex items-center py-4 fixed top-0 z-20 bg-[#001836]">
       <div className="w-full flex justify-between items-center mx-auto">
        
         <div className={`${toggle ? "hidden" : "flex"} items-center gap-6`}>
@@ -92,7 +92,7 @@ const Navbar = () => {
           <div
             className={`${
               !toggle ? "hidden" : "flex"
-            } w-full min-h-screen absolute top-full right-0 justify-center items-center bg-primary`}
+            } w-full min-h-screen absolute top-full right-0 justify-center items-center bg-[#001836]`}
           >
             <ul className="list-none flex justify-end items-start flex-col gap-4">
               {rightLinks.map((link) => (
