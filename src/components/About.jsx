@@ -16,14 +16,13 @@ const About = () => {
 
     <motion.p variants={fadeIn("", "", 0.1, 1)}
     className="mt-4 text-secondary text-[18px] max-w-3xl leading-[30px]">
+      I’m interested in how software systems behave in practice, especially as they grow in complexity and scale. 
+      Through academic and industry projects, I’ve worked on backend services, API-driven web applications, and data-intensive workflows, with an emphasis on writing maintainable code and understanding systems end to end.
       
-      From early on, I’ve been interested in how software systems behave in practice.
-      I’ve built backend services and data-driven applications using Python, REST APIs, SQL, and React, with a focus on writing clear, maintainable code and understanding system behavior end to end.
+        <br />
+        <br />
       I recently graduated from the {" "}<span className="text-[#1cb9d7] font-bold">
-              <a href="https://www.uottawa.ca/en" target="_blank">
-                University of Ottawa
-              </a>
-            </span> and am looking for a software engineering role where I can contribute to real production systems, work closely with other engineers, and continue growing technically. My projects also include work with machine learning and data-intensive workflows, which has strengthened my approach to building and reasoning about complex systems.
+              <a href="https://www.uottawa.ca/en" target="_blank">University of Ottawa</a></span> and I’m looking for a software engineering role where I can contribute to production systems, collaborate with other engineers, and continue developing strong backend and infrastructure fundamentals, with applied machine learning as a supporting skill.
     </motion.p>
 
     </>

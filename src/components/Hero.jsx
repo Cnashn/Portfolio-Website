@@ -17,8 +17,8 @@ const Hero = () => {
               Hi, I'm <span className="text-[#1cb9d7]">Can</span>
             </h1>
             <p className={`${styles.heroSubText} mt-2 text-secondary max-w-3xl leading-[30px] `}>
-              I’m a software engineer based in Canada, focused on building backend systems and data-driven applications, with a growing interest in machine learning. 
-              I turn requirements into reliable software and improve existing systems over time.
+              I’m a software engineer based in Canada who builds backend systems and data-driven applications, with hands-on experience delivering complete web-based tools and applying machine learning in data-intensive projects. 
+              I care about clear abstractions, system behavior, and making software reliable over time.
             </p>
           </div>
         </div>

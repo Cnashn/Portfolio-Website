@@ -5,14 +5,14 @@ import close from "./close.svg";
 import linkedin from "./linkedin.svg";
 import docker from "./tech/docker.png";
 import git from "./tech/git.png";
-import reactjs from "./tech/reactjs.png";
-import tailwind from "./tech/tailwind.png";
+import react from "./tech/react.png";
+import typescript from "./tech/typescript.png";
 import aws from "./tech/aws.png";
 import cpp from "./tech/cpp.png";
 import python from "./tech/python.png";
 import postgresql from "./tech/postgresql.png";
-import scikit_learn from "./tech/scikit_learn.png";
-import spark from "./tech/spark.png";
+import linux from "./tech/linux.png";
+import java from "./tech/java.png";
 import terraform from "./tech/terraform.png";
 import fastapi from "./tech/fastapi.png";
 import pytorch from "./tech/pytorch.png";
@@ -22,6 +22,7 @@ import march_networks from "./company/march_networks.png";
 import portfolio_website from "./portfolio_website.png";
 import scdeepinsight from "./scdeepinsight.png";
 import f1 from "./f1-race-predictor.png";
+import carquery from "./search.png";
 
 export {
   logo,
@@ -33,19 +34,20 @@ export {
   cpp,
   python,
   docker,
-  scikit_learn,
+  linux,
   git,
   postgresql,
-  spark,
   terraform,
   fastapi,
   pytorch,
-  reactjs,
-  tailwind,
+  react,
   uottawa,
   march_networks,
   portfolio_website,
   scdeepinsight,
   streamlit,
   f1,
+  java,
+  typescript,
+  carquery
 };

@@ -1,24 +1,24 @@
 import {
-
   aws,
   cpp,
   python,
   docker,
-  scikit_learn,
+  linux,
   git,
   postgresql,
-  spark,
   terraform,
   fastapi,
   pytorch,
-  reactjs,
-  tailwind,
+  react,
+  typescript,
+  java,
   streamlit,
   march_networks,
   uottawa,
   portfolio_website,
   scdeepinsight,
   f1,
+  carquery
 } from "../assets";
 
 
@@ -28,20 +28,33 @@ const technologies = [
     icon: python,
   },
   {
-    name: "PyTorch",
-    icon: pytorch,
+    name: "Java",
+    icon: java,
   },
   {
     name: "C++",
     icon: cpp,
   },
   {
-    name: "Scikit-Learn",
-    icon: scikit_learn,
+    name: "TypeScript",
+    icon: typescript,
   },
+  {
+    name: "React",
+    icon: react,
+  },
+  {
+    name: "PyTorch",
+    icon: pytorch,
+  },
+  
   {
     name: "FastAPI",
     icon: fastapi,
+  },
+  {
+    name: "Linux",
+    icon: linux,
   },
   {
     name: "Docker",
@@ -55,10 +68,7 @@ const technologies = [
     name: "PostgreSQL",
     icon: postgresql,
   },
-  {
-    name: "Apache Spark",
-    icon: spark,
-  },
+  
   {
     name: "Terraform",
     icon: terraform,
@@ -71,14 +81,8 @@ const technologies = [
     name: "Streamlit",
     icon: streamlit,
   },
-  {
-    name: "React JS",
-    icon: reactjs,
-  },
-  {
-    name: "Tailwind CSS",
-    icon: tailwind,
-  },
+  
+  
 ];
 
 const experiences = [
@@ -89,9 +93,9 @@ const experiences = [
     iconBg: "#ffffffff",
     date: "September 2023 - April 2024",
     points: [
-      "Developed Python scripts and data validation logic to improve the reliability of enterprise architecture datasets, eliminating manual QA steps and ensuring consistent inputs for governance reviews.",
-      "Implemented analysis scripts to surface duplicated workflows across 30+ IT initiatives, supporting consolidation discussions and contributing quantified efficiency estimates (20–30%).",
-      "Generated structured datasets and technical documentation consumed by senior enterprise architects to evaluate modernization and standards compliance in system design reviews.",
+      "Designed and implemented Python-based data validation and ingestion pipelines to standardize enterprise architecture datasets, eliminating manual QA steps and improving governance review reliability.",
+      "Developed automation for analysis workflows across 30+ IT initiatives, producing quantified efficiency estimates (20–30%) used in consolidation and modernization decisions.",
+      "Collaborated with senior enterprise architects to deliver structured datasets and documentation supporting system design, compliance, and architecture standardization.",
     ],
   },
   {
@@ -101,9 +105,9 @@ const experiences = [
     iconBg: "#ffffffff",
     date: "January 2023 - April 2023",
     points: [
-      "Automated compliance reporting by developing Python tooling that replaced Excel-based workflows, reducing manual effort by ~80% for legal and R&D teams.",
-      "Improved consistency of license and vulnerability analysis across 3,000+ components by developing and maintaining production data-processing scripts.",
-      "Reduced reporting runtime by ~50% by optimizing data-processing logic and algorithms in large-scale compliance workflows.",
+      "Led the development of Python tooling to replace Excel-based compliance reporting workflows, reducing manual effort by ~80% for legal and R&D stakeholders.",
+      "Maintained and evolved production data-processing scripts analyzing license and vulnerability data across 3,000+ components, improving consistency and auditability.",
+      "Identified and optimized performance bottlenecks in large-scale data-processing workflows, reducing reporting runtime by ~50% under real production constraints.",
     ],
   },
 ];
@@ -118,15 +122,15 @@ const projects = [
     tags: [
       {
         name: "Python",
-        color: "text-green-500",
+        color: "text-blue-400",
       },
       {
         name: "PyTorch",
-        color: "text-orange-400",
+        color: "text-yellow-300",
       },
       {
-        name: "Scikit-Learn",
-        color: "text-blue-400",
+        name: "Deep Learning",
+        color: "text-green-500",
       },
     ],
     image: scdeepinsight,
@@ -135,19 +139,19 @@ const projects = [
   {
     name: "Portfolio Website",
     description:
-      "A personal portfolio built with React JS and Vite, using Tailwind CSS for styling, to showcase my projects and technical skills in one place.",
+      "Built a personal portfolio website to showcase projects and technical skills, focusing on responsive layout, component structure, and performance across devices.",
     tags: [
       {
-        name: "React JS",
+        name: "JavaScript",
         color: "text-yellow-300",
       },
       {
-        name: "Vite",
-        color: "text-blue-400",
+        name: "React",
+        color: "text-green-500",
       },
       {
         name: "Tailwind CSS",
-        color: "text-green-500",
+        color: "text-orange-400",
       },
     ],
     image: portfolio_website,
@@ -156,24 +160,46 @@ const projects = [
   {
     name: "Formula 1 Race Predictor",
     description:
-      "Streamlit app that predicts race finishing order from grid positions using a 2025 season data.",
+      "Developed a Streamlit-based application that predicts Formula 1 race finishing order from starting grid positions using regression models trained on historical season data.",
     tags: [
       {
         name: "Python",
-        color: "text-blue-400",
+        color: "text-green-500",
       },
       {
         name: "Scikit-Learn",
-        color: "text-yellow-300",
+        color: "text-orange-400",
       },
       {
         name: "Streamlit",
-        color: "text-orange-400",
+        color: "text-blue-400",
       },
     ],
     image: f1,
     source_code_link: "https://github.com/Cnashn/f1_race_predictor",
   },
+
+  {
+    name: "CarQuery",
+    description:
+      "Built a chat-based used-car search tool using the Yellowcake API to extract live listings and return low-mileage results filtered by make, model, color, and source, displaying results in a sortable table.",
+    tags: [
+      {
+        name: "TypeScript",
+        color: "text-orange-400",
+      },
+      {
+        name: "React",
+        color: "text-blue-400",
+      },
+      {
+        name: "YellowCake API",
+        color: "text-yellow-300",
+      },
+    ],
+    image: carquery,
+    source_code_link: "https://github.com/Cnashn/CarQuery",
+  }
 ];
 
 export { technologies, experiences,  projects };
