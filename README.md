@@ -9,7 +9,6 @@ A personal portfolio built with React, Vite, Tailwind CSS, Framer Motion, and re
 - Tailwind CSS + PostCSS
 - Framer Motion for animation
 - react-three-fiber, drei, three for 3D
-- ESLint for linting
 
 ## Getting started
 1) Install dependencies  
@@ -22,11 +21,6 @@ npm install
 npm run dev
 ```
 Open the shown local URL (typically http://localhost:5173).
-
-3) Lint (optional)  
-```bash
-npm run lint
-```
 
 ## Build & preview
 ```bash
