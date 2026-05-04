@@ -49,7 +49,8 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
 
     imageLoadedRef.current = false;
     linesRef.current = [];
-
+    
+    // Load the image into an offscreen canvas and extract pixel data so we can inspect which pixels are visible.
     img.onload = () => {
       const offscreen = document.createElement("canvas");
       const offCtx = offscreen.getContext("2d");
@@ -97,7 +98,8 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
 
             const clampedX = Math.max(0, Math.min(canvasWidth - lineLength, x + scatterX));
             const clampedY = Math.max(0, Math.min(canvasHeight - 1, y + scatterY));
-
+            
+            // For each visible pixel, create a particle object that stores position, velocity, and visual properties.
             lines.push({
               x: clampedX,
               y: clampedY,
@@ -122,7 +124,7 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
       imageLoadedRef.current = true;
       startTimeRef.current = performance.now();
     };
-
+    // Constantly update and redraw particles every frame for smooth animation.
     const draw = () => {
       animationId = requestAnimationFrame(draw);
 
@@ -145,7 +147,9 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
 
         const moveProgress = Math.min(particleTime / 2.5, 1);
         const easedMove = 1 - Math.pow(1 - moveProgress, 3);
+        
 
+        // Push particles away from the cursor to create interaction.
         if (mouse.active) {
           const dx = p.x - mouse.x;
           const dy = p.y - mouse.y;

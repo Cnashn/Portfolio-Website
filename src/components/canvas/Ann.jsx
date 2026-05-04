@@ -88,7 +88,7 @@ const AnnCanvas = () => {
           <OrbitControls
             enableZoom={false}
             enablePan={false}
-            minPolarAngle={1.38} // lock vertical angle so you can only rotate left/right (yaw)
+            minPolarAngle={1.38} // lock vertical angle so you can only rotate left/right
             maxPolarAngle={1.38}
           />
         )}

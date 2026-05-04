@@ -15,7 +15,6 @@ const App = () => {
       <Experience />
       <Tech />
       <Works />
-      
     </div>
    </BrowserRouter>
 

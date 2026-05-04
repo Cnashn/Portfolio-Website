@@ -18,7 +18,8 @@ import {
   portfolio_website,
   scdeepinsight,
   f1,
-  carquery
+  carquery,
+  gymprog
 } from "../assets";
 
 
@@ -81,8 +82,7 @@ const technologies = [
     name: "Streamlit",
     icon: streamlit,
   },
-  
-  
+ 
 ];
 
 const experiences = [

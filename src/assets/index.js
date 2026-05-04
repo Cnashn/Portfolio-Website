@@ -23,6 +23,7 @@ import portfolio_website from "./portfolio_website.png";
 import scdeepinsight from "./scdeepinsight.png";
 import f1 from "./f1-race-predictor.png";
 import carquery from "./search.png";
+import gymprog from "./gymprog.png";
 
 export {
   logo,
@@ -49,5 +50,6 @@ export {
   f1,
   java,
   typescript,
-  carquery
+  carquery,
+  gymprog,
 };
