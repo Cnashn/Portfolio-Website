@@ -158,6 +158,27 @@ const projects = [
     source_code_link: "https://github.com/Cnashn/Portfolio-Website",
   },
   {
+    name: "Gym Progression App",
+    description:
+      "A full-stack workout tracking app that automatically progresses your weights based on performance, featuring a 17-exercise Push/Pull/Legs program, per-lift progress charts, and smart deload detection. Built with FastAPI, Neon (PostgreSQL), React, TypeScript, and Tailwind CSS, deployed on Render and Vercel.",
+    tags: [
+      {
+        name: "FastAPI",
+        color: "text-blue-400",
+      },
+      {
+        name: "React",
+        color: "text-green-500",
+      },
+      {
+        name: "PostgreSQL",
+        color: "text-yellow-300",
+      },
+    ],
+    image: gymprog,
+    source_code_link: "https://github.com/Cnashn/Gym_Progression_App",
+  },
+  {
     name: "Formula 1 Race Predictor",
     description:
       "Developed a Streamlit-based application that predicts Formula 1 race finishing order from starting grid positions using regression models trained on historical season data.",
@@ -200,27 +221,7 @@ const projects = [
     image: carquery,
     source_code_link: "https://github.com/Cnashn/CarQuery",
   },
-  {
-    name: "Gym Progression App",
-    description:
-      "A full-stack workout tracking app that automatically progresses your weights based on performance, featuring a 17-exercise Push/Pull/Legs program, per-lift progress charts, and smart deload detection. Built with FastAPI, Neon (PostgreSQL), React, TypeScript, and Tailwind CSS, deployed on Render and Vercel.",
-    tags: [
-      {
-        name: "FastAPI",
-        color: "text-blue-400",
-      },
-      {
-        name: "React",
-        color: "text-green-500",
-      },
-      {
-        name: "PostgreSQL",
-        color: "text-yellow-300",
-      },
-    ],
-    image: gymprog,
-    source_code_link: "https://github.com/Cnashn/Gym_Progression_App",
-  }
+  
 ];
 
 export { technologies, experiences,  projects };
