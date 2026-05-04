@@ -199,6 +199,27 @@ const projects = [
     ],
     image: carquery,
     source_code_link: "https://github.com/Cnashn/CarQuery",
+  },
+  {
+    name: "Gym Progression App",
+    description:
+      "A full-stack workout tracking app that automatically progresses your weights based on performance, featuring a 17-exercise Push/Pull/Legs program, per-lift progress charts, and smart deload detection. Built with FastAPI, Neon (PostgreSQL), React, TypeScript, and Tailwind CSS, deployed on Render and Vercel.",
+    tags: [
+      {
+        name: "FastAPI",
+        color: "text-blue-400",
+      },
+      {
+        name: "React",
+        color: "text-green-500",
+      },
+      {
+        name: "PostgreSQL",
+        color: "text-yellow-300",
+      },
+    ],
+    image: gymprog,
+    source_code_link: "https://github.com/Cnashn/Gym_Progression_App",
   }
 ];
 
