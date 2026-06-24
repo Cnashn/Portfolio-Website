@@ -7,11 +7,12 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   const rightLinks = [
-    {id: "", title: "Home" },
+    { id: "", title: "Home" },
     { id: "about", title: "About" },
     { id: "work", title: "Work" },
     { id: "tech", title: "Tech" },
     { id: "projects", title: "Projects" },
+    { id: "contact", title: "Contact" },
   ];
 
   return (
@@ -68,16 +69,6 @@ const Navbar = () => {
             </li>
           ))}
 
-          <li
-            className={`font-poppins font-medium cursor-pointer text-[22px] transition-all ${
-              active === "Resume" ? "text-white" : "text-secondary"
-            } hover:text-white`}
-            onClick={() => setActive("Resume")}
-          >
-            <a href="/CanSahin_Resume.pdf" target="_blank" rel="noreferrer">
-              Resume
-            </a>
-          </li>
         </ul>
 
         {/* Mobile */}
@@ -110,19 +101,6 @@ const Navbar = () => {
                 </li>
               ))}
 
-              <li
-                className={`font-poppins font-medium cursor-pointer text-[24px] ${
-                  active === "Resume" ? "text-white" : "text-secondary"
-                } hover:text-white`}
-                onClick={() => {
-                  setToggle(false);
-                  setActive("Resume");
-                }}
-              >
-                <a href="/CanSahin_Resume.pdf" target="_blank" rel="noreferrer">
-                  Resume
-                </a>
-              </li>
             </ul>
           </div>
         </div>

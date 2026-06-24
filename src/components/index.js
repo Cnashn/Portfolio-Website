@@ -6,6 +6,7 @@ import Tech from './Tech';
 import Experience from './Experience';
 import Works from './Works';
 import AnimatedParticle from './AnimatedParticle';
+import Contact from './Contact';
 
 
 export {
@@ -15,7 +16,8 @@ export {
   Tech,
   Experience,
   Works,
-  BallCanvas, 
+  BallCanvas,
   AnnCanvas,
   AnimatedParticle,
+  Contact,
 }
