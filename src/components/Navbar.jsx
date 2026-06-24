@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { linkedin, github, logo, menu, close } from "../assets";
+import { useLang } from "../context/LanguageContext";
+import { t } from "../translations";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
+  const { lang, toggle: toggleLang } = useLang();
+  const tr = t[lang].nav;
 
   const rightLinks = [
-    { id: "", title: "Home" },
-    { id: "about", title: "About" },
-    { id: "work", title: "Work" },
-    { id: "tech", title: "Tech" },
-    { id: "projects", title: "Projects" },
-    { id: "contact", title: "Contact" },
+    { id: "", title: tr.home },
+    { id: "about", title: tr.about },
+    { id: "work", title: tr.work },
+    { id: "tech", title: tr.tech },
+    { id: "projects", title: tr.projects },
+    { id: "contact", title: tr.contact },
   ];
 
   return (
     <nav className="sm:px-16 px-6 w-full flex items-center py-4 fixed top-0 z-20 bg-[#001836]">
       <div className="w-full flex justify-between items-center mx-auto">
-       
+
         <div className={`${toggle ? "hidden" : "flex"} items-center gap-6`}>
 
           <Link
@@ -34,7 +38,7 @@ const Navbar = () => {
               Can Sahin
             </p>
           </Link>
-          
+
           <a
             href="https://github.com/cnashn"
             target="_blank"
@@ -43,7 +47,7 @@ const Navbar = () => {
           >
             <img src={github} alt="GitHub" className="w-9 h-9 object-contain" />
           </a>
-          
+
           <a
             href="https://www.linkedin.com/in/cansahin1"
             target="_blank"
@@ -52,10 +56,10 @@ const Navbar = () => {
           >
             <img src={linkedin} alt="LinkedIn" className="w-9 h-9 object-contain" />
           </a>
-          
+
         </div>
 
-       
+
         <ul className="list-none hidden sm:flex flex-row gap-10 items-center">
           {rightLinks.map((link) => (
             <li
@@ -69,6 +73,14 @@ const Navbar = () => {
             </li>
           ))}
 
+          <li>
+            <button
+              onClick={toggleLang}
+              className="font-poppins font-medium text-[18px] border border-[#1cb9d7] text-[#1cb9d7] px-3 py-1 rounded-full hover:bg-[#1cb9d7] hover:text-primary transition-colors cursor-pointer"
+            >
+              {lang === "en" ? "FR" : "EN"}
+            </button>
+          </li>
         </ul>
 
         {/* Mobile */}
@@ -101,6 +113,14 @@ const Navbar = () => {
                 </li>
               ))}
 
+              <li>
+                <button
+                  onClick={() => { toggleLang(); setToggle(false); }}
+                  className="font-poppins font-medium text-[24px] border border-[#1cb9d7] text-[#1cb9d7] px-4 py-1 rounded-full hover:bg-[#1cb9d7] hover:text-primary transition-colors cursor-pointer"
+                >
+                  {lang === "en" ? "FR" : "EN"}
+                </button>
+              </li>
             </ul>
           </div>
         </div>

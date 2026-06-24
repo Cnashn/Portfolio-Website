@@ -7,13 +7,18 @@ import { Tooltip } from "react-tooltip";
 
 import { styles } from "../styles";
 import { textVariant } from "../utils/motion";
+import { useLang } from "../context/LanguageContext";
+import { t } from "../translations";
 
 const Tech = () => {
+  const { lang } = useLang();
+  const tr = t[lang].tech;
+
   return (
     <div>
       <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Technologies I use</p>
-        <h2 className={styles.sectionHeadText}>Tech Stack</h2>
+        <p className={styles.sectionSubText}>{tr.sub}</p>
+        <h2 className={styles.sectionHeadText}>{tr.head}</h2>
       </motion.div>
 
       <div className="mt-10 flex flex-wrap justify-center gap-10">

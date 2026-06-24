@@ -4,20 +4,24 @@ import { useForm, ValidationError } from '@formspree/react';
 import { styles } from '../styles';
 import { SectionWrapper } from '../hoc';
 import { fadeIn, textVariant } from '../utils/motion';
+import { useLang } from '../context/LanguageContext';
+import { t } from '../translations';
 
 const Contact = () => {
   const [state, handleSubmit] = useForm('mzdldpwn');
+  const { lang } = useLang();
+  const tr = t[lang].contact;
 
   return (
     <>
       <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Get in Touch</p>
-        <h2 className={styles.sectionHeadText}>Contact</h2>
+        <p className={styles.sectionSubText}>{tr.sub}</p>
+        <h2 className={styles.sectionHeadText}>{tr.head}</h2>
       </motion.div>
 
       <motion.div variants={fadeIn("", "", 0.1, 1)} className="mt-4">
-        <p className="text-[#1cb9d7] text-[20px] font-medium">cansahin2001@gmail.com</p>
-        <p className="text-secondary text-[14px] mt-1">Feel free to reach out with any inquiries or questions!</p>
+        <p className="text-[#1cb9d7] text-[20px] font-medium">{tr.email_label}</p>
+        <p className="text-secondary text-[14px] mt-1">{tr.tagline}</p>
       </motion.div>
 
       <motion.form
@@ -27,7 +31,7 @@ const Contact = () => {
       >
         <div className="flex flex-col sm:flex-row gap-8">
           <div className="flex-1 flex flex-col">
-            <label className="text-secondary text-[14px] mb-2">Name</label>
+            <label className="text-secondary text-[14px] mb-2">{tr.name}</label>
             <input
               type="text"
               name="name"
@@ -37,7 +41,7 @@ const Contact = () => {
             <ValidationError field="name" errors={state.errors} className="text-red-400 text-[12px] mt-1" />
           </div>
           <div className="flex-1 flex flex-col">
-            <label className="text-secondary text-[14px] mb-2">Email Address</label>
+            <label className="text-secondary text-[14px] mb-2">{tr.email}</label>
             <input
               type="email"
               name="email"
@@ -49,7 +53,7 @@ const Contact = () => {
         </div>
 
         <div className="flex flex-col">
-          <label className="text-secondary text-[14px] mb-2">Message</label>
+          <label className="text-secondary text-[14px] mb-2">{tr.message}</label>
           <textarea
             name="message"
             rows={5}
@@ -61,14 +65,14 @@ const Contact = () => {
 
         <div className="flex justify-end items-center gap-4">
           {state.succeeded && (
-            <p className="text-[#1cb9d7] text-[14px]">Message sent!</p>
+            <p className="text-[#1cb9d7] text-[14px]">{tr.sent_msg}</p>
           )}
           <button
             type="submit"
             disabled={state.submitting || state.succeeded}
             className="border border-[#1cb9d7] text-[#1cb9d7] px-8 py-3 rounded-full text-[16px] font-medium hover:bg-[#1cb9d7] hover:text-primary transition-colors disabled:opacity-50 cursor-pointer"
           >
-            {state.submitting ? 'Sending...' : state.succeeded ? 'Sent!' : 'Submit'}
+            {state.submitting ? tr.sending : state.succeeded ? tr.sent_btn : tr.submit}
           </button>
         </div>
       </motion.form>

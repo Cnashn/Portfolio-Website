@@ -5,25 +5,25 @@ import { github } from '../assets';
 import { SectionWrapper } from '../hoc';
 import { projects } from '../constants';
 import { fadeIn, textVariant } from '../utils/motion';
-
-
+import { useLang } from '../context/LanguageContext';
+import { t } from '../translations';
 
 
 const ProjectCard = ({index, name, description, tags, image, source_code_link}) => {
 
   return (
     <motion.div variants = {fadeIn("up","spring", index * 0.5,0.75)}>
-      
-      <Tilt 
+
+      <Tilt
         options ={{
           max:45,
           scale:1,
           speed:450
         }}
         className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
-      
+
       >
-        
+
         <div className="relative w-full h-[230px]">
           <img
             src={image}
@@ -40,21 +40,17 @@ const ProjectCard = ({index, name, description, tags, image, source_code_link}) 
           </div>
         </div>
 
-
-
         <div className="mt-5">
           <h3 className="text-white text-[20px] font-bold">{name}</h3>
           <p className="mt-2 text-secondary text-[14px]">{description}</p>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {tags.map((tag) => ( 
+          {tags.map((tag) => (
             <p key={tag.name} className={`text-[14px] ${tag.color}`}>
               #{tag.name}
             </p>
           ))}
-
-
         </div>
       </Tilt>
 
@@ -65,11 +61,19 @@ const ProjectCard = ({index, name, description, tags, image, source_code_link}) 
 
 
 const Works = () => {
+  const { lang } = useLang();
+  const tr = t[lang].works;
+  const translatedProjects = projects.map((p, i) => ({
+    ...p,
+    name: t[lang].projects[i].name,
+    description: t[lang].projects[i].description,
+  }));
+
   return (
     <>
     <motion.div variants={textVariant()}>
-          <p className={styles.sectionSubText}>Work Showcase</p>
-          <h2 className={styles.sectionHeadText}>Projects</h2>
+          <p className={styles.sectionSubText}>{tr.sub}</p>
+          <h2 className={styles.sectionHeadText}>{tr.head}</h2>
         </motion.div>
     <div className='w-full flex'>
       <motion.p
@@ -80,14 +84,14 @@ const Works = () => {
 
     <div className = "mt-20 flex flex-wrap gap-7">
 
-      {projects.map((project, index) => (
-        <ProjectCard 
-          key={`project-${index}`} 
+      {translatedProjects.map((project, index) => (
+        <ProjectCard
+          key={`project-${index}`}
           index={index}
           {...project}
         />
 
-      ))} 
+      ))}
 
     </div>
     </div>

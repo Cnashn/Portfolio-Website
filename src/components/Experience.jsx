@@ -8,6 +8,8 @@ import {styles} from '../styles';
 import {experiences} from '../constants';
 import {SectionWrapper} from '../hoc';
 import {textVariant} from '../utils/motion';
+import { useLang } from '../context/LanguageContext';
+import { t } from '../translations';
 
 const ExperienceCard = ({experience}) => (
   <VerticalTimelineElement
@@ -31,7 +33,7 @@ const ExperienceCard = ({experience}) => (
         {experience.title}
       </h3>
       <p className="text-secondary text-[16px] font-semibold" style={{margin: 0}}>
-        {experience.company_name}        
+        {experience.company_name}
       </p>
     </div>
 
@@ -47,20 +49,28 @@ const ExperienceCard = ({experience}) => (
 )
 
 const Experience = () => {
+  const { lang } = useLang();
+  const tr = t[lang].experience;
+  const translatedExperiences = t[lang].experiences.map((te, i) => ({
+    ...experiences[i],
+    title: te.title,
+    company_name: te.company_name,
+    date: te.date,
+    points: te.points,
+  }));
+
   return (
     <>
     <motion.div variants={textVariant()}>
-      <p className={styles.sectionSubText}>What I have done so far</p>
-      <h2 className={styles.sectionHeadText}>Work Experience</h2>
-
+      <p className={styles.sectionSubText}>{tr.sub}</p>
+      <h2 className={styles.sectionHeadText}>{tr.head}</h2>
     </motion.div>
     <div className ="mt-20 flex flex-col">
       <VerticalTimeline>
-        {experiences.map((experience, index) => (
+        {translatedExperiences.map((experience, index) => (
           <ExperienceCard key={index} experience={experience}/>
         ))}
       </VerticalTimeline>
-
     </div>
     </>
   )
