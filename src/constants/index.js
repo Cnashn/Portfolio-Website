@@ -19,7 +19,8 @@ import {
   scdeepinsight,
   f1,
   carquery,
-  gymprog
+  gymprog,
+  semanticCache
 } from "../assets";
 
 
@@ -221,7 +222,31 @@ const projects = [
     image: carquery,
     source_code_link: "https://github.com/Cnashn/CarQuery",
   },
-  
+  {
+    name: "Semantic Caching Layer for LLM APIs",
+    description:
+      "A caching proxy that sits in front of any LLM API and returns stored responses for semantically similar questions, avoiding redundant API calls. Uses vector embeddings and cosine similarity to detect equivalent prompts, with TTL expiration, hit tracking, cache invalidation, and a live Prometheus/Grafana dashboard.",
+    tags: [
+      {
+        name: "FastAPI",
+        color: "text-blue-400",
+      },
+      {
+        name: "Python",
+        color: "text-green-500",
+      },
+      {
+        name: "Qdrant",
+        color: "text-orange-400",
+      },
+      {
+        name: "Docker",
+        color: "text-yellow-300",
+      },
+    ],
+    image: semanticCache,
+    source_code_link: "https://github.com/Cnashn/semantic-cache",
+  },
 ];
 
 export { technologies, experiences,  projects };

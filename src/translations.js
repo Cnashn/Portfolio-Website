@@ -93,6 +93,11 @@ export const t = {
         description:
           "Built a chat-based used-car search tool using the Yellowcake API to extract live listings and return low-mileage results filtered by make, model, color, and source, displaying results in a sortable table.",
       },
+      {
+        name: "Semantic Caching Layer for LLM APIs",
+        description:
+          "A caching proxy that sits in front of any LLM API and returns stored responses for semantically similar questions, avoiding redundant API calls. Uses vector embeddings and cosine similarity to detect equivalent prompts, with TTL expiration, hit tracking, cache invalidation, and a live Prometheus/Grafana dashboard.",
+      },
     ],
   },
 
@@ -189,6 +194,11 @@ export const t = {
         name: "CarQuery",
         description:
           "Création d'un outil de recherche de voitures d'occasion par chat utilisant l'API Yellowcake pour extraire des annonces en direct et retourner des résultats filtrés par marque, modèle, couleur et source, affichés dans un tableau triable.",
+      },
+      {
+        name: "Couche de cache semantique pour APIs LLM",
+        description:
+          "Un proxy de cache qui intercepte les requetes vers une API LLM et retourne des reponses stockees pour des questions semantiquement similaires, evitant les appels redondants. Utilise des embeddings vectoriels et la similarite cosinus pour detecter les requetes equivalentes, avec expiration TTL, suivi des acces, invalidation du cache et un tableau de bord Prometheus/Grafana en temps reel.",
       },
     ],
   },

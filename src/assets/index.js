@@ -24,6 +24,7 @@ import scdeepinsight from "./scdeepinsight.png";
 import f1 from "./f1-race-predictor.png";
 import carquery from "./search.png";
 import gymprog from "./gymprog.png";
+import semanticCache from "./semantic-cache.png";
 
 export {
   logo,
@@ -52,4 +53,5 @@ export {
   typescript,
   carquery,
   gymprog,
+  semanticCache,
 };
