@@ -215,7 +215,7 @@ const projects = [
         color: "text-blue-400",
       },
       {
-        name: "YellowCake API",
+        name: "Next.js",
         color: "text-yellow-300",
       },
     ],
