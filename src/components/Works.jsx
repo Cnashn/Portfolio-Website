@@ -75,25 +75,14 @@ const Works = () => {
           <p className={styles.sectionSubText}>{tr.sub}</p>
           <h2 className={styles.sectionHeadText}>{tr.head}</h2>
         </motion.div>
-    <div className='w-full flex'>
-      <motion.p
-        variants={fadeIn("","",0.1,1)}
-        className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
-      >
-      </motion.p>
-
-    <div className = "mt-20 flex flex-wrap gap-7">
-
+    <div className="mt-20 flex flex-wrap gap-7">
       {translatedProjects.map((project, index) => (
         <ProjectCard
           key={`project-${index}`}
           index={index}
           {...project}
         />
-
       ))}
-
-    </div>
     </div>
     </>
   )
