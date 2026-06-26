@@ -236,10 +236,6 @@ const projects = [
         color: "text-green-500",
       },
       {
-        name: "Qdrant",
-        color: "text-orange-400",
-      },
-      {
         name: "Docker",
         color: "text-yellow-300",
       },
