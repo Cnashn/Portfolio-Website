@@ -95,7 +95,7 @@ const Navbar = () => {
           <div
             className={`${
               !toggle ? "hidden" : "flex"
-            } w-full min-h-screen absolute top-full right-0 justify-center items-center bg-[#001836]`}
+            } w-full absolute top-full right-0 justify-center items-start pt-10 pb-10 bg-[#001836]`}
           >
             <ul className="list-none flex justify-end items-start flex-col gap-4">
               {rightLinks.map((link) => (
