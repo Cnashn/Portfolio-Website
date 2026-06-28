@@ -4,15 +4,17 @@ import {
   python,
   docker,
   linux,
-  git,
   postgresql,
   terraform,
   fastapi,
-  pytorch,
+  tailwind,
+  javascript,
+  go,
+  prometheus,
+  grafana,
   react,
   typescript,
   java,
-  streamlit,
   march_networks,
   uottawa,
   portfolio_website,
@@ -25,65 +27,22 @@ import {
 
 
 const technologies = [
-  {
-    name: "Python",
-    icon: python,
-  },
-  {
-    name: "Java",
-    icon: java,
-  },
-  {
-    name: "C++",
-    icon: cpp,
-  },
-  {
-    name: "TypeScript",
-    icon: typescript,
-  },
-  {
-    name: "React",
-    icon: react,
-  },
-  {
-    name: "PyTorch",
-    icon: pytorch,
-  },
-  
-  {
-    name: "FastAPI",
-    icon: fastapi,
-  },
-  {
-    name: "Linux",
-    icon: linux,
-  },
-  {
-    name: "Docker",
-    icon: docker,
-  },
-  {
-    name: "AWS",
-    icon: aws,
-  },
-  {
-    name: "PostgreSQL",
-    icon: postgresql,
-  },
-  
-  {
-    name: "Terraform",
-    icon: terraform,
-  },
-  {
-    name: "Git",
-    icon: git,
-  },
-  {
-    name: "Streamlit",
-    icon: streamlit,
-  },
- 
+  { name: "Python", icon: python },
+  { name: "JavaScript", icon: javascript },
+  { name: "TypeScript", icon: typescript },
+  { name: "Java", icon: java },
+  { name: "C++", icon: cpp },
+  { name: "Go", icon: go },
+  { name: "FastAPI", icon: fastapi },
+  { name: "PostgreSQL", icon: postgresql },
+  { name: "Docker", icon: docker },
+  { name: "AWS", icon: aws },
+  { name: "Terraform", icon: terraform },
+  { name: "Prometheus", icon: prometheus },
+  { name: "Grafana", icon: grafana },
+  { name: "Linux", icon: linux },
+  { name: "React", icon: react },
+  { name: "Tailwind", icon: tailwind },
 ];
 
 const experiences = [

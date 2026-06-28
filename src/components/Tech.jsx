@@ -14,14 +14,33 @@ const Tech = () => {
   const { lang } = useLang();
   const tr = t[lang].tech;
 
+  const resetAll = () => document.dispatchEvent(new CustomEvent('reset-balls'));
+
   return (
-    <div>
+    <div className="relative">
       <motion.div variants={textVariant()}>
         <p className={styles.sectionSubText}>{tr.sub}</p>
         <h2 className={styles.sectionHeadText}>{tr.head}</h2>
       </motion.div>
 
-      <div className="mt-10 flex flex-wrap justify-center gap-10">
+      <div className="mt-4">
+        <button
+          onClick={resetAll}
+          style={{
+            background: 'rgba(255,255,255,0.08)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: '6px 16px',
+            fontSize: 13,
+            color: 'rgba(255,255,255,0.6)',
+          }}
+        >
+          ↺ Reset
+        </button>
+      </div>
+
+      <div className="mt-6 grid grid-cols-8 gap-6 justify-items-center">
         {technologies.map((tech) => (
           <div className="w-28 h-28" key={tech.name}>
             <a data-tooltip-id={`tech-${tech.name}`}>

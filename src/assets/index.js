@@ -15,8 +15,12 @@ import linux from "./tech/linux.png";
 import java from "./tech/java.png";
 import terraform from "./tech/terraform.png";
 import fastapi from "./tech/fastapi.png";
-import pytorch from "./tech/pytorch.png";
-import streamlit from "./tech/streamlit.png";
+import tailwind from "./tech/tailwind.png";
+import javascript from "./tech/javascript.png";
+import go from "./tech/go.png";
+import vite from "./tech/Vite.js.png";
+import prometheus from "./tech/prometheus.png";
+import grafana from "./tech/grafana.png";
 import uottawa from "./company/uottawa.png";
 import march_networks from "./company/march_networks.png";
 import portfolio_website from "./portfolio_website.png";
@@ -41,13 +45,17 @@ export {
   postgresql,
   terraform,
   fastapi,
-  pytorch,
+  tailwind,
+  javascript,
+  go,
+  vite,
+  prometheus,
+  grafana,
   react,
   uottawa,
   march_networks,
   portfolio_website,
   scdeepinsight,
-  streamlit,
   f1,
   java,
   typescript,
