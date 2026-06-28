@@ -89,9 +89,9 @@ export const t = {
           "Developed a Streamlit-based application that predicts Formula 1 race finishing order from starting grid positions using regression models trained on historical season data.",
       },
       {
-        name: "CarQuery",
+        name: "Spring RabbitMQ Orders",
         description:
-          "Built a chat-based used-car search tool using the Yellowcake API to extract live listings and return low-mileage results filtered by make, model, color, and source, displaying results in a sortable table.",
+          "An event-driven order processing microservice built with Spring Boot and RabbitMQ. Publishes order events to a topic exchange, consumes them asynchronously, retries failures with exponential backoff, routes exhausted messages to a dead-letter queue, and deduplicates events for idempotent processing.",
       },
       {
         name: "Semantic Caching Layer for LLM APIs",
@@ -191,9 +191,9 @@ export const t = {
           "Développement d'une application Streamlit qui prédit l'ordre d'arrivée des courses de Formule 1 à partir des positions de grille de départ, en utilisant des modèles de régression entraînés sur des données historiques.",
       },
       {
-        name: "CarQuery",
+        name: "Spring RabbitMQ Orders",
         description:
-          "Création d'un outil de recherche de voitures d'occasion par chat utilisant l'API Yellowcake pour extraire des annonces en direct et retourner des résultats filtrés par marque, modèle, couleur et source, affichés dans un tableau triable.",
+          "Un microservice de traitement de commandes événementiel construit avec Spring Boot et RabbitMQ. Publie des événements de commande sur un topic exchange, les consomme de manière asynchrone, réessaie les échecs avec un backoff exponentiel, achemine les messages épuisés vers une dead-letter queue et déduplique les événements pour un traitement idempotent.",
       },
       {
         name: "Couche de cache semantique pour APIs LLM",

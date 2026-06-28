@@ -7,7 +7,7 @@ import {
   postgresql,
   terraform,
   fastapi,
-  tailwind,
+  spring,
   javascript,
   go,
   prometheus,
@@ -20,9 +20,9 @@ import {
   portfolio_website,
   scdeepinsight,
   f1,
-  carquery,
   gymprog,
-  semanticCache
+  semanticCache,
+  springRabbitMQ
 } from "../assets";
 
 
@@ -42,7 +42,7 @@ const technologies = [
   { name: "Grafana", icon: grafana },
   { name: "Linux", icon: linux },
   { name: "React", icon: react },
-  { name: "Tailwind", icon: tailwind },
+  { name: "Spring", icon: spring },
 ];
 
 const experiences = [
@@ -161,25 +161,25 @@ const projects = [
   },
 
   {
-    name: "CarQuery",
+    name: "Spring RabbitMQ Orders",
     description:
-      "Built a chat-based used-car search tool using the Yellowcake API to extract live listings and return low-mileage results filtered by make, model, color, and source, displaying results in a sortable table.",
+      "An event-driven order processing microservice built with Spring Boot and RabbitMQ. Publishes order events to a topic exchange, consumes them asynchronously, retries failures with exponential backoff, routes exhausted messages to a dead-letter queue, and deduplicates events for idempotent processing.",
     tags: [
       {
-        name: "TypeScript",
+        name: "Java",
         color: "text-orange-400",
       },
       {
-        name: "React",
-        color: "text-blue-400",
+        name: "Spring Boot",
+        color: "text-green-500",
       },
       {
-        name: "Next.js",
+        name: "RabbitMQ",
         color: "text-yellow-300",
       },
     ],
-    image: carquery,
-    source_code_link: "https://github.com/Cnashn/CarQuery",
+    image: springRabbitMQ,
+    source_code_link: "https://github.com/Cnashn/spring-rabbitmq-orders",
   },
   {
     name: "Semantic Caching Layer for LLM APIs",

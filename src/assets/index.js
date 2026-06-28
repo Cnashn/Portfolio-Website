@@ -15,7 +15,7 @@ import linux from "./tech/linux.png";
 import java from "./tech/java.png";
 import terraform from "./tech/terraform.png";
 import fastapi from "./tech/fastapi.png";
-import tailwind from "./tech/tailwind.png";
+import spring from "./tech/spring.png";
 import javascript from "./tech/javascript.png";
 import go from "./tech/go.png";
 import vite from "./tech/Vite.js.png";
@@ -26,9 +26,9 @@ import march_networks from "./company/march_networks.png";
 import portfolio_website from "./portfolio_website.png";
 import scdeepinsight from "./scdeepinsight.png";
 import f1 from "./f1-race-predictor.png";
-import carquery from "./search.png";
 import gymprog from "./gymprog.png";
 import semanticCache from "./semantic-cache.png";
+import springRabbitMQ from "./springrabbitmq.png";
 
 export {
   logo,
@@ -45,7 +45,7 @@ export {
   postgresql,
   terraform,
   fastapi,
-  tailwind,
+  spring,
   javascript,
   go,
   vite,
@@ -59,7 +59,7 @@ export {
   f1,
   java,
   typescript,
-  carquery,
   gymprog,
   semanticCache,
+  springRabbitMQ,
 };
