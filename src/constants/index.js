@@ -19,10 +19,10 @@ import {
   uottawa,
   portfolio_website,
   scdeepinsight,
-  f1,
   gymprog,
   semanticCache,
-  springRabbitMQ
+  springRabbitMQ,
+  jobsRag
 } from "../assets";
 
 
@@ -76,46 +76,46 @@ const experiences = [
 
 const projects = [
   {
-    name: "Cell Type Classification from Single-Cell RNA-seq Data",
+    name: "Semantic Caching Layer for LLM APIs",
     description:
-      "A cell-type classification project using the scDeepInsight deep learning framework to identify cell types from single-cell RNA-sequencing data across multiple datasets.",
+      "A caching proxy that sits in front of any LLM API and returns stored responses for semantically similar questions, avoiding redundant API calls. Uses vector embeddings and cosine similarity to detect equivalent prompts, with TTL expiration, hit tracking, cache invalidation, and a live Prometheus/Grafana dashboard.",
+    tags: [
+      {
+        name: "FastAPI",
+        color: "text-blue-400",
+      },
+      {
+        name: "Python",
+        color: "text-green-500",
+      },
+      {
+        name: "Docker",
+        color: "text-yellow-300",
+      },
+    ],
+    image: semanticCache,
+    source_code_link: "https://github.com/Cnashn/semantic-cache",
+  },
+  {
+    name: "Job Search RAG Pipeline",
+    description:
+      "A production-grade RAG system over 32 live Canadian tech job postings. Combines BM25 and dense vector search with Reciprocal Rank Fusion, cross-encoder reranking, and LLM-as-judge citation verification. Evaluated on a 50-question golden dataset: 0.63 composite score, 87% citation accuracy.",
     tags: [
       {
         name: "Python",
         color: "text-blue-400",
       },
       {
-        name: "PyTorch",
-        color: "text-yellow-300",
-      },
-      {
-        name: "Deep Learning",
+        name: "FastAPI",
         color: "text-green-500",
-      },
-    ],
-    image: scdeepinsight,
-    source_code_link: "https://github.com/Cnashn/Cell-Type-Classification-with-scDeepInsight",
-  },
-  {
-    name: "Portfolio Website",
-    description:
-      "Built a personal portfolio website to showcase projects and technical skills, focusing on responsive layout, component structure, and performance across devices.",
-    tags: [
-      {
-        name: "JavaScript",
-        color: "text-yellow-300",
       },
       {
         name: "React",
-        color: "text-green-500",
-      },
-      {
-        name: "Tailwind CSS",
-        color: "text-orange-400",
+        color: "text-yellow-300",
       },
     ],
-    image: portfolio_website,
-    source_code_link: "https://github.com/Cnashn/Portfolio-Website",
+    image: jobsRag,
+    source_code_link: "https://github.com/Cnashn/jobs-rag-pipeline",
   },
   {
     name: "Gym Progression App",
@@ -139,28 +139,6 @@ const projects = [
     source_code_link: "https://github.com/Cnashn/Gym_Progression_App",
   },
   {
-    name: "Formula 1 Race Predictor",
-    description:
-      "Developed a Streamlit-based application that predicts Formula 1 race finishing order from starting grid positions using regression models trained on historical season data.",
-    tags: [
-      {
-        name: "Python",
-        color: "text-green-500",
-      },
-      {
-        name: "Scikit-Learn",
-        color: "text-orange-400",
-      },
-      {
-        name: "Streamlit",
-        color: "text-blue-400",
-      },
-    ],
-    image: f1,
-    source_code_link: "https://github.com/Cnashn/f1_race_predictor",
-  },
-
-  {
     name: "Spring RabbitMQ Orders",
     description:
       "An event-driven order processing microservice built with Spring Boot and RabbitMQ. Publishes order events to a topic exchange, consumes them asynchronously, retries failures with exponential backoff, routes exhausted messages to a dead-letter queue, and deduplicates events for idempotent processing.",
@@ -182,25 +160,46 @@ const projects = [
     source_code_link: "https://github.com/Cnashn/spring-rabbitmq-orders",
   },
   {
-    name: "Semantic Caching Layer for LLM APIs",
+    name: "Portfolio Website",
     description:
-      "A caching proxy that sits in front of any LLM API and returns stored responses for semantically similar questions, avoiding redundant API calls. Uses vector embeddings and cosine similarity to detect equivalent prompts, with TTL expiration, hit tracking, cache invalidation, and a live Prometheus/Grafana dashboard.",
+      "Built a personal portfolio website to showcase projects and technical skills, focusing on responsive layout, component structure, and performance across devices.",
     tags: [
       {
-        name: "FastAPI",
-        color: "text-blue-400",
+        name: "JavaScript",
+        color: "text-yellow-300",
       },
       {
-        name: "Python",
+        name: "React",
         color: "text-green-500",
       },
       {
-        name: "Docker",
-        color: "text-yellow-300",
+        name: "Tailwind CSS",
+        color: "text-orange-400",
       },
     ],
-    image: semanticCache,
-    source_code_link: "https://github.com/Cnashn/semantic-cache",
+    image: portfolio_website,
+    source_code_link: "https://github.com/Cnashn/Portfolio-Website",
+  },
+  {
+    name: "Cell Type Classification from Single-Cell RNA-seq Data",
+    description:
+      "A cell-type classification project using the scDeepInsight deep learning framework to identify cell types from single-cell RNA-sequencing data across multiple datasets.",
+    tags: [
+      {
+        name: "Python",
+        color: "text-blue-400",
+      },
+      {
+        name: "PyTorch",
+        color: "text-yellow-300",
+      },
+      {
+        name: "Deep Learning",
+        color: "text-green-500",
+      },
+    ],
+    image: scdeepinsight,
+    source_code_link: "https://github.com/Cnashn/Cell-Type-Classification-with-scDeepInsight",
   },
 ];
 

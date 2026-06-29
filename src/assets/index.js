@@ -29,6 +29,7 @@ import f1 from "./f1-race-predictor.png";
 import gymprog from "./gymprog.png";
 import semanticCache from "./semantic-cache.png";
 import springRabbitMQ from "./springrabbitmq.png";
+import jobsRag from "./jobs-rag.png";
 
 export {
   logo,
@@ -62,4 +63,5 @@ export {
   gymprog,
   semanticCache,
   springRabbitMQ,
+  jobsRag,
 };

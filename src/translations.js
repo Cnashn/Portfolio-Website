@@ -69,14 +69,14 @@ export const t = {
     ],
     projects: [
       {
-        name: "Cell Type Classification from Single-Cell RNA-seq Data",
+        name: "Semantic Caching Layer for LLM APIs",
         description:
-          "A cell-type classification project using the scDeepInsight deep learning framework to identify cell types from single-cell RNA-sequencing data across multiple datasets.",
+          "A caching proxy that sits in front of any LLM API and returns stored responses for semantically similar questions, avoiding redundant API calls. Uses vector embeddings and cosine similarity to detect equivalent prompts, with TTL expiration, hit tracking, cache invalidation, and a live Prometheus/Grafana dashboard.",
       },
       {
-        name: "Portfolio Website",
+        name: "Job Search RAG Pipeline",
         description:
-          "Built a personal portfolio website to showcase projects and technical skills, focusing on responsive layout, component structure, and performance across devices.",
+          "A production-grade RAG system over 32 live Canadian tech job postings. Combines BM25 and dense vector search with Reciprocal Rank Fusion, cross-encoder reranking, and LLM-as-judge citation verification. Evaluated on a 50-question golden dataset: 0.63 composite score, 87% citation accuracy.",
       },
       {
         name: "Gym Progression App",
@@ -84,19 +84,19 @@ export const t = {
           "A full-stack workout tracking app that automatically progresses your weights based on performance, featuring a 17-exercise Push/Pull/Legs program, per-lift progress charts, and smart deload detection. Built with FastAPI, Neon (PostgreSQL), React, TypeScript, and Tailwind CSS, deployed on Render and Vercel.",
       },
       {
-        name: "Formula 1 Race Predictor",
-        description:
-          "Developed a Streamlit-based application that predicts Formula 1 race finishing order from starting grid positions using regression models trained on historical season data.",
-      },
-      {
         name: "Spring RabbitMQ Orders",
         description:
           "An event-driven order processing microservice built with Spring Boot and RabbitMQ. Publishes order events to a topic exchange, consumes them asynchronously, retries failures with exponential backoff, routes exhausted messages to a dead-letter queue, and deduplicates events for idempotent processing.",
       },
       {
-        name: "Semantic Caching Layer for LLM APIs",
+        name: "Portfolio Website",
         description:
-          "A caching proxy that sits in front of any LLM API and returns stored responses for semantically similar questions, avoiding redundant API calls. Uses vector embeddings and cosine similarity to detect equivalent prompts, with TTL expiration, hit tracking, cache invalidation, and a live Prometheus/Grafana dashboard.",
+          "Built a personal portfolio website to showcase projects and technical skills, focusing on responsive layout, component structure, and performance across devices.",
+      },
+      {
+        name: "Cell Type Classification from Single-Cell RNA-seq Data",
+        description:
+          "A cell-type classification project using the scDeepInsight deep learning framework to identify cell types from single-cell RNA-sequencing data across multiple datasets.",
       },
     ],
   },
@@ -138,7 +138,7 @@ export const t = {
       sub: "Me contacter",
       head: "Contact",
       email_label: "cansahin2001@gmail.com",
-      tagline: "N'hésitez pas à me contacter pour toute question ou demande !",
+      tagline: "N'hésitez pas à me contacter pour toute question ou demande!",
       name: "Nom",
       email: "Adresse courriel",
       message: "Message",
@@ -171,14 +171,14 @@ export const t = {
     ],
     projects: [
       {
-        name: "Classification de types cellulaires à partir de données scRNA-seq",
+        name: "Couche de cache sémantique pour APIs LLM",
         description:
-          "Un projet de classification de types cellulaires utilisant le cadre d'apprentissage profond scDeepInsight pour identifier les types cellulaires à partir de données de séquençage d'ARN à cellule unique sur plusieurs ensembles de données.",
+          "Un proxy de cache qui intercepte les requêtes vers une API LLM et retourne des réponses stockées pour des questions sémantiquement similaires, évitant les appels redondants. Utilise des embeddings vectoriels et la similarité cosinus pour détecter les requêtes équivalentes, avec expiration TTL, suivi des accès, invalidation du cache et un tableau de bord Prometheus/Grafana en temps réel.",
       },
       {
-        name: "Site web portfolio",
+        name: "Pipeline RAG de recherche d'emploi",
         description:
-          "Création d'un site web portfolio personnel pour présenter des projets et des compétences techniques, en mettant l'accent sur la mise en page réactive, la structure des composants et les performances sur différents appareils.",
+          "Un système RAG de niveau production sur 32 offres d'emploi tech canadiennes en direct. Combine BM25 et recherche vectorielle dense avec Reciprocal Rank Fusion, reranking par cross-encoder et vérification de citations par LLM. Évalué sur 50 questions : score composite 0.63, précision des citations 87%.",
       },
       {
         name: "Application de progression en salle de sport",
@@ -186,19 +186,19 @@ export const t = {
           "Une application full-stack de suivi d'entraînement qui progresse automatiquement vos poids selon les performances, avec un programme Push/Pull/Jambes de 17 exercices, des graphiques de progression et une détection intelligente du déchargement. Construite avec FastAPI, Neon (PostgreSQL), React, TypeScript et Tailwind CSS.",
       },
       {
-        name: "Prédicteur de courses de Formule 1",
-        description:
-          "Développement d'une application Streamlit qui prédit l'ordre d'arrivée des courses de Formule 1 à partir des positions de grille de départ, en utilisant des modèles de régression entraînés sur des données historiques.",
-      },
-      {
         name: "Spring RabbitMQ Orders",
         description:
           "Un microservice de traitement de commandes événementiel construit avec Spring Boot et RabbitMQ. Publie des événements de commande sur un topic exchange, les consomme de manière asynchrone, réessaie les échecs avec un backoff exponentiel, achemine les messages épuisés vers une dead-letter queue et déduplique les événements pour un traitement idempotent.",
       },
       {
-        name: "Couche de cache semantique pour APIs LLM",
+        name: "Site web portfolio",
         description:
-          "Un proxy de cache qui intercepte les requetes vers une API LLM et retourne des reponses stockees pour des questions semantiquement similaires, evitant les appels redondants. Utilise des embeddings vectoriels et la similarite cosinus pour detecter les requetes equivalentes, avec expiration TTL, suivi des acces, invalidation du cache et un tableau de bord Prometheus/Grafana en temps reel.",
+          "Création d'un site web portfolio personnel pour présenter des projets et des compétences techniques, en mettant l'accent sur la mise en page réactive, la structure des composants et les performances sur différents appareils.",
+      },
+      {
+        name: "Classification de types cellulaires à partir de données scRNA-seq",
+        description:
+          "Un projet de classification de types cellulaires utilisant le cadre d'apprentissage profond scDeepInsight pour identifier les types cellulaires à partir de données de séquençage d'ARN à cellule unique sur plusieurs ensembles de données.",
       },
     ],
   },
