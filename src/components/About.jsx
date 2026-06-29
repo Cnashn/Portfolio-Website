@@ -25,7 +25,7 @@ const About = () => {
         <br />
         <br />
       {tr.body2}{" "}<span className="text-[#1cb9d7] font-bold">
-              <a href="https://www.uottawa.ca/en" target="_blank">{tr.body3}</a></span>{" "}{tr.body4}
+              <a href={lang === 'fr' ? "https://www.uottawa.ca/fr" : "https://www.uottawa.ca/en"} target="_blank">{tr.body3}</a></span>{" "}{tr.body4}
     </motion.p>
 
     </>
