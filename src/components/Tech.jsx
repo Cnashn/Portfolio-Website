@@ -26,21 +26,13 @@ const Tech = () => {
       <div className="mt-4">
         <button
           onClick={resetAll}
-          style={{
-            background: 'rgba(255,255,255,0.08)',
-            border: '1px solid rgba(255,255,255,0.2)',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: '6px 16px',
-            fontSize: 13,
-            color: 'rgba(255,255,255,0.6)',
-          }}
+          className="bg-white/5 border border-white/20 rounded-lg px-4 py-1.5 text-[13px] text-white/60 hover:text-white hover:border-white/40 transition-colors duration-200 cursor-pointer"
         >
           ↺ Reset
         </button>
       </div>
 
-      <div className="mt-6 grid grid-cols-8 gap-6 justify-items-center">
+      <div className="mt-6 grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-6 justify-items-center">
         {technologies.map((tech) => (
           <div className="w-28 h-28" key={tech.name}>
             <a data-tooltip-id={`tech-${tech.name}`}>

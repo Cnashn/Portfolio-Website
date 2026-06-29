@@ -4,6 +4,10 @@ module.exports = {
   mode: "jit",
   theme: {
     extend: {
+      fontFamily: {
+        archivo: ["Archivo", "sans-serif"],
+        grotesk: ["Space Grotesk", "sans-serif"],
+      },
       colors: {
         primary: "#010c2a",
         secondary: "#a6afc3ff",

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { styles } from "../styles";
 import AnimatedParticle from "./AnimatedParticle";
 import { useLang } from "../context/LanguageContext";
@@ -8,24 +9,47 @@ const Hero = () => {
   const tr = t[lang].hero;
 
   return (
-    <section className="relative w-full h-screen mx-auto">
+    <section className="relative w-full h-screen mx-auto overflow-hidden">
       <div
-        className={`${styles.paddingX} absolute inset-0 top-[60px] max-w-7xl mx-auto flex flex-col items-center gap-6 sm:gap-8 lg:gap-12 lg:flex-row`}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 60% at 70% 50%, rgba(28,185,215,0.07) 0%, transparent 70%)",
+        }}
+      />
+
+      <div
+        className={`${styles.paddingX} absolute inset-0 top-[60px] max-w-7xl mx-auto flex flex-col items-center justify-center gap-6 sm:gap-8 lg:gap-12 lg:flex-row lg:justify-start`}
       >
-        <div className="flex flex-row items-stretch gap-5 flex-1">
-          <div className="flex flex-col items-center mt-5 self-stretch">
-            <div className="w-5 h-5 rounded-full bg-[#1cb9d7] flex-shrink-0" />
-            <div className="w-1 flex-1 bg-[#1cb9d7]" />
-          </div>
-          <div className="flex-1 text-left">
-            <h1 className={`${styles.heroHeadText} text-white`}>
-              {tr.greeting} <span className="text-[#1cb9d7]">Can</span>
-            </h1>
-            <p className={`${styles.heroSubText} mt-2 text-secondary max-w-3xl leading-[30px]`}>
-              {tr.bio}
-            </p>
-          </div>
+        <div className="flex-none lg:flex-1 text-left">
+          <motion.h1
+            className={styles.heroHeadText}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {tr.greeting}{" "}
+            <motion.span
+              className="text-[#1cb9d7]"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              style={{ display: "inline-block" }}
+            >
+              Can
+            </motion.span>
+          </motion.h1>
+
+          <motion.p
+            className={`${styles.heroSubText} mt-4 text-secondary max-w-xl leading-[30px]`}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55, duration: 0.6, ease: "easeOut" }}
+          >
+            {tr.bio}
+          </motion.p>
         </div>
+
         <div className="flex justify-center flex-1 w-full">
           <AnimatedParticle />
         </div>

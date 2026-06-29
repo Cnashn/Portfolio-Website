@@ -103,15 +103,15 @@ const projects = [
     tags: [
       {
         name: "Python",
-        color: "text-blue-400",
-      },
-      {
-        name: "FastAPI",
         color: "text-green-500",
       },
       {
+        name: "FastAPI",
+        color: "text-orange-400",
+      },
+      {
         name: "React",
-        color: "text-yellow-300",
+        color: "text-blue-400",
       },
     ],
     image: jobsRag,
@@ -124,15 +124,15 @@ const projects = [
     tags: [
       {
         name: "FastAPI",
-        color: "text-blue-400",
+        color: "text-yellow-300",
       },
       {
         name: "React",
-        color: "text-green-500",
+        color: "text-blue-400",
       },
       {
         name: "PostgreSQL",
-        color: "text-yellow-300",
+        color: "text-orange-400",
       },
     ],
     image: gymprog,
@@ -149,11 +149,11 @@ const projects = [
       },
       {
         name: "Spring Boot",
-        color: "text-green-500",
+        color: "text-blue-400",
       },
       {
         name: "RabbitMQ",
-        color: "text-yellow-300",
+        color: "text-green-500",
       },
     ],
     image: springRabbitMQ,
@@ -170,11 +170,11 @@ const projects = [
       },
       {
         name: "React",
-        color: "text-green-500",
+        color: "text-orange-400",
       },
       {
         name: "Tailwind CSS",
-        color: "text-orange-400",
+        color: "text-green-500",
       },
     ],
     image: portfolio_website,
@@ -191,11 +191,11 @@ const projects = [
       },
       {
         name: "PyTorch",
-        color: "text-yellow-300",
+        color: "text-orange-400",
       },
       {
         name: "Deep Learning",
-        color: "text-green-500",
+        color: "text-yellow-300",
       },
     ],
     image: scdeepinsight,
