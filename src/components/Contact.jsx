@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useForm, ValidationError } from '@formspree/react';
 import { styles } from '../styles';
@@ -8,9 +8,18 @@ import { useLang } from '../context/LanguageContext';
 import { t } from '../translations';
 
 const Contact = () => {
-  const [state, handleSubmit] = useForm('mzdldpwn');
+  const [state, handleSubmit, resetForm] = useForm('mzdldpwn');
   const { lang } = useLang();
   const tr = t[lang].contact;
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    if (state.succeeded) {
+      formRef.current?.reset();
+      const timer = setTimeout(() => resetForm(), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [state.succeeded, resetForm]);
 
   return (
     <>
@@ -25,6 +34,7 @@ const Contact = () => {
       </motion.div>
 
       <motion.form
+        ref={formRef}
         onSubmit={handleSubmit}
         variants={fadeIn("", "", 0.2, 1)}
         className="mt-10 flex flex-col gap-8"
