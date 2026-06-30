@@ -10,15 +10,15 @@ export const t = {
     },
     hero: {
       greeting: "Hi, I'm",
-      bio: "I'm a software engineer based in Canada who builds backend systems and data-driven applications, with hands-on experience delivering complete web-based tools and applying machine learning in data-intensive projects. I care about clear abstractions, system behavior, and making software reliable over time.",
+      bio: "I'm a software engineer who builds and ships full-stack systems with a backend lean: async APIs, event-driven services, and LLM tooling in Python, Java, and TypeScript on PostgreSQL. I care about layered architecture, distributed systems design, and making software reliable over time.",
     },
     about: {
       sub: "Introduction",
       head: "Overview",
-      body1: "I'm interested in how software systems behave in practice, especially as they grow in complexity and scale. Through academic and industry projects, I've worked on backend services, API-driven web applications, and data-intensive workflows, with an emphasis on writing maintainable code and understanding systems end to end.",
+      body1: "I'm interested in how software systems behave in practice, especially as they grow in complexity and scale. Through co-op roles and personal projects, I've built async APIs, event-driven microservices, and LLM-powered tools, with an emphasis on observability, testing, and understanding systems end to end.",
       body2: "I recently graduated from the",
       body3: "University of Ottawa",
-      body4: "and I'm looking for a software engineering role where I can contribute to production systems, collaborate with other engineers, and continue developing strong backend and infrastructure fundamentals, with applied machine learning as a supporting skill.",
+      body4: "and I'm looking for a software engineering role where I can contribute to production systems, collaborate with other engineers, and keep building on strong backend and distributed systems fundamentals, with LLM tooling as a supporting skill.",
     },
     experience: {
       sub: "What I have done so far",
@@ -51,9 +51,9 @@ export const t = {
         company_name: "University of Ottawa",
         date: "September 2023 - April 2024",
         points: [
-          "Designed and implemented Python-based data validation and ingestion pipelines to standardize enterprise architecture datasets, eliminating manual QA steps and improving governance review reliability.",
-          "Developed automation for analysis workflows across 30+ IT initiatives, producing quantified efficiency estimates (20–30%) used in consolidation and modernization decisions.",
-          "Collaborated with senior enterprise architects to deliver structured datasets and documentation supporting system design, compliance, and architecture standardization.",
+          "Eliminated manual QA steps by building Python validation and ingestion pipelines that standardized messy enterprise data into reliable, tested outputs.",
+          "Informed platform consolidation decisions across 30+ IT initiatives by building automation that produced 20-30% efficiency estimates.",
+          "Delivered structured data models, tests, and documentation that unblocked enterprise system design decisions and met compliance requirements across multiple initiatives.",
         ],
       },
       {
@@ -61,9 +61,9 @@ export const t = {
         company_name: "March Networks",
         date: "January 2023 - April 2023",
         points: [
-          "Led the development of Python tooling to replace Excel-based compliance reporting workflows, reducing manual effort by ~80% for legal and R&D stakeholders.",
-          "Maintained and evolved production data-processing scripts analyzing license and vulnerability data across 3,000+ components, improving consistency and auditability.",
-          "Identified and optimized performance bottlenecks in large-scale data-processing workflows, reducing reporting runtime by ~50% under real production constraints.",
+          "Reduced manual compliance toil by ~80% for legal and R&D teams by replacing manual Excel workflows with Python automation.",
+          "Cut reporting runtime by ~50% by optimizing large-scale data-processing workflows under real production constraints.",
+          "Improved consistency and auditability across 3,000+ components by refactoring production data-analysis services, reducing error-prone manual processes and standardizing outputs for downstream reporting.",
         ],
       },
     ],
@@ -112,15 +112,15 @@ export const t = {
     },
     hero: {
       greeting: "Bonjour, je suis",
-      bio: "Je suis un ingénieur logiciel basé au Canada qui conçoit des systèmes backend et des applications axées sur les données, avec une expérience pratique dans la livraison d'outils web complets et l'application de l'apprentissage automatique dans des projets intensifs en données. Je me soucie des abstractions claires, du comportement des systèmes et de la fiabilité du logiciel dans le temps.",
+      bio: "Je suis un ingénieur logiciel qui conçoit et livre des systèmes full-stack avec une orientation backend : API asynchrones, services événementiels et outillage LLM en Python, Java et TypeScript sur PostgreSQL. Je me soucie de l'architecture en couches, de la conception de systèmes distribués et de la fiabilité du logiciel dans le temps.",
     },
     about: {
       sub: "Introduction",
       head: "Aperçu",
-      body1: "Je m'intéresse au comportement des systèmes logiciels en pratique, notamment à mesure qu'ils gagnent en complexité et en échelle. À travers des projets académiques et industriels, j'ai travaillé sur des services backend, des applications web pilotées par API et des flux de travail intensifs en données, avec un accent sur l'écriture de code maintenable et la compréhension des systèmes de bout en bout.",
+      body1: "Je m'intéresse au comportement des systèmes logiciels en pratique, notamment à mesure qu'ils gagnent en complexité et en échelle. À travers des stages coopératifs et des projets personnels, j'ai construit des API asynchrones, des microservices événementiels et des outils basés sur des LLM, avec un accent sur l'observabilité, les tests et la compréhension des systèmes de bout en bout.",
       body2: "J'ai récemment obtenu mon diplôme de l'",
       body3: "Université d'Ottawa",
-      body4: "et je recherche un poste en ingénierie logicielle où je pourrai contribuer à des systèmes en production, collaborer avec d'autres ingénieurs, et continuer à développer de solides bases en backend et en infrastructure, avec l'apprentissage automatique appliqué comme compétence complémentaire.",
+      body4: "et je recherche un poste en ingénierie logicielle où je pourrai contribuer à des systèmes en production, collaborer avec d'autres ingénieurs, et continuer à renforcer de solides bases en backend et en systèmes distribués, avec l'outillage LLM comme compétence complémentaire.",
     },
     experience: {
       sub: "Mon parcours jusqu'ici",
@@ -153,9 +153,9 @@ export const t = {
         company_name: "Université d'Ottawa",
         date: "Septembre 2023 - Avril 2024",
         points: [
-          "Conception et mise en œuvre de pipelines Python de validation et d'ingestion de données pour standardiser les ensembles de données d'architecture d'entreprise, éliminant les étapes manuelles d'assurance qualité.",
-          "Développement d'automatisations pour les flux d'analyse couvrant plus de 30 initiatives informatiques, produisant des estimations d'efficacité quantifiées (20–30 %) utilisées dans les décisions de consolidation.",
-          "Collaboration avec des architectes d'entreprise seniors pour livrer des ensembles de données structurés et de la documentation soutenant la conception système, la conformité et la standardisation de l'architecture.",
+          "Élimination des étapes manuelles d'assurance qualité en construisant des pipelines Python de validation et d'ingestion qui standardisaient des données d'entreprise désordonnées en sorties fiables et testées.",
+          "Décisions de consolidation de plateforme éclairées sur plus de 30 initiatives informatiques en construisant des automatisations produisant des estimations d'efficacité de 20 à 30 %.",
+          "Livraison de modèles de données structurés, de tests et de documentation ayant débloqué des décisions de conception de systèmes d'entreprise et répondu aux exigences de conformité sur plusieurs initiatives.",
         ],
       },
       {
@@ -163,9 +163,9 @@ export const t = {
         company_name: "March Networks",
         date: "Janvier 2023 - Avril 2023",
         points: [
-          "Direction du développement d'outils Python pour remplacer les flux de rapports de conformité basés sur Excel, réduisant l'effort manuel d'environ 80 % pour les parties prenantes juridiques et R&D.",
-          "Maintenance et évolution de scripts de traitement de données en production analysant les données de licences et de vulnérabilités sur plus de 3 000 composants, améliorant la cohérence et l'auditabilité.",
-          "Identification et optimisation des goulots d'étranglement de performance dans les flux de traitement de données à grande échelle, réduisant le temps d'exécution des rapports d'environ 50 %.",
+          "Réduction d'environ 80 % de la charge manuelle de conformité pour les équipes juridiques et R&D en remplaçant des flux de travail Excel manuels par de l'automatisation Python.",
+          "Réduction d'environ 50 % du temps d'exécution des rapports en optimisant des flux de traitement de données à grande échelle sous des contraintes de production réelles.",
+          "Amélioration de la cohérence et de l'auditabilité sur plus de 3 000 composants en refactorisant des services de production d'analyse de données, réduisant les processus manuels sujets aux erreurs et standardisant les sorties pour les rapports en aval.",
         ],
       },
     ],
