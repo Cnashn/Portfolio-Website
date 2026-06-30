@@ -94,6 +94,11 @@ export const t = {
           "Built a personal portfolio website to showcase projects and technical skills, focusing on responsive layout, component structure, and performance across devices.",
       },
       {
+        name: "Your Daily Sports Agent",
+        description:
+          "An autonomous AI agent that runs daily via GitHub Actions, pulls live data from multiple sports APIs, and uses the Anthropic API to write a personal journal entry in a consistent voice. Zero manual input, fully self-contained from data fetch to git commit.",
+      },
+      {
         name: "Cell Type Classification from Single-Cell RNA-seq Data",
         description:
           "A cell-type classification project using the scDeepInsight deep learning framework to identify cell types from single-cell RNA-sequencing data across multiple datasets.",
@@ -194,6 +199,11 @@ export const t = {
         name: "Site web portfolio",
         description:
           "Création d'un site web portfolio personnel pour présenter des projets et des compétences techniques, en mettant l'accent sur la mise en page réactive, la structure des composants et les performances sur différents appareils.",
+      },
+      {
+        name: "Your Daily Sports Agent",
+        description:
+          "Un agent IA autonome qui s'exécute quotidiennement via GitHub Actions, récupère des données sportives en direct depuis plusieurs API, et utilise l'API Anthropic pour rédiger une entrée de journal personnelle dans une voix cohérente. Zéro intervention manuelle, entièrement autonome de la collecte de données jusqu'au commit Git.",
       },
       {
         name: "Classification de types cellulaires à partir de données scRNA-seq",

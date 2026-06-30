@@ -30,6 +30,7 @@ import gymprog from "./gymprog.png";
 import semanticCache from "./semantic-cache.png";
 import springRabbitMQ from "./springrabbitmq.png";
 import jobsRag from "./jobs-rag.png";
+import ai_agent from "./ai_agent.png";
 
 export {
   logo,
@@ -64,4 +65,5 @@ export {
   semanticCache,
   springRabbitMQ,
   jobsRag,
+  ai_agent,
 };

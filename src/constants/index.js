@@ -22,7 +22,8 @@ import {
   gymprog,
   semanticCache,
   springRabbitMQ,
-  jobsRag
+  jobsRag,
+  ai_agent
 } from "../assets";
 
 
@@ -179,6 +180,27 @@ const projects = [
     ],
     image: portfolio_website,
     source_code_link: "https://github.com/Cnashn/Portfolio-Website",
+  },
+  {
+    name: "Your Daily Sports Agent",
+    description:
+      "An autonomous AI agent that runs daily via GitHub Actions, pulls live data from multiple sports APIs, and uses the Anthropic API to write a personal journal entry in a consistent voice. Zero manual input, fully self-contained from data fetch to git commit.",
+    tags: [
+      {
+        name: "Python",
+        color: "text-green-500",
+      },
+      {
+        name: "Anthropic API",
+        color: "text-orange-400",
+      },
+      {
+        name: "GitHub Actions",
+        color: "text-blue-400",
+      },
+    ],
+    image: ai_agent,
+    source_code_link: "https://github.com/Cnashn/your-daily-sports-agent",
   },
   {
     name: "Cell Type Classification from Single-Cell RNA-seq Data",
