@@ -18,7 +18,7 @@ export const t = {
       body1: "I'm interested in how software systems behave in practice, especially as they grow in complexity and scale. Through co-op roles and personal projects, I've built async APIs, event-driven microservices, and LLM-powered tools, with an emphasis on observability, testing, and understanding systems end to end.",
       body2: "I recently graduated from the",
       body3: "University of Ottawa",
-      body4: "and I'm looking for a software engineering role where I can contribute to production systems, collaborate with other engineers, and keep building on strong backend and distributed systems fundamentals, with LLM tooling as a supporting skill.",
+      body4: "and I'm looking for a software engineering role where I can contribute to production systems, collaborate with other engineers, and keep building on strong backend and distributed systems fundamentals.",
     },
     experience: {
       sub: "What I have done so far",
@@ -125,7 +125,7 @@ export const t = {
       body1: "Je m'intéresse au comportement des systèmes logiciels en pratique, notamment à mesure qu'ils gagnent en complexité et en échelle. À travers des stages coopératifs et des projets personnels, j'ai construit des API asynchrones, des microservices événementiels et des outils basés sur des LLM, avec un accent sur l'observabilité, les tests et la compréhension des systèmes de bout en bout.",
       body2: "J'ai récemment obtenu mon diplôme de l'",
       body3: "Université d'Ottawa",
-      body4: "et je recherche un poste en ingénierie logicielle où je pourrai contribuer à des systèmes en production, collaborer avec d'autres ingénieurs, et continuer à renforcer de solides bases en backend et en systèmes distribués, avec l'outillage LLM comme compétence complémentaire.",
+      body4: "et je recherche un poste en ingénierie logicielle où je pourrai contribuer à des systèmes en production, collaborer avec d'autres ingénieurs, et continuer à renforcer de solides bases en backend et en systèmes distribués.",
     },
     experience: {
       sub: "Mon parcours jusqu'ici",
