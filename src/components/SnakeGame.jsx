@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 const CYAN = "#1cb9d7";
 const CELL = 14;
+const FOOD_COLORS = ["#ffd60a", "#22e55c", "#ff4d4d", "#ff9f1c", "#ff5fa2"];
 
 const SnakeGame = ({ onExit }) => {
   const wrapRef = useRef(null);
@@ -34,7 +35,7 @@ const SnakeGame = ({ onExit }) => {
     const ro = new ResizeObserver(resize);
     ro.observe(wrap);
 
-    let snake, dir, nextDir, food, score, over, won, tickMs;
+    let snake, dir, nextDir, food, foodColor, score, over, won, tickMs;
 
     const placeFood = () => {
       do {
@@ -43,6 +44,11 @@ const SnakeGame = ({ onExit }) => {
           y: Math.floor(Math.random() * rows),
         };
       } while (snake.some((s) => s.x === food.x && s.y === food.y));
+      let c;
+      do {
+        c = FOOD_COLORS[Math.floor(Math.random() * FOOD_COLORS.length)];
+      } while (c === foodColor);
+      foodColor = c;
     };
 
     const reset = () => {
@@ -144,7 +150,7 @@ const SnakeGame = ({ onExit }) => {
       });
       ctx.globalAlpha = 1;
 
-      ctx.fillStyle = "#febc2e";
+      ctx.fillStyle = foodColor;
       ctx.beginPath();
       ctx.arc(ox + food.x * CELL + CELL / 2, oy + food.y * CELL + CELL / 2, 3.5, 0, Math.PI * 2);
       ctx.fill();

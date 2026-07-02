@@ -127,7 +127,6 @@ const Terminal = () => {
   const vimAttempts = useRef(0);
   const inputRef = useRef(null);
   const scrollRef = useRef(null);
-  const constraintsRef = useRef(null);
   const dragControls = useDragControls();
   const dragX = useMotionValue(0);
   const dragY = useMotionValue(0);
@@ -142,8 +141,19 @@ const Terminal = () => {
   const panelW = maximized ? 720 : isGame ? 560 : 400;
   const contentH = maximized ? 440 : isGame ? 340 : 260;
 
-  // Panel size changes invalidate framer's measured drag constraints,
-  // which leaves the panel stuck; snapping home keeps it draggable.
+  // Ref-based dragConstraints go stale when the panel resizes, so bounds
+  // are computed from the panel's home position (bottom-right, 20px/70px
+  // insets) against a 12px viewport margin instead.
+  const realW = Math.min(panelW, window.innerWidth - 40);
+  const realH = 40 + (minimized ? 0 : contentH);
+  const dragBounds = {
+    left: 12 - (window.innerWidth - 20 - realW),
+    right: 8,
+    top: 12 - (window.innerHeight - 70 - realH),
+    bottom: 58,
+  };
+
+  // Snap home when the panel grows so it never expands past the viewport.
   useEffect(() => {
     snapHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -438,15 +448,13 @@ const Terminal = () => {
         &gt;_<span className="animate-pulse">▌</span>
       </motion.button>
 
-      {open && <div ref={constraintsRef} className="fixed inset-3 z-30 pointer-events-none" />}
-
       <AnimatePresence>
         {open && (
           <motion.div
             drag
             dragListener={false}
             dragControls={dragControls}
-            dragConstraints={constraintsRef}
+            dragConstraints={dragBounds}
             dragMomentum={false}
             dragElastic={0}
             style={{ x: dragX, y: dragY }}
