@@ -102,7 +102,7 @@ const Terminal = () => {
         break;
       case "rm -rf /":
       case "rm -rf /*":
-        out = ["rm: permission denied. this portfolio is read-only."];
+        out = ["nice try."];
         break;
       case "ls":
         out = ["about  work  tech  projects  contact"];
