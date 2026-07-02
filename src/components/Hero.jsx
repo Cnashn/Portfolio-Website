@@ -79,6 +79,8 @@ const Hero = () => {
               initial="hidden"
               animate="show"
               onClick={burstParticles}
+              whileTap={{ scale: 0.92 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
               title=""
               className="text-gradient-cyan inline-block cursor-pointer select-none"
             >

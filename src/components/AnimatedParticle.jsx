@@ -4,6 +4,7 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: -1000, y: -1000, active: false });
   const linesRef = useRef([]);
+  const burstRef = useRef({ id: 0, start: 0, active: false });
   const imageLoadedRef = useRef(false);
   const startTimeRef = useRef(null);
   const [size, setSize] = useState(500);
@@ -28,20 +29,15 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
 
   useEffect(() => {
     const burst = () => {
-      const cx = size / 2;
-      const cy = size / 2;
-      linesRef.current.forEach((p) => {
-        const dx = p.x - cx;
-        const dy = p.y - cy;
-        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-        const force = 8 + Math.random() * 14;
-        p.vx += (dx / dist) * force;
-        p.vy += (dy / dist) * force;
-      });
+      burstRef.current = {
+        id: burstRef.current.id + 1,
+        start: performance.now(),
+        active: true,
+      };
     };
     document.addEventListener("hero-burst", burst);
     return () => document.removeEventListener("hero-burst", burst);
-  }, [size]);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -151,7 +147,28 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
 
       const lines = linesRef.current;
       const mouse = mouseRef.current;
-      const elapsed = (performance.now() - startTimeRef.current) / 1000;
+      const now = performance.now();
+      const elapsed = (now - startTimeRef.current) / 1000;
+
+      // Shockwave: an impulse ring travels outward from the center,
+      // kicking each particle as the wavefront reaches it.
+      const burst = burstRef.current;
+      const waveCx = canvasWidth / 2;
+      const waveCy = canvasHeight / 2;
+      const maxWaveR = canvasWidth * 0.78;
+      let waveR = -1;
+      if (burst.active) {
+        waveR = ((now - burst.start) / 1000) * canvasWidth * 1.5;
+        if (waveR > maxWaveR) {
+          burst.active = false;
+        } else {
+          ctx.strokeStyle = `rgba(28,185,215,${0.45 * (1 - waveR / maxWaveR)})`;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.arc(waveCx, waveCy, waveR, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
 
       lines.forEach((p) => {
         const particleTime = elapsed - p.delay;
@@ -180,22 +197,50 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
           }
         }
 
+        if (burst.active && p.burstId !== burst.id) {
+          const bdx = p.x - waveCx;
+          const bdy = p.y - waveCy;
+          const bdist = Math.sqrt(bdx * bdx + bdy * bdy) || 1;
+          if (bdist <= waveR) {
+            p.burstId = burst.id;
+            p.hitTime = now;
+            p.flash = 1;
+            const force = 10 + Math.random() * 8;
+            p.vx += (bdx / bdist) * force;
+            p.vy += (bdy / bdist) * force;
+          }
+        }
+
         const dx = p.targetX - p.x;
         const dy = p.targetY - p.y;
 
-        const pullStrength = 0.01 + easedMove * 0.07;
+        // Recently kicked particles return on a springier setting so they
+        // overshoot and wobble before settling.
+        const sprung = p.hitTime && now - p.hitTime < 1600;
+        const pullStrength = sprung ? 0.035 : 0.01 + easedMove * 0.07;
+        const damping = sprung ? 0.96 : 0.92;
         p.vx += dx * pullStrength;
         p.vy += dy * pullStrength;
 
-        p.vx *= 0.92;
-        p.vy *= 0.92;
+        p.vx *= damping;
+        p.vy *= damping;
 
         p.x += p.vx;
         p.y += p.vy;
 
-        ctx.strokeStyle = `${color}${Math.round(p.currentAlpha * 255)
-          .toString(16)
-          .padStart(2, "0")}`;
+        if (p.flash > 0.01) {
+          p.flash *= 0.94;
+          const f = p.flash;
+          const r = Math.round(28 + 227 * f);
+          const g = Math.round(185 + 70 * f);
+          const b = Math.round(215 + 40 * f);
+          const a = Math.min(1, p.currentAlpha + f * 0.5);
+          ctx.strokeStyle = `rgba(${r},${g},${b},${a})`;
+        } else {
+          ctx.strokeStyle = `${color}${Math.round(p.currentAlpha * 255)
+            .toString(16)
+            .padStart(2, "0")}`;
+        }
         ctx.lineWidth = size <= 280 ? 1.5 : 2;
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);

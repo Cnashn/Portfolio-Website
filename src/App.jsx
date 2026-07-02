@@ -3,7 +3,7 @@ import {About, Contact, Experience, Hero, Navbar, Tech, Works} from './component
 import { LanguageProvider } from './context/LanguageContext';
 import ScrollProgress from './components/ScrollProgress';
 import CustomCursor from './components/CustomCursor';
-import EasterEggs from './components/EasterEggs';
+import Terminal from './components/Terminal';
 
 
 
@@ -13,7 +13,7 @@ const App = () => {
     <LanguageProvider>
       <CustomCursor />
       <ScrollProgress />
-      <EasterEggs />
+      <Terminal />
       <div className="relative z-0">
         <div>
           <Navbar />
