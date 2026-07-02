@@ -163,7 +163,7 @@ const projects = [
   {
     name: "Portfolio Website",
     description:
-      "Built a personal portfolio website to showcase projects and technical skills, focusing on responsive layout, component structure, and performance across devices.",
+      "The site you're looking at. Bilingual EN/FR, built with React, Tailwind CSS, and Framer Motion, with scroll-driven animations and a hidden in-browser terminal running playable mini games.",
     tags: [
       {
         name: "JavaScript",

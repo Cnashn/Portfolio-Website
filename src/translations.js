@@ -91,7 +91,7 @@ export const t = {
       {
         name: "Portfolio Website",
         description:
-          "Built a personal portfolio website to showcase projects and technical skills, focusing on responsive layout, component structure, and performance across devices.",
+          "The site you're looking at. Bilingual EN/FR, built with React, Tailwind CSS, and Framer Motion, with scroll-driven animations and a hidden in-browser terminal running playable mini games.",
       },
       {
         name: "Your Daily Sports Agent",
@@ -198,7 +198,7 @@ export const t = {
       {
         name: "Site web portfolio",
         description:
-          "Création d'un site web portfolio personnel pour présenter des projets et des compétences techniques, en mettant l'accent sur la mise en page réactive, la structure des composants et les performances sur différents appareils.",
+          "Le site que vous consultez. Bilingue EN/FR, construit avec React, Tailwind CSS et Framer Motion, avec des animations au défilement et un terminal caché dans le navigateur proposant des mini-jeux.",
       },
       {
         name: "Your Daily Sports Agent",

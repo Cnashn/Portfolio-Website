@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, useDragControls } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useDragControls,
+  useMotionValue,
+  animate,
+} from "framer-motion";
 import { technologies, projects } from "../constants";
 import DinoGame from "./DinoGame";
 import SnakeGame from "./SnakeGame";
@@ -73,6 +79,14 @@ const MatrixRain = ({ onDone }) => {
         drops[i]++;
         if (y > H && Math.random() > 0.975) drops[i] = -Math.random() * 10;
       }
+
+      ctx.fillStyle = "rgba(1,12,42,0.7)";
+      ctx.fillRect(W / 2 - 118, H - 27, 236, 20);
+      ctx.fillStyle = `rgba(255,255,255,${0.55 + 0.3 * Math.sin(Date.now() / 350)})`;
+      ctx.font = "11px ui-monospace, Menlo, monospace";
+      ctx.textAlign = "center";
+      ctx.fillText("press any key to disconnect", W / 2, H - 13);
+      ctx.textAlign = "left";
     };
     draw();
 
@@ -110,13 +124,30 @@ const Terminal = () => {
   const [histIdx, setHistIdx] = useState(-1);
   const [vimMsg, setVimMsg] = useState(null);
   const helloStreak = useRef(0);
+  const vimAttempts = useRef(0);
   const inputRef = useRef(null);
   const scrollRef = useRef(null);
+  const constraintsRef = useRef(null);
   const dragControls = useDragControls();
+  const dragX = useMotionValue(0);
+  const dragY = useMotionValue(0);
+  const closeRef = useRef(() => {});
+
+  const snapHome = () => {
+    animate(dragX, 0, { type: "spring", stiffness: 300, damping: 28 });
+    animate(dragY, 0, { type: "spring", stiffness: 300, damping: 28 });
+  };
 
   const isGame = mode === "dino" || mode === "snake";
   const panelW = maximized ? 720 : isGame ? 560 : 400;
   const contentH = maximized ? 440 : isGame ? 340 : 260;
+
+  // Panel size changes invalidate framer's measured drag constraints,
+  // which leaves the panel stuck; snapping home keeps it draggable.
+  useEffect(() => {
+    snapHome();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [maximized]);
 
   useEffect(() => {
     console.log(
@@ -150,7 +181,7 @@ const Terminal = () => {
   useEffect(() => {
     if (!open || mode !== "shell") return;
     const onKey = (e) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") closeRef.current();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -169,7 +200,7 @@ const Terminal = () => {
     const onKey = (e) => {
       if (e.ctrlKey && e.key.toLowerCase() === "c") {
         e.preventDefault();
-        setVimMsg({ text: "Type :q to exit", color: "hint" });
+        setVimMsg({ text: "Ctrl+C won't help you here. Type :q! to exit", color: "hint" });
       }
     };
     window.addEventListener("keydown", onKey);
@@ -204,7 +235,7 @@ const Terminal = () => {
         return;
       case "help":
         print([
-          "utilities:",
+          "UTILITIES:",
           "  whoami        who are you (and who am I)",
           "  stack         technologies I work with",
           "  projects      list shipped projects",
@@ -213,8 +244,8 @@ const Terminal = () => {
           "  clear         clear the terminal",
           "  exit          close the terminal (or Esc)",
           "",
-          "arcade:",
-          "  dino          runner. space to jump, q to quit",
+          "ARCADE:",
+          "  dino          space to jump, q to quit",
           "  snake         arrows/wasd to steer, q to quit",
         ]);
         return;
@@ -290,10 +321,11 @@ const Terminal = () => {
       case "vim":
       case "vi":
         setVimMsg(null);
+        vimAttempts.current = 0;
         setMode("vim");
         return;
       case "matrix":
-        print(["entering the matrix... any key to disconnect."]);
+        print(["entering the matrix..."]);
         setMode("matrix");
         return;
       case "sl":
@@ -303,7 +335,7 @@ const Terminal = () => {
         setLines([]);
         return;
       case "exit":
-        setOpen(false);
+        closeRef.current();
         return;
       default:
         if (cmd.startsWith("cat ")) {
@@ -324,11 +356,18 @@ const Terminal = () => {
       print(["Welcome back to safety."], "accent");
     } else if (cmd === ":q" || cmd === ":wq" || cmd === ":x") {
       setVimMsg({
-        text: "E37: No write since last change (add ! to override)",
+        text: "E37: No write since last change (add ! to override)\n(vim speak for: type :q! instead)",
         color: "error",
       });
     } else {
-      setVimMsg({ text: "Type :q to exit", color: "hint" });
+      vimAttempts.current++;
+      const msg =
+        vimAttempts.current === 1
+          ? "Type :q! to exit"
+          : vimAttempts.current === 2
+          ? "Almost. It's :q! (colon, q, exclamation mark)"
+          : "Type exactly this: :q! then press Enter";
+      setVimMsg({ text: msg, color: "hint" });
     }
   };
 
@@ -372,7 +411,10 @@ const Terminal = () => {
     setMode("shell");
     setMinimized(false);
     setVimMsg(null);
+    dragX.set(0);
+    dragY.set(0);
   };
+  closeRef.current = close;
 
   const lineColor = (line) =>
     line.color === "error"
@@ -396,46 +438,72 @@ const Terminal = () => {
         &gt;_<span className="animate-pulse">▌</span>
       </motion.button>
 
+      {open && <div ref={constraintsRef} className="fixed inset-3 z-30 pointer-events-none" />}
+
       <AnimatePresence>
         {open && (
           <motion.div
             drag
             dragListener={false}
             dragControls={dragControls}
+            dragConstraints={constraintsRef}
             dragMomentum={false}
             dragElastic={0}
-            initial={{ opacity: 0, y: 16, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1, width: panelW }}
-            exit={{ opacity: 0, y: 16, scale: 0.97 }}
+            style={{ x: dragX, y: dragY }}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1, width: panelW }}
+            exit={{ opacity: 0, scale: 0.96 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="terminal-mono fixed bottom-[70px] right-5 z-40 max-w-[calc(100vw-2.5rem)] rounded-xl overflow-hidden border border-[#1cb9d7]/25 bg-[#010c2a]/95 backdrop-blur-xl shadow-[0_16px_60px_rgba(0,0,0,0.5),0_0_30px_rgba(28,185,215,0.08)]"
           >
             <div
               onPointerDown={(e) => dragControls.start(e)}
-              className="flex items-center gap-2 px-4 py-2.5 bg-white/[0.04] border-b border-white/10 cursor-grab active:cursor-grabbing select-none touch-none"
+              onDoubleClick={() => setMaximized((m) => !m)}
+              title="drag to move, double-click to maximize"
+              className="flex items-center px-4 py-2.5 bg-white/[0.04] border-b border-white/10 cursor-grab active:cursor-grabbing select-none touch-none"
             >
-              <button
-                onPointerDown={stopDrag}
-                onClick={close}
-                aria-label="Close terminal"
-                title="close"
-                className="w-3 h-3 rounded-full bg-[#ff5f57] hover:brightness-125 cursor-pointer"
-              />
-              <button
-                onPointerDown={stopDrag}
-                onClick={() => setMinimized((m) => !m)}
-                aria-label="Minimize terminal"
-                title="minimize"
-                className="w-3 h-3 rounded-full bg-[#febc2e] hover:brightness-125 cursor-pointer"
-              />
-              <button
-                onPointerDown={stopDrag}
-                onClick={() => setMaximized((m) => !m)}
-                aria-label="Maximize terminal"
-                title="maximize"
-                className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-125 cursor-pointer"
-              />
-              <span className="ml-2 text-[11px] text-secondary">
+              <div className="group/lights flex items-center gap-2">
+                <button
+                  onPointerDown={stopDrag}
+                  onClick={close}
+                  aria-label="Close terminal"
+                  className="w-3 h-3 rounded-full bg-[#ff5f57] flex items-center justify-center cursor-pointer"
+                >
+                  <svg
+                    viewBox="0 0 8 8"
+                    className="w-[7px] h-[7px] opacity-0 group-hover/lights:opacity-100 transition-opacity duration-150"
+                  >
+                    <path d="M1.5 1.5 L6.5 6.5 M6.5 1.5 L1.5 6.5" stroke="rgba(77,0,0,0.75)" strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                </button>
+                <button
+                  onPointerDown={stopDrag}
+                  onClick={() => setMinimized((m) => !m)}
+                  aria-label="Minimize terminal"
+                  className="w-3 h-3 rounded-full bg-[#febc2e] flex items-center justify-center cursor-pointer"
+                >
+                  <svg
+                    viewBox="0 0 8 8"
+                    className="w-[7px] h-[7px] opacity-0 group-hover/lights:opacity-100 transition-opacity duration-150"
+                  >
+                    <path d="M1.2 4 L6.8 4" stroke="rgba(90,60,0,0.8)" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </button>
+                <button
+                  onPointerDown={stopDrag}
+                  onClick={() => setMaximized((m) => !m)}
+                  aria-label="Maximize terminal"
+                  className="w-3 h-3 rounded-full bg-[#28c840] flex items-center justify-center cursor-pointer"
+                >
+                  <svg
+                    viewBox="0 0 8 8"
+                    className="w-[7px] h-[7px] opacity-0 group-hover/lights:opacity-100 transition-opacity duration-150"
+                  >
+                    <path d="M3.1 1.4 H6.6 V4.9 Z M4.9 6.6 H1.4 V3.1 Z" fill="rgba(0,70,0,0.75)" />
+                  </svg>
+                </button>
+              </div>
+              <span className="ml-3 text-[11px] text-secondary">
                 {mode === "vim" ? "vim: trapped" : "guest@can.sh: ~"}
               </span>
             </div>
@@ -484,9 +552,9 @@ const Terminal = () => {
                   </div>
                   {vimMsg && (
                     <p
-                      className={
+                      className={`whitespace-pre-line ${
                         vimMsg.color === "error" ? "text-red-400" : "text-[#febc2e]"
-                      }
+                      }`}
                     >
                       {vimMsg.text}
                     </p>

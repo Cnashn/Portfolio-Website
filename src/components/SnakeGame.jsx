@@ -34,7 +34,7 @@ const SnakeGame = ({ onExit }) => {
     const ro = new ResizeObserver(resize);
     ro.observe(wrap);
 
-    let snake, dir, nextDir, food, score, over, tickMs;
+    let snake, dir, nextDir, food, score, over, won, tickMs;
 
     const placeFood = () => {
       do {
@@ -57,6 +57,7 @@ const SnakeGame = ({ onExit }) => {
       nextDir = dir;
       score = 0;
       over = false;
+      won = false;
       tickMs = 110;
       placeFood();
     };
@@ -105,6 +106,11 @@ const SnakeGame = ({ onExit }) => {
       snake.unshift(head);
       if (head.x === food.x && head.y === food.y) {
         score += 1;
+        if (snake.length >= cols * rows) {
+          won = true;
+          over = true;
+          return;
+        }
         tickMs = Math.max(60, tickMs - 2);
         placeFood();
       } else {
@@ -138,7 +144,7 @@ const SnakeGame = ({ onExit }) => {
       });
       ctx.globalAlpha = 1;
 
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = "#febc2e";
       ctx.beginPath();
       ctx.arc(ox + food.x * CELL + CELL / 2, oy + food.y * CELL + CELL / 2, 3.5, 0, Math.PI * 2);
       ctx.fill();
@@ -157,7 +163,7 @@ const SnakeGame = ({ onExit }) => {
         ctx.fillStyle = "#ffffff";
         ctx.textAlign = "center";
         ctx.font = "14px ui-monospace, Menlo, monospace";
-        ctx.fillText(`game over. score ${score}`, W / 2, H / 2 - 10);
+        ctx.fillText(won ? `you win. score ${score}` : `game over. score ${score}`, W / 2, H / 2 - 10);
         ctx.fillStyle = "rgba(166,175,195,0.9)";
         ctx.font = "12px ui-monospace, Menlo, monospace";
         ctx.fillText("space to restart, q to quit", W / 2, H / 2 + 12);
