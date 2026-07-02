@@ -65,8 +65,11 @@ const MatrixRain = ({ onDone }) => {
     const drops = Array.from({ length: cols }, () => -Math.random() * 30);
 
     let animationId;
-    const draw = () => {
+    let lastTick = 0;
+    const draw = (t) => {
       animationId = requestAnimationFrame(draw);
+      if (t - lastTick < 50) return;
+      lastTick = t;
       ctx.fillStyle = "rgba(1,12,42,0.16)";
       ctx.fillRect(0, 0, W, H);
       ctx.font = "13px ui-monospace, Menlo, monospace";
@@ -89,7 +92,7 @@ const MatrixRain = ({ onDone }) => {
       ctx.fillText("press any key to disconnect", W / 2, H - 13);
       ctx.textAlign = "left";
     };
-    draw();
+    animationId = requestAnimationFrame(draw);
 
     const finish = () => onDoneRef.current();
     const timer = setTimeout(finish, 6000);

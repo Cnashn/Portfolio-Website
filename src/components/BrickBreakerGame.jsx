@@ -25,6 +25,21 @@ const BrickBreakerGame = ({ onExit }) => {
     let CW = 8;
     let cols = 0;
     let rows = 0;
+    let bricks, brickCols, brickX0, ball, paddle, score, lives, over, won, speed, serveIn;
+    const keys = { left: false, right: false };
+
+    // rebuild the brick field for the current width, keeping the alive state
+    // of columns that survive the resize so maximizing mid-game works
+    const layout = () => {
+      const newCols = Math.floor((cols - 1) / BRICK_PITCH);
+      const old = bricks;
+      bricks = Array.from({ length: BRICK_ROWS }, (_, r) =>
+        Array.from({ length: newCols }, (_, c) => (old && c < brickCols ? old[r][c] : true))
+      );
+      brickCols = newCols;
+      brickX0 = Math.floor((cols - (brickCols * BRICK_PITCH - 1)) / 2);
+    };
+
     const resize = () => {
       W = wrap.clientWidth;
       H = wrap.clientHeight;
@@ -37,13 +52,16 @@ const BrickBreakerGame = ({ onExit }) => {
       CW = ctx.measureText("█").width;
       cols = Math.floor(W / CW) - 2;
       rows = Math.floor((H - 24) / CH); // leave a strip for the score line
+      if (bricks) {
+        layout();
+        paddle.x = Math.max(0, Math.min(cols - PADDLE_W, paddle.x));
+        ball.x = Math.max(0, Math.min(cols, ball.x));
+        ball.y = Math.min(ball.y, rows - 2);
+      }
     };
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(wrap);
-
-    let bricks, brickCols, brickX0, ball, paddle, score, lives, over, won, speed, serveIn;
-    const keys = { left: false, right: false };
 
     const serve = () => {
       ball = { x: paddle.x + PADDLE_W / 2, y: rows - 2, vx: 0, vy: 0 };
@@ -59,9 +77,8 @@ const BrickBreakerGame = ({ onExit }) => {
     };
 
     const reset = () => {
-      brickCols = Math.floor((cols - 1) / BRICK_PITCH);
-      brickX0 = Math.floor((cols - (brickCols * BRICK_PITCH - 1)) / 2);
-      bricks = Array.from({ length: BRICK_ROWS }, () => Array(brickCols).fill(true));
+      bricks = null;
+      layout();
       paddle = { x: (cols - PADDLE_W) / 2 };
       score = 0;
       lives = 3;
@@ -101,8 +118,10 @@ const BrickBreakerGame = ({ onExit }) => {
     const brickAt = (x, y) => {
       const r = Math.floor(y) - 1;
       if (r < 0 || r >= BRICK_ROWS) return null;
+      // the whole pitch (blocks + gap) is solid so the ball can't slip
+      // through the 1-char channels between brick columns
       const rel = Math.floor(x) - brickX0;
-      if (rel < 0 || rel % BRICK_PITCH >= BRICK_PITCH - 1) return null;
+      if (rel < 0) return null;
       const c = Math.floor(rel / BRICK_PITCH);
       if (c >= brickCols || !bricks[r][c]) return null;
       return { r, c };
