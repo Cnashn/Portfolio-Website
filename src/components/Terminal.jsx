@@ -9,6 +9,7 @@ import {
 import { technologies, projects } from "../constants";
 import DinoGame from "./DinoGame";
 import SnakeGame from "./SnakeGame";
+import BrickBreakerGame from "./BrickBreakerGame";
 
 const PROMPT = "guest@can.sh:~$";
 
@@ -117,7 +118,7 @@ const Terminal = () => {
   const [open, setOpen] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const [maximized, setMaximized] = useState(false);
-  const [mode, setMode] = useState("shell"); // shell | vim | dino | snake | matrix | sl
+  const [mode, setMode] = useState("shell"); // shell | vim | dino | snake | brick | matrix | sl
   const [lines, setLines] = useState([]);
   const [input, setInput] = useState("");
   const [history, setHistory] = useState([]);
@@ -137,7 +138,7 @@ const Terminal = () => {
     animate(dragY, 0, { type: "spring", stiffness: 300, damping: 28 });
   };
 
-  const isGame = mode === "dino" || mode === "snake";
+  const isGame = mode === "dino" || mode === "snake" || mode === "brick";
   const panelW = maximized ? 720 : isGame ? 560 : 400;
   const contentH = maximized ? 440 : isGame ? 340 : 260;
 
@@ -257,6 +258,7 @@ const Terminal = () => {
           "ARCADE:",
           "  dino          space to jump, q to quit",
           "  snake         arrows/wasd to steer, q to quit",
+          "  breakout      arrows/ad to move, q to quit",
         ]);
         return;
       case "whoami":
@@ -327,6 +329,10 @@ const Terminal = () => {
         return;
       case "snake":
         startGame("snake", "launching snake... arrows/wasd to steer, q to quit.");
+        return;
+      case "breakout":
+      case "brickbreaker":
+        startGame("brick", "launching breakout... arrows/ad to move, q to quit.");
         return;
       case "vim":
       case "vi":
@@ -523,6 +529,7 @@ const Terminal = () => {
             >
               {mode === "dino" && <DinoGame onExit={(s) => endGame("dino", s)} />}
               {mode === "snake" && <SnakeGame onExit={(s) => endGame("snake", s)} />}
+              {mode === "brick" && <BrickBreakerGame onExit={(s) => endGame("breakout", s)} />}
               {mode === "matrix" && (
                 <MatrixRain
                   onDone={() => {
