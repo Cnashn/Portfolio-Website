@@ -153,6 +153,13 @@ body::after {
   animation: aurora-drift 18s ease-in-out infinite;
 }
 
+/* The global * font rule above outranks inherited font-family, so the
+   terminal needs its own class to force mono on every descendant */
+.terminal-mono,
+.terminal-mono * {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
 /* Animated link underline */
 .link-underline {
   position: relative;
