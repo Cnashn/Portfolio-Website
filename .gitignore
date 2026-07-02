@@ -13,6 +13,9 @@ dist-ssr
 *.local
 .env
 
+# graphify knowledge graph output (local only, never committed)
+graphify-out/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
