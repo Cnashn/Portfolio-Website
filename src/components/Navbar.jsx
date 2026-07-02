@@ -5,6 +5,8 @@ import { linkedin, github, logo, menu, close } from "../assets";
 import { useLang } from "../context/LanguageContext";
 import { t } from "../translations";
 
+const SECTION_IDS = ["about", "work", "tech", "projects", "contact"];
+
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
@@ -16,6 +18,37 @@ const Navbar = () => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Scrollspy: highlight the section currently in the middle of the viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.dataset.sectionId);
+        });
+      },
+      { rootMargin: "-35% 0px -55% 0px" }
+    );
+
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) {
+        const target = el.parentElement || el;
+        target.dataset.sectionId = id;
+        observer.observe(target);
+      }
+    });
+
+    const onTop = () => {
+      if (window.scrollY < 200) setActive("");
+    };
+    window.addEventListener("scroll", onTop, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onTop);
+    };
   }, []);
 
   const rightLinks = [
@@ -56,7 +89,7 @@ const Navbar = () => {
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
-            className="opacity-70 hover:opacity-100 transition-opacity duration-200"
+            className="opacity-70 hover:opacity-100 hover:-translate-y-0.5 transition-all duration-200"
           >
             <img src={github} alt="GitHub" className="w-7 h-7 object-contain" />
           </a>
@@ -66,7 +99,7 @@ const Navbar = () => {
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"
-            className="opacity-70 hover:opacity-100 transition-opacity duration-200"
+            className="opacity-70 hover:opacity-100 hover:-translate-y-0.5 transition-all duration-200"
           >
             <img src={linkedin} alt="LinkedIn" className="w-7 h-7 object-contain" />
           </a>
@@ -77,20 +110,20 @@ const Navbar = () => {
             <li
               key={link.id}
               className="relative cursor-pointer"
-              onClick={() => setActive(link.title)}
+              onClick={() => setActive(link.id)}
             >
               <a
                 href={`#${link.id}`}
                 className={`font-medium text-[14px] tracking-wide transition-colors duration-200 ${
-                  active === link.title ? "text-white" : "text-secondary hover:text-white"
+                  active === link.id ? "text-white" : "text-secondary hover:text-white"
                 }`}
               >
                 {link.title}
               </a>
-              {active === link.title && (
+              {active === link.id && (
                 <motion.span
                   layoutId="nav-underline"
-                  className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-[#1cb9d7] rounded-full"
+                  className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-[#1cb9d7] rounded-full shadow-[0_0_8px_rgba(28,185,215,0.6)]"
                 />
               )}
             </li>
@@ -125,19 +158,22 @@ const Navbar = () => {
                 className="w-full absolute top-full right-0 bg-[#010c2a]/95 backdrop-blur-md border-b border-white/5"
               >
                 <ul className="list-none flex flex-col gap-1 px-6 py-6">
-                  {rightLinks.map((link) => (
-                    <li
+                  {rightLinks.map((link, i) => (
+                    <motion.li
                       key={link.id}
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05, duration: 0.25 }}
                       className={`font-medium cursor-pointer text-[16px] py-2 transition-colors duration-200 ${
-                        active === link.title ? "text-[#1cb9d7]" : "text-secondary hover:text-white"
+                        active === link.id ? "text-[#1cb9d7]" : "text-secondary hover:text-white"
                       }`}
                       onClick={() => {
                         setToggle(false);
-                        setActive(link.title);
+                        setActive(link.id);
                       }}
                     >
                       <a href={`#${link.id}`}>{link.title}</a>
-                    </li>
+                    </motion.li>
                   ))}
 
                   <li className="mt-2">

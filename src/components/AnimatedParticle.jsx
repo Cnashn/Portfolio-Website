@@ -27,6 +27,23 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
   }, []);
 
   useEffect(() => {
+    const burst = () => {
+      const cx = size / 2;
+      const cy = size / 2;
+      linesRef.current.forEach((p) => {
+        const dx = p.x - cx;
+        const dy = p.y - cy;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        const force = 8 + Math.random() * 14;
+        p.vx += (dx / dist) * force;
+        p.vy += (dy / dist) * force;
+      });
+    };
+    document.addEventListener("hero-burst", burst);
+    return () => document.removeEventListener("hero-burst", burst);
+  }, [size]);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 

@@ -3,6 +3,7 @@ import {About, Contact, Experience, Hero, Navbar, Tech, Works} from './component
 import { LanguageProvider } from './context/LanguageContext';
 import ScrollProgress from './components/ScrollProgress';
 import CustomCursor from './components/CustomCursor';
+import EasterEggs from './components/EasterEggs';
 
 
 
@@ -12,8 +13,9 @@ const App = () => {
     <LanguageProvider>
       <CustomCursor />
       <ScrollProgress />
-      <div className="relative z-0 bg-primary">
-        <div className="bg-primary">
+      <EasterEggs />
+      <div className="relative z-0">
+        <div>
           <Navbar />
           <Hero />
         </div>
