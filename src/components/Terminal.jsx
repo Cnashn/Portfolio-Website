@@ -68,7 +68,7 @@ const MatrixRain = ({ onDone }) => {
     let lastTick = 0;
     const draw = (t) => {
       animationId = requestAnimationFrame(draw);
-      if (t - lastTick < 50) return;
+      if (t - lastTick < 30) return;
       lastTick = t;
       ctx.fillStyle = "rgba(1,12,42,0.16)";
       ctx.fillRect(0, 0, W, H);
@@ -94,18 +94,15 @@ const MatrixRain = ({ onDone }) => {
     };
     animationId = requestAnimationFrame(draw);
 
-    const finish = () => onDoneRef.current();
-    const timer = setTimeout(finish, 6000);
     const onKey = (e) => {
       e.preventDefault();
       e.stopPropagation();
-      finish();
+      onDoneRef.current();
     };
     window.addEventListener("keydown", onKey, true);
 
     return () => {
       cancelAnimationFrame(animationId);
-      clearTimeout(timer);
       window.removeEventListener("keydown", onKey, true);
     };
   }, []);
