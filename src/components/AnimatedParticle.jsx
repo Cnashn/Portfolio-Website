@@ -56,15 +56,20 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
     ctx.scale(dpr, dpr);
 
     let animationId;
+    // Guards against a stale image load from a previous effect run (e.g. the
+    // initial 500px pass on mobile) overwriting particles computed for the
+    // current canvas size.
+    let stale = false;
     const img = new Image();
     img.crossOrigin = "Anonymous";
     img.src = imageSrc;
 
     imageLoadedRef.current = false;
     linesRef.current = [];
-    
+
     // Load the image into an offscreen canvas and extract pixel data so we can inspect which pixels are visible.
     img.onload = () => {
+      if (stale) return;
       const offscreen = document.createElement("canvas");
       const offCtx = offscreen.getContext("2d");
       offscreen.width = canvasWidth;
@@ -280,6 +285,7 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
     draw();
 
     return () => {
+      stale = true;
       cancelAnimationFrame(animationId);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleLeave);

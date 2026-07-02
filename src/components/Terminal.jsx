@@ -621,4 +621,10 @@ const Terminal = () => {
   );
 };
 
-export default Terminal;
+// The terminal needs a physical keyboard; skip it entirely on touch devices.
+const TerminalGate = () => {
+  if (window.matchMedia("(hover: none)").matches) return null;
+  return <Terminal />;
+};
+
+export default TerminalGate;
