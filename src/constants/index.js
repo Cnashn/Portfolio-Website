@@ -23,7 +23,8 @@ import {
   semanticCache,
   springRabbitMQ,
   jobsRag,
-  ai_agent
+  ai_agent,
+  goGateway
 } from "../assets";
 
 
@@ -201,6 +202,27 @@ const projects = [
     ],
     image: ai_agent,
     source_code_link: "https://github.com/Cnashn/your-daily-sports-agent",
+  },
+  {
+    name: "Go API Gateway",
+    description:
+      "An API gateway and reverse proxy written in Go with the standard library. Redis-backed token bucket rate limiting kept atomic with a Lua script, a hand-rolled per-upstream circuit breaker, and Prometheus/Grafana dashboards. In local load tests it processed 13,700 requests per second while enforcing route rate limits.",
+    tags: [
+      {
+        name: "Go",
+        color: "text-cyan-400",
+      },
+      {
+        name: "Redis",
+        color: "text-red-500",
+      },
+      {
+        name: "Grafana",
+        color: "text-orange-400",
+      },
+    ],
+    image: goGateway,
+    source_code_link: "https://github.com/Cnashn/gateway",
   },
   {
     name: "Cell Type Classification from Single-Cell RNA-seq Data",

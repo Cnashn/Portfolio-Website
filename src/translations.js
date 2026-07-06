@@ -99,6 +99,11 @@ export const t = {
           "An autonomous AI agent that runs daily via GitHub Actions, pulls live data from multiple sports APIs, and uses the Anthropic API to write a personal journal entry in a consistent voice. Zero manual input, fully self-contained from data fetch to git commit.",
       },
       {
+        name: "Go API Gateway",
+        description:
+          "An API gateway and reverse proxy written in Go with the standard library. Redis-backed token bucket rate limiting kept atomic with a Lua script, a hand-rolled per-upstream circuit breaker, and Prometheus/Grafana dashboards. In local load tests it processed 13,700 requests per second while enforcing route rate limits.",
+      },
+      {
         name: "Cell Type Classification from Single-Cell RNA-seq Data",
         description:
           "A cell-type classification project using the scDeepInsight deep learning framework to identify cell types from single-cell RNA-sequencing data across multiple datasets.",
@@ -204,6 +209,11 @@ export const t = {
         name: "Your Daily Sports Agent",
         description:
           "Un agent IA autonome qui s'exécute quotidiennement via GitHub Actions, récupère des données sportives en direct depuis plusieurs API, et utilise l'API Anthropic pour rédiger une entrée de journal personnelle dans une voix cohérente. Zéro intervention manuelle, entièrement autonome de la collecte de données jusqu'au commit Git.",
+      },
+      {
+        name: "Passerelle API en Go",
+        description:
+          "Une passerelle API et un proxy inverse écrits en Go avec la bibliothèque standard. Limitation de débit par token bucket dans Redis, rendue atomique par un script Lua, un circuit breaker par service implémenté à la main, et des tableaux de bord Prometheus/Grafana. En tests de charge locaux, elle a traité 13 700 requêtes par seconde tout en appliquant les limites de débit.",
       },
       {
         name: "Classification de types cellulaires à partir de données scRNA-seq",
