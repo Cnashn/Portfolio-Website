@@ -49,15 +49,15 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Software Engineer",
+    title: "IT Analyst",
     company_name: "University of Ottawa",
     icon: uottawa,
     iconBg: "#ffffffff",
     date: "September 2023 - April 2024",
     points: [
-      "Designed and implemented Python-based data validation and ingestion pipelines to standardize enterprise architecture datasets, eliminating manual QA steps and improving governance review reliability.",
-      "Developed automation for analysis workflows across 30+ IT initiatives, producing quantified efficiency estimates (20–30%) used in consolidation and modernization decisions.",
-      "Collaborated with senior enterprise architects to deliver structured datasets and documentation supporting system design, compliance, and architecture standardization.",
+      "Eliminated manual corrections to meeting distribution lists by building a Python script that cross-referenced members across AWG, business analyst, and application manager groups and flagged discrepancies.",
+      "Supported architecture governance across university IT initiatives by reviewing business and technical architecture documents and coordinating weekly AWG and monthly ARB review sessions with project managers.",
+      "Researched and presented Generative AI adoption opportunities for the IT department to architects and stakeholders following an industry enterprise architecture event.",
     ],
   },
   {
@@ -67,9 +67,9 @@ const experiences = [
     iconBg: "#ffffffff",
     date: "January 2023 - April 2023",
     points: [
-      "Led the development of Python tooling to replace Excel-based compliance reporting workflows, reducing manual effort by ~80% for legal and R&D stakeholders.",
-      "Maintained and evolved production data-processing scripts analyzing license and vulnerability data across 3,000+ components, improving consistency and auditability.",
-      "Identified and optimized performance bottlenecks in large-scale data-processing workflows, reducing reporting runtime by ~50% under real production constraints.",
+      "Reduced manual compliance review by ~80% for legal and R&D teams by automating Black Duck report generation and formatting in Python, replacing manual downloads and Excel macro workflows.",
+      "Cut release license reviews from manual inspection of 3,000+ components to an automated diff by building a Python tool that compared component, version, and license IDs across release versions and surfaced only medium and high risk licenses for legal sign-off.",
+      "Reduced comparison runtime by ~50% on large releases by reworking the matching logic after one-by-one comparison proved too slow at scale.",
     ],
   },
 ];

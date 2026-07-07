@@ -47,13 +47,13 @@ export const t = {
     },
     experiences: [
       {
-        title: "Software Engineer",
+        title: "IT Analyst",
         company_name: "University of Ottawa",
         date: "September 2023 - April 2024",
         points: [
-          "Eliminated manual QA steps by building Python validation and ingestion pipelines that standardized messy enterprise data into reliable, tested outputs.",
-          "Informed platform consolidation decisions across 30+ IT initiatives by building automation that produced 20-30% efficiency estimates.",
-          "Delivered structured data models, tests, and documentation that unblocked enterprise system design decisions and met compliance requirements across multiple initiatives.",
+          "Eliminated manual corrections to meeting distribution lists by building a Python script that cross-referenced members across AWG, business analyst, and application manager groups and flagged discrepancies.",
+          "Supported architecture governance across university IT initiatives by reviewing business and technical architecture documents and coordinating weekly AWG and monthly ARB review sessions with project managers.",
+          "Researched and presented Generative AI adoption opportunities for the IT department to architects and stakeholders following an industry enterprise architecture event.",
         ],
       },
       {
@@ -61,9 +61,9 @@ export const t = {
         company_name: "March Networks",
         date: "January 2023 - April 2023",
         points: [
-          "Reduced manual compliance toil by ~80% for legal and R&D teams by replacing manual Excel workflows with Python automation.",
-          "Cut reporting runtime by ~50% by optimizing large-scale data-processing workflows under real production constraints.",
-          "Improved consistency and auditability across 3,000+ components by refactoring production data-analysis services, reducing error-prone manual processes and standardizing outputs for downstream reporting.",
+          "Reduced manual compliance review by ~80% for legal and R&D teams by automating Black Duck report generation and formatting in Python, replacing manual downloads and Excel macro workflows.",
+          "Cut release license reviews from manual inspection of 3,000+ components to an automated diff by building a Python tool that compared component, version, and license IDs across release versions and surfaced only medium and high risk licenses for legal sign-off.",
+          "Reduced comparison runtime by ~50% on large releases by reworking the matching logic after one-by-one comparison proved too slow at scale.",
         ],
       },
     ],
@@ -159,13 +159,13 @@ export const t = {
     },
     experiences: [
       {
-        title: "Ingénieur logiciel",
+        title: "Analyste TI",
         company_name: "Université d'Ottawa",
         date: "Septembre 2023 - Avril 2024",
         points: [
-          "Élimination des étapes manuelles d'assurance qualité en construisant des pipelines Python de validation et d'ingestion qui standardisaient des données d'entreprise désordonnées en sorties fiables et testées.",
-          "Décisions de consolidation de plateforme éclairées sur plus de 30 initiatives informatiques en construisant des automatisations produisant des estimations d'efficacité de 20 à 30 %.",
-          "Livraison de modèles de données structurés, de tests et de documentation ayant débloqué des décisions de conception de systèmes d'entreprise et répondu aux exigences de conformité sur plusieurs initiatives.",
+          "Élimination des corrections manuelles des listes de distribution de réunions en construisant un script Python qui croisait les membres entre les groupes AWG, analystes d'affaires et gestionnaires d'applications et signalait les écarts.",
+          "Soutien à la gouvernance de l'architecture des initiatives informatiques de l'université en révisant des documents d'architecture d'affaires et technique et en coordonnant les séances de revue hebdomadaires de l'AWG et mensuelles de l'ARB avec les gestionnaires de projet.",
+          "Recherche et présentation d'occasions d'adoption de l'IA générative pour le département informatique aux architectes et aux parties prenantes à la suite d'un événement de l'industrie en architecture d'entreprise.",
         ],
       },
       {
@@ -173,9 +173,9 @@ export const t = {
         company_name: "March Networks",
         date: "Janvier 2023 - Avril 2023",
         points: [
-          "Réduction d'environ 80 % de la charge manuelle de conformité pour les équipes juridiques et R&D en remplaçant des flux de travail Excel manuels par de l'automatisation Python.",
-          "Réduction d'environ 50 % du temps d'exécution des rapports en optimisant des flux de traitement de données à grande échelle sous des contraintes de production réelles.",
-          "Amélioration de la cohérence et de l'auditabilité sur plus de 3 000 composants en refactorisant des services de production d'analyse de données, réduisant les processus manuels sujets aux erreurs et standardisant les sorties pour les rapports en aval.",
+          "Réduction d'environ 80 % de la révision manuelle de conformité pour les équipes juridiques et R&D en automatisant la génération et le formatage des rapports Black Duck en Python, remplaçant les téléchargements manuels et les macros Excel.",
+          "Passage de l'inspection manuelle de plus de 3 000 composants à une comparaison automatisée pour les revues de licences en construisant un outil Python qui comparait les composants, versions et identifiants de licence entre les versions de release et ne faisait ressortir que les licences à risque moyen et élevé pour approbation juridique.",
+          "Réduction d'environ 50 % du temps de comparaison sur les grosses releases en retravaillant la logique de correspondance après que la comparaison un à un se soit révélée trop lente à grande échelle.",
         ],
       },
     ],
