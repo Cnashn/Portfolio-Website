@@ -6,6 +6,7 @@ import { SectionWrapper } from '../hoc';
 import { fadeIn, textVariant } from '../utils/motion';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../translations';
+import { Button as MovingBorderButton } from './ui/moving-border';
 
 const fieldClasses =
   "bg-white/[0.03] border border-white/10 rounded-xl text-white text-[15px] px-4 py-3 outline-none placeholder-transparent focus:border-[#1cb9d7]/60 focus:bg-white/[0.05] focus:shadow-[0_0_24px_rgba(28,185,215,0.08)] transition-all duration-300";
@@ -107,16 +108,19 @@ const Contact = () => {
               </motion.p>
             )}
           </AnimatePresence>
-          <button
+          <MovingBorderButton
             type="submit"
             disabled={state.submitting || state.succeeded}
-            className="group relative overflow-hidden border border-[#1cb9d7] text-[#1cb9d7] px-8 py-3 rounded-full text-[15px] font-medium transition-colors duration-300 disabled:opacity-50 cursor-pointer"
+            borderRadius="9999px"
+            duration={3500}
+            containerClassName="group h-auto w-auto disabled:opacity-50 cursor-pointer"
+            className="overflow-hidden text-[#1cb9d7] px-8 py-3 text-[15px] font-medium transition-colors duration-300"
           >
             <span className="absolute inset-0 bg-[#1cb9d7] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
             <span className="relative z-[1] group-hover:text-primary transition-colors duration-300">
               {state.submitting ? tr.sending : state.succeeded ? tr.sent_btn : tr.submit}
             </span>
-          </button>
+          </MovingBorderButton>
         </div>
       </motion.form>
     </>

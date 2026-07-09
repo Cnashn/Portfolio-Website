@@ -11,6 +11,7 @@ import DinoGame from "./DinoGame";
 import SnakeGame from "./SnakeGame";
 import BrickBreakerGame from "./BrickBreakerGame";
 import { EncryptedText } from "./ui/encrypted-text";
+import { Button as MovingBorderButton } from "./ui/moving-border";
 
 const PROMPT = "guest@can.sh:~$";
 
@@ -461,16 +462,20 @@ const Terminal = () => {
 
   return (
     <>
-      <motion.button
+      <MovingBorderButton
+        as={motion.button}
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.2, duration: 0.6 }}
         onClick={() => setOpen((o) => !o)}
         aria-label="Open terminal"
-        className="fixed bottom-5 right-5 z-40 font-mono text-[14px] text-[#1cb9d7] bg-[#010c2a]/80 backdrop-blur-md border border-[#1cb9d7]/30 rounded-lg px-3 py-2 hover:border-[#1cb9d7]/70 hover:shadow-[0_0_20px_rgba(28,185,215,0.25)] transition-all duration-300 cursor-pointer"
+        borderRadius="0.5rem"
+        duration={4000}
+        containerClassName="fixed bottom-5 right-5 z-40 h-auto w-auto cursor-pointer"
+        className="font-mono text-[14px] text-[#1cb9d7] bg-[#010c2a]/80 backdrop-blur-md px-3 py-2 hover:shadow-[0_0_20px_rgba(28,185,215,0.25)] transition-shadow duration-300"
       >
         &gt;_<span className="animate-pulse">▌</span>
-      </motion.button>
+      </MovingBorderButton>
 
       <AnimatePresence>
         {open && (

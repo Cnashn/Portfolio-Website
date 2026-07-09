@@ -5,6 +5,7 @@ import { linkedin, github, logo, menu, close } from "../assets";
 import { useLang } from "../context/LanguageContext";
 import { t } from "../translations";
 import { LinkPreview } from "./ui/link-preview";
+import { Button as MovingBorderButton } from "./ui/moving-border";
 import githubPreview from "../assets/github-preview.jpg";
 import linkedinPreview from "../assets/linkedin-preview.jpg";
 
@@ -139,12 +140,15 @@ const Navbar = () => {
           ))}
 
           <li>
-            <button
+            <MovingBorderButton
               onClick={toggleLang}
-              className="font-medium text-[13px] border border-[#1cb9d7]/50 text-[#1cb9d7] px-3 py-1 rounded-full hover:bg-[#1cb9d7] hover:text-primary hover:border-[#1cb9d7] transition-all duration-200 cursor-pointer tracking-wider"
+              borderRadius="9999px"
+              duration={3000}
+              containerClassName="h-auto w-auto cursor-pointer"
+              className="font-medium text-[13px] text-[#1cb9d7] px-3 py-1 hover:bg-[#1cb9d7] hover:text-primary transition-colors duration-200 tracking-wider"
             >
               {lang === "en" ? "FR" : "EN"}
-            </button>
+            </MovingBorderButton>
           </li>
         </ul>
 
@@ -186,12 +190,15 @@ const Navbar = () => {
                   ))}
 
                   <li className="mt-2">
-                    <button
+                    <MovingBorderButton
                       onClick={() => { toggleLang(); setToggle(false); }}
-                      className="font-medium text-[14px] border border-[#1cb9d7]/50 text-[#1cb9d7] px-4 py-1.5 rounded-full hover:bg-[#1cb9d7] hover:text-primary transition-all duration-200 cursor-pointer"
+                      borderRadius="9999px"
+                      duration={3000}
+                      containerClassName="h-auto w-auto cursor-pointer"
+                      className="font-medium text-[14px] text-[#1cb9d7] px-4 py-1.5 hover:bg-[#1cb9d7] hover:text-primary transition-colors duration-200"
                     >
                       {lang === "en" ? "FR" : "EN"}
-                    </button>
+                    </MovingBorderButton>
                   </li>
                 </ul>
               </motion.div>
