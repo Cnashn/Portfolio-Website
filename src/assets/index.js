@@ -21,6 +21,10 @@ import go from "./tech/go.png";
 import vite from "./tech/Vite.js.png";
 import prometheus from "./tech/prometheus.png";
 import grafana from "./tech/grafana.png";
+import redis from "./tech/redis.png";
+import rabbitmq from "./tech/rabbitmq.png";
+import kubernetes from "./tech/kubernetes.png";
+import github_actions from "./tech/github_actions.png";
 import uottawa from "./company/uottawa.png";
 import march_networks from "./company/march_networks.png";
 import portfolio_website from "./portfolio_website.png";
@@ -54,6 +58,10 @@ export {
   vite,
   prometheus,
   grafana,
+  redis,
+  rabbitmq,
+  kubernetes,
+  github_actions,
   react,
   uottawa,
   march_networks,

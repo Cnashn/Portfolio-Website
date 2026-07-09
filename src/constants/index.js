@@ -12,6 +12,10 @@ import {
   go,
   prometheus,
   grafana,
+  redis,
+  rabbitmq,
+  kubernetes,
+  github_actions,
   react,
   typescript,
   java,
@@ -45,6 +49,10 @@ const technologies = [
   { name: "Linux", icon: linux },
   { name: "React", icon: react },
   { name: "Spring", icon: spring },
+  { name: "Redis", icon: redis },
+  { name: "RabbitMQ", icon: rabbitmq },
+  { name: "Kubernetes", icon: kubernetes },
+  { name: "GitHub Actions", icon: github_actions },
 ];
 
 const experiences = [
