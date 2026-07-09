@@ -7,6 +7,7 @@ import { textVariant } from '../utils/motion';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../translations';
 import SpotlightCard from './SpotlightCard';
+import { BackgroundGradient } from './ui/background-gradient';
 
 
 const cardVariant = (index) => ({
@@ -26,12 +27,16 @@ const cardVariant = (index) => ({
 const ProjectCard = ({index, name, description, tags, image, source_code_link}) => {
 
   return (
-    <motion.div variants={cardVariant(index)} className="sm:w-[360px] w-full h-full">
+    <motion.div
+      variants={cardVariant(index)}
+      whileHover={{ y: -6 }}
+      transition={{ type: "spring", stiffness: 260, damping: 24 }}
+      className="sm:w-[360px] w-full h-full"
+    >
 
+      <BackgroundGradient containerClassName="rounded-2xl p-[2px] h-full" className="h-full">
       <SpotlightCard
-        whileHover={{ y: -6 }}
-        transition={{ type: "spring", stiffness: 260, damping: 24 }}
-        className="group bg-white/[0.04] backdrop-blur-sm border border-white/10 hover:border-[#1cb9d7]/40 hover:shadow-[0_8px_40px_rgba(28,185,215,0.12)] transition-[border-color,box-shadow] duration-500 p-5 rounded-2xl h-full flex flex-col">
+        className="group bg-tertiary/90 backdrop-blur-sm border border-white/10 hover:border-[#1cb9d7]/40 hover:shadow-[0_8px_40px_rgba(28,185,215,0.12)] transition-[border-color,box-shadow] duration-500 p-5 rounded-2xl h-full flex flex-col">
 
           <div className="relative z-[2] w-full h-[230px] overflow-hidden rounded-xl">
             <img
@@ -68,6 +73,7 @@ const ProjectCard = ({index, name, description, tags, image, source_code_link}) 
             ))}
           </div>
         </SpotlightCard>
+      </BackgroundGradient>
 
     </motion.div>
   )

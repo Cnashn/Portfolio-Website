@@ -12,12 +12,15 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@formspree/react": "^3.0.0",
+    "@radix-ui/react-hover-card": "^1.1.19",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
     "@tailwindcss/vite": "^4.1.18",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.23.26",
     "maath": "^0.10.8",
     "prop-types": "^15.8.1",
+    "qss": "^3.0.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-intersection-observer": "^10.0.0",
@@ -25,6 +28,7 @@
     "react-tilt": "^1.0.2",
     "react-tooltip": "^5.30.0",
     "react-vertical-timeline-component": "^3.6.0",
+    "tailwind-merge": "^3.6.0",
     "three": "^0.182.0"
   },
   "devDependencies": {
