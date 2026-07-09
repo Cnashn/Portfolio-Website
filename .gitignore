@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+.claude/
 
 node_modules
 dist
@@ -26,3 +27,7 @@ graphify-out/
 *.njsproj
 *.sln
 *.sw?
+
+design.md
+
+CLAUDE.md

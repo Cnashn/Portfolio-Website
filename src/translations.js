@@ -173,7 +173,7 @@ export const t = {
         company_name: "March Networks",
         date: "Janvier 2023 - Avril 2023",
         points: [
-          "Réduction d'environ 80 % de la révision manuelle de conformité pour les équipes juridiques et R&D en automatisant la génération et le formatage des rapports Black Duck en Python, remplaçant les téléchargements manuels et les macros Excel.",
+          "Automatisation du contrôle de conformité manuel à hauteur de ~80 % pour les équipes juridiques et R&D via le développement d'un outil Python de génération et de mise en forme de rapports Black Duck, remplaçant les téléchargements manuels et les flux de travail basés sur des macros Excel.",
           "Passage de l'inspection manuelle de plus de 3 000 composants à une comparaison automatisée pour les revues de licences en construisant un outil Python qui comparait les composants, versions et identifiants de licence entre les versions de release et ne faisait ressortir que les licences à risque moyen et élevé pour approbation juridique.",
           "Réduction d'environ 50 % du temps de comparaison sur les grosses releases en retravaillant la logique de correspondance après que la comparaison un à un se soit révélée trop lente à grande échelle.",
         ],
