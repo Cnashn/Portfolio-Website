@@ -92,15 +92,15 @@ const projects = [
     tags: [
       {
         name: "FastAPI",
-        color: "text-blue-400",
+        color: "text-cyan-400",
       },
       {
         name: "Python",
-        color: "text-green-500",
+        color: "text-yellow-300",
       },
       {
         name: "Docker",
-        color: "text-yellow-300",
+        color: "text-pink-400",
       },
     ],
     image: semanticCache,
@@ -117,11 +117,11 @@ const projects = [
       },
       {
         name: "FastAPI",
-        color: "text-orange-400",
+        color: "text-blue-400",
       },
       {
         name: "React",
-        color: "text-blue-400",
+        color: "text-purple-400",
       },
     ],
     image: jobsRag,
@@ -134,15 +134,15 @@ const projects = [
     tags: [
       {
         name: "FastAPI",
-        color: "text-yellow-300",
+        color: "text-orange-400",
       },
       {
         name: "React",
-        color: "text-blue-400",
+        color: "text-red-500",
       },
       {
         name: "PostgreSQL",
-        color: "text-orange-400",
+        color: "text-cyan-400",
       },
     ],
     image: gymprog,
@@ -155,11 +155,11 @@ const projects = [
     tags: [
       {
         name: "Java",
-        color: "text-orange-400",
+        color: "text-blue-400",
       },
       {
         name: "Spring Boot",
-        color: "text-blue-400",
+        color: "text-pink-400",
       },
       {
         name: "RabbitMQ",
@@ -170,42 +170,21 @@ const projects = [
     source_code_link: "https://github.com/Cnashn/spring-rabbitmq-orders",
   },
   {
-    name: "Portfolio Website",
-    description:
-      "The site you're looking at. Bilingual EN/FR, built with React, Tailwind CSS, and Framer Motion, with scroll-driven animations and a hidden in-browser terminal running playable mini games.",
-    tags: [
-      {
-        name: "JavaScript",
-        color: "text-yellow-300",
-      },
-      {
-        name: "React",
-        color: "text-orange-400",
-      },
-      {
-        name: "Tailwind CSS",
-        color: "text-green-500",
-      },
-    ],
-    image: portfolio_website,
-    source_code_link: "https://github.com/Cnashn/Portfolio-Website",
-  },
-  {
     name: "Your Daily Sports Agent",
     description:
       "An autonomous AI agent that runs daily via GitHub Actions, pulls live data from multiple sports APIs, and uses the Anthropic API to write a personal journal entry in a consistent voice. Zero manual input, fully self-contained from data fetch to git commit.",
     tags: [
       {
         name: "Python",
-        color: "text-green-500",
+        color: "text-yellow-300",
       },
       {
         name: "Anthropic API",
-        color: "text-orange-400",
+        color: "text-purple-400",
       },
       {
         name: "GitHub Actions",
-        color: "text-blue-400",
+        color: "text-red-500",
       },
     ],
     image: ai_agent,
@@ -222,11 +201,11 @@ const projects = [
       },
       {
         name: "Redis",
-        color: "text-red-500",
+        color: "text-orange-400",
       },
       {
         name: "Grafana",
-        color: "text-orange-400",
+        color: "text-blue-400",
       },
     ],
     image: goGateway,
@@ -239,11 +218,11 @@ const projects = [
     tags: [
       {
         name: "Python",
-        color: "text-blue-400",
+        color: "text-pink-400",
       },
       {
         name: "PyTorch",
-        color: "text-orange-400",
+        color: "text-green-500",
       },
       {
         name: "Deep Learning",
@@ -252,6 +231,27 @@ const projects = [
     ],
     image: scdeepinsight,
     source_code_link: "https://github.com/Cnashn/Cell-Type-Classification-with-scDeepInsight",
+  },
+  {
+    name: "Portfolio Website",
+    description:
+      "The site you're looking at. Bilingual EN/FR, built with React, Tailwind CSS, and Framer Motion, with scroll-driven animations and a hidden in-browser terminal running playable mini games.",
+    tags: [
+      {
+        name: "JavaScript",
+        color: "text-red-500",
+      },
+      {
+        name: "React",
+        color: "text-purple-400",
+      },
+      {
+        name: "Tailwind CSS",
+        color: "text-orange-400",
+      },
+    ],
+    image: portfolio_website,
+    source_code_link: "https://github.com/Cnashn/Portfolio-Website",
   },
 ];
 

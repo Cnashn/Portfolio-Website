@@ -89,11 +89,6 @@ export const t = {
           "An event-driven order processing microservice built with Spring Boot and RabbitMQ. Publishes order events to a topic exchange, consumes them asynchronously, retries failures with exponential backoff, routes exhausted messages to a dead-letter queue, and deduplicates events for idempotent processing.",
       },
       {
-        name: "Portfolio Website",
-        description:
-          "The site you're looking at. Bilingual EN/FR, built with React, Tailwind CSS, and Framer Motion, with scroll-driven animations and a hidden in-browser terminal running playable mini games.",
-      },
-      {
         name: "Your Daily Sports Agent",
         description:
           "An autonomous AI agent that runs daily via GitHub Actions, pulls live data from multiple sports APIs, and uses the Anthropic API to write a personal journal entry in a consistent voice. Zero manual input, fully self-contained from data fetch to git commit.",
@@ -107,6 +102,11 @@ export const t = {
         name: "Cell Type Classification from Single-Cell RNA-seq Data",
         description:
           "A cell-type classification project using the scDeepInsight deep learning framework to identify cell types from single-cell RNA-sequencing data across multiple datasets.",
+      },
+      {
+        name: "Portfolio Website",
+        description:
+          "The site you're looking at. Bilingual EN/FR, built with React, Tailwind CSS, and Framer Motion, with scroll-driven animations and a hidden in-browser terminal running playable mini games.",
       },
     ],
   },
@@ -201,11 +201,6 @@ export const t = {
           "Un microservice de traitement de commandes événementiel construit avec Spring Boot et RabbitMQ. Publie des événements de commande sur un topic exchange, les consomme de manière asynchrone, réessaie les échecs avec un backoff exponentiel, achemine les messages épuisés vers une dead-letter queue et déduplique les événements pour un traitement idempotent.",
       },
       {
-        name: "Site web portfolio",
-        description:
-          "Le site que vous consultez. Bilingue EN/FR, construit avec React, Tailwind CSS et Framer Motion, avec des animations au défilement et un terminal caché dans le navigateur proposant des mini-jeux.",
-      },
-      {
         name: "Your Daily Sports Agent",
         description:
           "Un agent IA autonome qui s'exécute quotidiennement via GitHub Actions, récupère des données sportives en direct depuis plusieurs API, et utilise l'API Anthropic pour rédiger une entrée de journal personnelle dans une voix cohérente. Zéro intervention manuelle, entièrement autonome de la collecte de données jusqu'au commit Git.",
@@ -219,6 +214,11 @@ export const t = {
         name: "Classification de types cellulaires à partir de données scRNA-seq",
         description:
           "Un projet de classification de types cellulaires utilisant le cadre d'apprentissage profond scDeepInsight pour identifier les types cellulaires à partir de données de séquençage d'ARN à cellule unique sur plusieurs ensembles de données.",
+      },
+      {
+        name: "Site web portfolio",
+        description:
+          "Le site que vous consultez. Bilingue EN/FR, construit avec React, Tailwind CSS et Framer Motion, avec des animations au défilement et un terminal caché dans le navigateur proposant des mini-jeux.",
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { linkedin, github, logo, menu, close } from "../assets";
@@ -17,6 +17,23 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const { lang, toggle: toggleLang } = useLang();
   const tr = t[lang].nav;
+  const spyPausedRef = useRef(false);
+  const spyTimerRef = useRef(null);
+
+  // Clicking a nav link smooth-scrolls past intermediate sections; without
+  // this pause the scrollspy drags the underline through every one of them.
+  const pauseSpyUntilScrollSettles = () => {
+    spyPausedRef.current = true;
+    const settle = () => {
+      clearTimeout(spyTimerRef.current);
+      spyTimerRef.current = setTimeout(() => {
+        spyPausedRef.current = false;
+        window.removeEventListener("scroll", settle);
+      }, 150);
+    };
+    window.addEventListener("scroll", settle, { passive: true });
+    settle();
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -29,7 +46,8 @@ const Navbar = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.dataset.sectionId);
+          if (entry.isIntersecting && !spyPausedRef.current)
+            setActive(entry.target.dataset.sectionId);
         });
       },
       { rootMargin: "-35% 0px -55% 0px" }
@@ -45,7 +63,7 @@ const Navbar = () => {
     });
 
     const onTop = () => {
-      if (window.scrollY < 200) setActive("");
+      if (window.scrollY < 200 && !spyPausedRef.current) setActive("");
     };
     window.addEventListener("scroll", onTop, { passive: true });
 
@@ -120,7 +138,10 @@ const Navbar = () => {
             <li
               key={link.id}
               className="relative cursor-pointer"
-              onClick={() => setActive(link.id)}
+              onClick={() => {
+                setActive(link.id);
+                pauseSpyUntilScrollSettles();
+              }}
             >
               <a
                 href={`#${link.id}`}
