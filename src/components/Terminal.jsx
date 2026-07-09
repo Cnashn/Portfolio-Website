@@ -10,6 +10,7 @@ import { technologies, projects } from "../constants";
 import DinoGame from "./DinoGame";
 import SnakeGame from "./SnakeGame";
 import BrickBreakerGame from "./BrickBreakerGame";
+import { EncryptedText } from "./ui/encrypted-text";
 
 const PROMPT = "guest@can.sh:~$";
 
@@ -84,13 +85,6 @@ const MatrixRain = ({ onDone }) => {
         if (y > H && Math.random() > 0.975) drops[i] = -Math.random() * 10;
       }
 
-      ctx.fillStyle = "rgba(1,12,42,0.7)";
-      ctx.fillRect(W / 2 - 118, H - 27, 236, 20);
-      ctx.fillStyle = `rgba(255,255,255,${0.55 + 0.3 * Math.sin(Date.now() / 350)})`;
-      ctx.font = "11px ui-monospace, Menlo, monospace";
-      ctx.textAlign = "center";
-      ctx.fillText("press any key to disconnect", W / 2, H - 13);
-      ctx.textAlign = "left";
     };
     animationId = requestAnimationFrame(draw);
 
@@ -110,6 +104,24 @@ const MatrixRain = ({ onDone }) => {
   return (
     <div ref={wrapRef} className="relative w-full h-full">
       <canvas ref={canvasRef} className="absolute inset-0" />
+      <div className="absolute inset-x-0 top-3 flex justify-center pointer-events-none">
+        <span className="px-3 py-1 rounded bg-[#010c2a]/70 font-mono text-[12.5px] text-secondary">
+          <EncryptedText
+            text="Welcome to the Matrix"
+            charset={MATRIX_CHARS}
+            encryptedClassName="text-[#1cb9d7]"
+          />
+        </span>
+      </div>
+      <div className="absolute inset-x-0 bottom-3 flex justify-center pointer-events-none">
+        <span className="px-3 py-1 rounded bg-[#010c2a]/70 font-mono text-[11px] text-secondary">
+          <EncryptedText
+            text="Press any key to leave"
+            charset={MATRIX_CHARS}
+            encryptedClassName="text-[#1cb9d7]"
+          />
+        </span>
+      </div>
     </div>
   );
 };
@@ -223,6 +235,12 @@ const Terminal = () => {
 
   const print = (texts, color) =>
     setLines((l) => [...l, ...texts.map((text) => ({ type: "out", text, color }))]);
+
+  const printEncrypted = (texts, color) =>
+    setLines((l) => [
+      ...l,
+      ...texts.map((text) => ({ type: "out", text, color, encrypted: true })),
+    ]);
 
   const startGame = (game, launchMsg) => {
     setMinimized(false);
@@ -341,7 +359,7 @@ const Terminal = () => {
         setMode("vim");
         return;
       case "matrix":
-        print(["entering the matrix..."]);
+        printEncrypted(["entering the matrix..."]);
         setMode("matrix");
         return;
       case "sl":
@@ -534,7 +552,7 @@ const Terminal = () => {
                 <MatrixRain
                   onDone={() => {
                     setMode("shell");
-                    print(["matrix: connection closed."]);
+                    printEncrypted(["matrix: connection closed."]);
                   }}
                 />
               )}
@@ -600,7 +618,15 @@ const Terminal = () => {
                       </p>
                     ) : (
                       <p key={i} className={`${lineColor(line)} whitespace-pre-wrap`}>
-                        {line.text}
+                        {line.encrypted ? (
+                          <EncryptedText
+                            text={line.text}
+                            charset={MATRIX_CHARS}
+                            encryptedClassName="text-[#1cb9d7]"
+                          />
+                        ) : (
+                          line.text
+                        )}
                       </p>
                     )
                   )}
