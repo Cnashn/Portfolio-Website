@@ -8,8 +8,7 @@ export const BackgroundLines = ({
   svgOptions
 }) => {
   return (
-    <div
-      className={cn("h-[20rem] md:h-screen w-full bg-white dark:bg-black", className)}>
+    <div className={cn("h-[20rem] md:h-screen w-full", className)}>
       <SVG svgOptions={svgOptions} />
       {children}
     </div>
@@ -53,35 +52,36 @@ const SVG = ({
   ];
 
   const colors = [
-    "#46A5CA",
-    "#8C2F2F",
-    "#4FAE4D",
-    "#D6590C",
-    "#811010",
+    "#1cb9d7",
     "#247AFB",
-    "#A534A0",
-    "#A8A438",
-    "#D6590C",
-    "#46A29C",
-    "#670F6D",
-    "#D7C200",
+    "#6366f1",
+    "#0891b2",
     "#59BBEB",
-    "#504F1C",
-    "#55BC54",
-    "#4D3568",
-    "#9F39A5",
-    "#363636",
-    "#860909",
-    "#6A286F",
-    "#604483",
+    "#1ca0fb",
+    "#38bdf8",
+    "#818cf8",
+    "#0ea5e9",
+    "#46A29C",
+    "#1cb9d7",
+    "#2563eb",
+    "#59BBEB",
+    "#0891b2",
+    "#6366f1",
+    "#1ca0fb",
+    "#38bdf8",
+    "#247AFB",
+    "#818cf8",
+    "#0ea5e9",
+    "#1cb9d7",
   ];
   return (
     <motion.svg
-      viewBox="0 1440 900"
+      viewBox="0 0 1440 900"
+      preserveAspectRatio="xMidYMid slice"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      animate={{ opacity: 0.5 }}
       transition={{ duration: 1 }}
       className="absolute inset-0 w-full h-full">
       {paths.map((path, idx) => (
