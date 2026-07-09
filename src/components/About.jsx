@@ -6,6 +6,9 @@ import {fadeIn, textVariant} from '../utils/motion';
 import { SectionWrapper } from '../hoc';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../translations';
+import { LinkPreview } from './ui/link-preview';
+import uottawaPreviewEn from '../assets/uottawa-preview-en.jpg';
+import uottawaPreviewFr from '../assets/uottawa-preview-fr.jpg';
 
 const About = () => {
   const { lang } = useLang();
@@ -34,7 +37,14 @@ const About = () => {
           <br />
           <br />
         {tr.body2}{" "}<span className="text-[#1cb9d7] font-bold">
-                <a className="link-underline" href={lang === 'fr' ? "https://www.uottawa.ca/fr" : "https://www.uottawa.ca/en"} target="_blank">{tr.body3}</a></span>{" "}{tr.body4}
+                <LinkPreview
+                  url={lang === 'fr' ? "https://www.uottawa.ca/fr" : "https://www.uottawa.ca/en"}
+                  isStatic
+                  imageSrc={lang === 'fr' ? uottawaPreviewFr : uottawaPreviewEn}
+                  className="link-underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >{tr.body3}</LinkPreview></span>{" "}{tr.body4}
       </motion.p>
     </div>
 

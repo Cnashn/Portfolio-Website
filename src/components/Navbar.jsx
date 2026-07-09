@@ -4,6 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { linkedin, github, logo, menu, close } from "../assets";
 import { useLang } from "../context/LanguageContext";
 import { t } from "../translations";
+import { LinkPreview } from "./ui/link-preview";
+import githubPreview from "../assets/github-preview.jpg";
+import linkedinPreview from "../assets/linkedin-preview.jpg";
 
 const SECTION_IDS = ["about", "work", "tech", "projects", "contact"];
 
@@ -84,25 +87,31 @@ const Navbar = () => {
             </p>
           </Link>
 
-          <a
-            href="https://github.com/cnashn"
+          <LinkPreview
+            url="https://github.com/cnashn"
+            isStatic
+            imageSrc={githubPreview}
+            side="bottom"
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
             className="opacity-70 hover:opacity-100 hover:-translate-y-0.5 transition-all duration-200"
           >
             <img src={github} alt="GitHub" className="w-7 h-7 object-contain" />
-          </a>
+          </LinkPreview>
 
-          <a
-            href={lang === "fr" ? "https://www.linkedin.com/in/cansahin1/?locale=fr-FR" : "https://www.linkedin.com/in/cansahin1"}
+          <LinkPreview
+            url={lang === "fr" ? "https://www.linkedin.com/in/cansahin1/?locale=fr-FR" : "https://www.linkedin.com/in/cansahin1"}
+            isStatic
+            imageSrc={linkedinPreview}
+            side="bottom"
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"
             className="opacity-70 hover:opacity-100 hover:-translate-y-0.5 transition-all duration-200"
           >
             <img src={linkedin} alt="LinkedIn" className="w-7 h-7 object-contain" />
-          </a>
+          </LinkPreview>
         </div>
 
         <ul className="list-none hidden sm:flex flex-row gap-8 items-center">

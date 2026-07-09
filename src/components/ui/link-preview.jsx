@@ -20,7 +20,9 @@ export const LinkPreview = ({
   quality = 50,
   layout = "fixed",
   isStatic = false,
-  imageSrc = ""
+  imageSrc = "",
+  side = "top",
+  ...rest
 }) => {
   let src;
   if (!isStatic) {
@@ -63,9 +65,9 @@ export const LinkPreview = ({
   return (
     <>
       {isMounted ? (
-        <div className="hidden">
+        <span className="hidden">
           <img src={src} width={width} height={height} alt="hidden image" />
-        </div>
+        </span>
       ) : null}
       <HoverCardPrimitive.Root
         openDelay={50}
@@ -75,14 +77,16 @@ export const LinkPreview = ({
         }}>
         <HoverCardPrimitive.Trigger
           onMouseMove={handleMouseMove}
-          className={cn("text-black dark:text-white", className)}
-          href={url}>
+          className={cn(className)}
+          href={url}
+          {...rest}>
           {children}
         </HoverCardPrimitive.Trigger>
 
+        <HoverCardPrimitive.Portal>
         <HoverCardPrimitive.Content
-          className="[transform-origin:var(--radix-hover-card-content-transform-origin)]"
-          side="top"
+          className="[transform-origin:var(--radix-hover-card-content-transform-origin)] z-50"
+          side={side}
           align="center"
           sideOffset={10}>
           <AnimatePresence>
@@ -119,6 +123,7 @@ export const LinkPreview = ({
             )}
           </AnimatePresence>
         </HoverCardPrimitive.Content>
+        </HoverCardPrimitive.Portal>
       </HoverCardPrimitive.Root>
     </>
   );
