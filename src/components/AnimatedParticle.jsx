@@ -33,6 +33,7 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
         id: burstRef.current.id + 1,
         start: performance.now(),
         active: true,
+        preset: burstRef.current.id % 3,
       };
     };
     document.addEventListener("hero-burst", burst);
@@ -45,15 +46,17 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
 
     const dpr = window.devicePixelRatio || 1;
     const ctx = canvas.getContext("2d");
-    const canvasWidth = size;
-    const canvasHeight = size;
+    // Particles always live in the 600px desktop coordinate space; the canvas
+    // is scaled down as a whole so every screen shows the same composition.
+    const canvasWidth = 600;
+    const canvasHeight = 600;
 
-    // Match the drawing buffer to device pixel ratio while keeping CSS size stable
-    canvas.width = canvasWidth * dpr;
-    canvas.height = canvasHeight * dpr;
-    canvas.style.width = `${canvasWidth}px`;
-    canvas.style.height = `${canvasHeight}px`;
-    ctx.scale(dpr, dpr);
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
+    canvas.style.width = `${size}px`;
+    canvas.style.height = `${size}px`;
+    const renderScale = (size / canvasWidth) * dpr;
+    ctx.scale(renderScale, renderScale);
 
     let animationId;
     // Guards against a stale image load from a previous effect run (e.g. the
@@ -94,7 +97,7 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
       const pixels = imageData.data;
 
       const lines = [];
-      const rowGap = size <= 320 ? 4 : 5;
+      const rowGap = 5;
 
       for (let y = 0; y < canvasHeight; y += rowGap) {
         let x = 0;
@@ -108,7 +111,7 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
             const b = pixels[i + 2];
             const brightness = (r + g + b) / (3 * 255);
 
-            const lineLength = Math.floor(3 + brightness * (size <= 320 ? 9 : 11));
+            const lineLength = Math.floor(3 + brightness * 11);
 
             const scatterRange = 10;
             const scatterX = (Math.random() - 0.5) * scatterRange;
@@ -155,23 +158,33 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
       const now = performance.now();
       const elapsed = (now - startTimeRef.current) / 1000;
 
-      // Shockwave: an impulse ring travels outward from the center,
-      // kicking each particle as the wavefront reaches it.
+      // Burst presets, rotating per click: 0 shockwave ring, 1 vortex swirl,
+      // 2 wind sweep left to right.
       const burst = burstRef.current;
       const waveCx = canvasWidth / 2;
       const waveCy = canvasHeight / 2;
       const maxWaveR = canvasWidth * 0.78;
       let waveR = -1;
+      let sweepX = -1;
+      let burstT = 0;
       if (burst.active) {
-        waveR = ((now - burst.start) / 1000) * canvasWidth * 1.5;
-        if (waveR > maxWaveR) {
-          burst.active = false;
-        } else {
-          ctx.strokeStyle = `rgba(28,185,215,${0.45 * (1 - waveR / maxWaveR)})`;
-          ctx.lineWidth = 1.5;
-          ctx.beginPath();
-          ctx.arc(waveCx, waveCy, waveR, 0, Math.PI * 2);
-          ctx.stroke();
+        burstT = (now - burst.start) / 1000;
+        if (burst.preset === 0 || burst.preset === 1) {
+          waveR = burstT * canvasWidth * 1.5;
+          if (waveR > maxWaveR) {
+            burst.active = false;
+          } else if (burst.preset === 0) {
+            ctx.strokeStyle = `rgba(28,185,215,${0.45 * (1 - waveR / maxWaveR)})`;
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.arc(waveCx, waveCy, waveR, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+        } else if (burst.preset === 2) {
+          sweepX = burstT * canvasWidth * 1.6;
+          if (sweepX > canvasWidth) {
+            burst.active = false;
+          }
         }
       }
 
@@ -206,13 +219,24 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
           const bdx = p.x - waveCx;
           const bdy = p.y - waveCy;
           const bdist = Math.sqrt(bdx * bdx + bdy * bdy) || 1;
-          if (bdist <= waveR) {
+          const kick = (fx, fy) => {
             p.burstId = burst.id;
             p.hitTime = now;
             p.flash = 1;
+            p.vx += fx;
+            p.vy += fy;
+          };
+          if (burst.preset === 0 && bdist <= waveR) {
             const force = 10 + Math.random() * 8;
-            p.vx += (bdx / bdist) * force;
-            p.vy += (bdy / bdist) * force;
+            kick((bdx / bdist) * force, (bdy / bdist) * force);
+          } else if (burst.preset === 1 && bdist <= waveR) {
+            const force = 9 + Math.random() * 6;
+            kick(
+              (-bdy / bdist) * force + (bdx / bdist) * force * 0.25,
+              (bdx / bdist) * force + (bdy / bdist) * force * 0.25
+            );
+          } else if (burst.preset === 2 && p.x <= sweepX) {
+            kick(8 + Math.random() * 7, (Math.random() - 0.5) * 4);
           }
         }
 
@@ -246,7 +270,7 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
             .toString(16)
             .padStart(2, "0")}`;
         }
-        ctx.lineWidth = size <= 280 ? 1.5 : 2;
+        ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(p.x + p.length, p.y);
@@ -263,24 +287,12 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
       mouseRef.current.active = true;
     };
 
-    const handleTouchMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const touch = e.touches[0];
-      const scaleX = canvasWidth / rect.width;
-      const scaleY = canvasHeight / rect.height;
-      mouseRef.current.x = (touch.clientX - rect.left) * scaleX;
-      mouseRef.current.y = (touch.clientY - rect.top) * scaleY;
-      mouseRef.current.active = true;
-    };
-
     const handleLeave = () => {
       mouseRef.current.active = false;
     };
 
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseleave", handleLeave);
-    canvas.addEventListener("touchmove", handleTouchMove);
-    canvas.addEventListener("touchend", handleLeave);
 
     draw();
 
@@ -289,8 +301,6 @@ const ParticlePortrait = ({ imageSrc = "/profile.png", color = "#1cb9d7" }) => {
       cancelAnimationFrame(animationId);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleLeave);
-      canvas.removeEventListener("touchmove", handleTouchMove);
-      canvas.removeEventListener("touchend", handleLeave);
     };
   }, [imageSrc, size]);
 

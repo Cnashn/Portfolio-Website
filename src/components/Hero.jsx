@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useAnimationControls, useScroll, useTransform } from "framer-motion";
 import { styles } from "../styles";
 import AnimatedParticle from "./AnimatedParticle";
 import Aurora from "./Aurora";
@@ -35,8 +35,15 @@ const Hero = () => {
 
   const greetingWords = tr.greeting.split(" ");
 
-  const burstParticles = () =>
+  const canControls = useAnimationControls();
+
+  const burstParticles = () => {
     document.dispatchEvent(new CustomEvent("hero-burst"));
+    canControls.start({
+      scale: [1, 0.9, 1],
+      transition: { duration: 0.35, ease: "easeOut" },
+    });
+  };
 
   return (
     <section
@@ -88,12 +95,14 @@ const Hero = () => {
               variants={wordVariant}
               initial="hidden"
               animate="show"
-              onClick={burstParticles}
-              whileTap={{ scale: 0.92 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
               title=""
-              className="inline-block cursor-pointer select-none"
+              className="inline-block"
             >
+              <motion.span
+                animate={canControls}
+                onClick={burstParticles}
+                className="inline-block cursor-pointer select-none"
+              >
               <GradientText
                 colors={["#1cb9d7", "#6ee7ff", "#fddb2a", "#804dee"]}
                 animationSpeed={3}
@@ -103,6 +112,7 @@ const Hero = () => {
               >
                 Can
               </GradientText>
+              </motion.span>
             </motion.span>
           </h1>
 
