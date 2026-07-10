@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { styles } from "../styles";
 import AnimatedParticle from "./AnimatedParticle";
+import Aurora from "./Aurora";
 import GradientText from "./GradientText/GradientText";
 import { useLang } from "../context/LanguageContext";
 import { t } from "../translations";
@@ -55,6 +56,14 @@ const Hero = () => {
         className="aurora-blob absolute bottom-0 right-0 w-[380px] h-[380px] rounded-full bg-[#804dee]/[0.05] blur-3xl pointer-events-none"
         style={{ animationDelay: "-9s" }}
       />
+      <div className="absolute inset-0 pointer-events-none opacity-50">
+        <Aurora
+          colorStops={["#fddb2a", "#1cb9d7", "#804dee"]}
+          amplitude={1.0}
+          blend={0.9}
+          speed={1.0}
+        />
+      </div>
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
