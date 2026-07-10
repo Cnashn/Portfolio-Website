@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { styles } from "../styles";
 import AnimatedParticle from "./AnimatedParticle";
+import GradientText from "./GradientText/GradientText";
 import { useLang } from "../context/LanguageContext";
 import { t } from "../translations";
 
@@ -82,9 +83,17 @@ const Hero = () => {
               whileTap={{ scale: 0.92 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
               title=""
-              className="text-gradient-cyan inline-block cursor-pointer select-none"
+              className="inline-block cursor-pointer select-none"
             >
-              Can
+              <GradientText
+                colors={["#1cb9d7", "#6ee7ff", "#fddb2a", "#804dee"]}
+                animationSpeed={3}
+                yoyo = {false}
+                direction = "horizontal"
+                className="!inline-flex !m-0 !font-black !rounded-none ![backdrop-filter:none]"
+              >
+                Can
+              </GradientText>
             </motion.span>
           </h1>
 

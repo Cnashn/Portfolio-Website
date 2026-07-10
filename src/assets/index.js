@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import github from "./github.png";
+import bluesky from "./bluesky.svg";
 import menu from "./menu.svg";
 import close from "./close.svg";
 import linkedin from "./linkedin.svg";
@@ -40,6 +41,7 @@ import goGateway from "./go-gateway.png";
 export {
   logo,
   github,
+  bluesky,
   menu,
   linkedin,
   close,

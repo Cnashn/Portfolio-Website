@@ -189,6 +189,7 @@ const projects = [
     ],
     image: ai_agent,
     source_code_link: "https://github.com/Cnashn/your-daily-sports-agent",
+    bluesky_link: "https://bsky.app/profile/dailysportsagent.bsky.social",
   },
   {
     name: "Go API Gateway",

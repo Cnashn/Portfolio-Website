@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
-import { github } from '../assets';
+import { github, bluesky } from '../assets';
 import { SectionWrapper } from '../hoc';
 import { projects } from '../constants';
 import { textVariant } from '../utils/motion';
@@ -24,7 +24,7 @@ const cardVariant = (index) => ({
   },
 });
 
-const ProjectCard = ({index, name, description, tags, image, source_code_link}) => {
+const ProjectCard = ({index, name, description, tags, image, source_code_link, bluesky_link}) => {
 
   return (
     <motion.div
@@ -46,7 +46,16 @@ const ProjectCard = ({index, name, description, tags, image, source_code_link}) 
               className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#010c2a]/70 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
-            <div className="absolute inset-0 flex justify-end items-start m-3">
+            <div className="absolute inset-0 flex justify-end items-start gap-2 m-3">
+              {bluesky_link && (
+                <button
+                  onClick={() => window.open(bluesky_link, "_blank")}
+                  aria-label={`${name} on Bluesky`}
+                  className="w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-[#010c2a]/70 backdrop-blur-md border border-white/20 hover:border-[#1cb9d7]/70 hover:bg-[#010c2a]/90 hover:scale-110 transition-all duration-300"
+                >
+                  <img src={bluesky} alt="bluesky" className="w-1/2 h-1/2 object-contain" />
+                </button>
+              )}
               <button
                 onClick={() => window.open(source_code_link, "_blank")}
                 aria-label={`${name} source code`}
