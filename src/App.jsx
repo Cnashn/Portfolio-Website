@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import {Contact, Experience, Hero, Navbar, Tech, Works} from './components';
+import {Contact, Experience, Footer, Hero, Navbar, Tech, Works} from './components';
 import { LanguageProvider } from './context/LanguageContext';
 import ScrollProgress from './components/ScrollProgress';
 import Terminal from './components/Terminal';
@@ -28,6 +28,7 @@ const App = () => {
           <Tech />
           <Works />
           <Contact />
+          <Footer />
         </div>
       </div>
     </LanguageProvider>
