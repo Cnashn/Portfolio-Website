@@ -9,7 +9,7 @@ import { Button as MovingBorderButton } from "./ui/moving-border";
 import githubPreview from "../assets/github-preview.jpg";
 import linkedinPreview from "../assets/linkedin-preview.jpg";
 
-const SECTION_IDS = ["about", "work", "tech", "projects", "contact"];
+const SECTION_IDS = ["work", "tech", "projects", "contact"];
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -75,7 +75,6 @@ const Navbar = () => {
 
   const rightLinks = [
     { id: "", title: tr.home },
-    { id: "about", title: tr.about },
     { id: "work", title: tr.work },
     { id: "tech", title: tr.tech },
     { id: "projects", title: tr.projects },

@@ -310,15 +310,14 @@ const Terminal = () => {
         print(["nice try."]);
         return;
       case "ls":
-        print(["about  work  tech  projects  contact"]);
+        print(["work  tech  projects  contact"]);
         return;
       case "ls -la":
       case "ls -al":
       case "ls -a":
       case "la":
         print([
-          "total 6",
-          "drwxr-xr-x  guest  staff  about",
+          "total 5",
           "drwxr-xr-x  guest  staff  work",
           "drwxr-xr-x  guest  staff  tech",
           "drwxr-xr-x  guest  staff  projects",

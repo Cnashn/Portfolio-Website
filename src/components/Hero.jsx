@@ -6,6 +6,9 @@ import Aurora from "./Aurora";
 import GradientText from "./GradientText/GradientText";
 import { useLang } from "../context/LanguageContext";
 import { t } from "../translations";
+import { LinkPreview } from "./ui/link-preview";
+import uottawaPreviewEn from "../assets/uottawa-preview-en.jpg";
+import uottawaPreviewFr from "../assets/uottawa-preview-fr.jpg";
 
 const wordVariant = {
   hidden: { opacity: 0, y: 28, filter: "blur(8px)" },
@@ -124,12 +127,25 @@ const Hero = () => {
           />
 
           <motion.p
-            className={`${styles.heroSubText} mt-5 text-secondary max-w-xl leading-[30px]`}
+            className={`${styles.heroSubText} mt-5 text-secondary max-w-xl leading-[30px] text-balance`}
             initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ delay: 1.0, duration: 0.7, ease: "easeOut" }}
           >
-            {tr.bio}
+            {tr.bio1}
+            <span className="text-[#1cb9d7] font-bold whitespace-nowrap">
+              <LinkPreview
+                url={lang === "fr" ? "https://www.uottawa.ca/fr" : "https://www.uottawa.ca/en"}
+                isStatic
+                imageSrc={lang === "fr" ? uottawaPreviewFr : uottawaPreviewEn}
+                className="link-underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {tr.bioUni}
+              </LinkPreview>
+            </span>
+            {tr.bio2}
           </motion.p>
         </div>
 
@@ -149,7 +165,7 @@ const Hero = () => {
         transition={{ delay: 1.8, duration: 0.8 }}
         className="absolute bottom-8 w-full flex justify-center items-center"
       >
-        <a href="#about" aria-label="Scroll down">
+        <a href="#work" aria-label="Scroll down">
           <div className="w-[30px] h-[52px] rounded-full border border-secondary/40 flex justify-center items-start pt-2 hover:border-[#1cb9d7]/60 transition-colors duration-300">
             <div className="scroll-dot w-1.5 h-1.5 rounded-full bg-[#1cb9d7]" />
           </div>

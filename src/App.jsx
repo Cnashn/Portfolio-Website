@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import {About, Contact, Experience, Hero, Navbar, Tech, Works} from './components';
+import {Contact, Experience, Hero, Navbar, Tech, Works} from './components';
 import { LanguageProvider } from './context/LanguageContext';
 import ScrollProgress from './components/ScrollProgress';
 import Terminal from './components/Terminal';
@@ -24,7 +24,6 @@ const App = () => {
               <BackgroundLines className="h-full w-full" />
             </div>
           </div>
-          <About />
           <Experience />
           <Tech />
           <Works />

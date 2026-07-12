@@ -2,7 +2,6 @@ export const t = {
   en: {
     nav: {
       home: "Home",
-      about: "About",
       work: "Work",
       tech: "Tech",
       projects: "Projects",
@@ -10,15 +9,9 @@ export const t = {
     },
     hero: {
       greeting: "Hi, I'm",
-      bio: "I'm a software engineer who builds and ships full-stack systems with a backend lean: async APIs, event-driven services, and LLM tooling in Python, Java, and TypeScript on PostgreSQL. I care about layered architecture, distributed systems design, and making software reliable over time.",
-    },
-    about: {
-      sub: "Introduction",
-      head: "Overview",
-      body1: "I'm interested in how software systems behave in practice, especially as they grow in complexity and scale. Through co-op roles and personal projects, I've built async APIs, event-driven microservices, and LLM-powered tools, with an emphasis on observability, testing, and understanding systems end to end.",
-      body2: "I recently graduated from the",
-      body3: "University of Ottawa",
-      body4: "and I'm looking for a software engineering role where I can contribute to production systems, collaborate with other engineers, and keep building on strong backend and distributed systems fundamentals.",
+      bio1: "I'm a backend and full-stack software engineer with an Honours BSc in Computer Science from the ",
+      bioUni: "University of Ottawa",
+      bio2: ". I build systems meant to run in production and stay reliable as they grow, and I'm currently looking for my next engineering role.",
     },
     experience: {
       sub: "What I have done so far",
@@ -114,7 +107,6 @@ export const t = {
   fr: {
     nav: {
       home: "Accueil",
-      about: "À propos",
       work: "Expérience",
       tech: "Tech",
       projects: "Projets",
@@ -122,15 +114,9 @@ export const t = {
     },
     hero: {
       greeting: "Bonjour, je suis",
-      bio: "Je suis un ingénieur logiciel qui conçoit et livre des systèmes full-stack avec une orientation backend : API asynchrones, services événementiels et outillage LLM en Python, Java et TypeScript sur PostgreSQL. Je me soucie de l'architecture en couches, de la conception de systèmes distribués et de la fiabilité du logiciel dans le temps.",
-    },
-    about: {
-      sub: "Introduction",
-      head: "Aperçu",
-      body1: "Je m'intéresse au comportement des systèmes logiciels en pratique, notamment à mesure qu'ils gagnent en complexité et en échelle. À travers des stages coopératifs et des projets personnels, j'ai construit des API asynchrones, des microservices événementiels et des outils basés sur des LLM, avec un accent sur l'observabilité, les tests et la compréhension des systèmes de bout en bout.",
-      body2: "J'ai récemment obtenu mon diplôme de l'",
-      body3: "Université d'Ottawa",
-      body4: "et je recherche un poste en ingénierie logicielle où je pourrai contribuer à des systèmes en production, collaborer avec d'autres ingénieurs, et continuer à renforcer de solides bases en backend et en systèmes distribués.",
+      bio1: "Je suis un ingénieur logiciel backend et full-stack, titulaire d'un baccalauréat spécialisé en informatique de l'",
+      bioUni: "Université d'Ottawa",
+      bio2: ". Je conçois des systèmes faits pour tourner en production et rester fiables à mesure qu'ils évoluent, et je suis actuellement à la recherche de mon prochain poste en génie logiciel.",
     },
     experience: {
       sub: "Mon parcours jusqu'ici",
