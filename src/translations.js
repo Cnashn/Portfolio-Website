@@ -92,6 +92,11 @@ export const t = {
           "An API gateway and reverse proxy written in Go with the standard library. Redis-backed token bucket rate limiting kept atomic with a Lua script, a hand-rolled per-upstream circuit breaker, and Prometheus/Grafana dashboards. In local load tests it processed 13,700 requests per second while enforcing route rate limits.",
       },
       {
+        name: "Contact Manager",
+        description:
+          "A multi-user contact manager with an ASP.NET Core Web API backend and a React frontend. JWT authentication with per-user data isolation, contact groups, photo uploads, birthday tracking, CSV import/export with per-row error reporting, and a printable PDF address book. Built with EF Core and SQL Server on the backend, TypeScript, Tailwind CSS and TanStack Query on the client.",
+      },
+      {
         name: "Cell Type Classification from Single-Cell RNA-seq Data",
         description:
           "A cell-type classification project using the scDeepInsight deep learning framework to identify cell types from single-cell RNA-sequencing data across multiple datasets.",
@@ -195,6 +200,11 @@ export const t = {
         name: "Passerelle API en Go",
         description:
           "Une passerelle API et un proxy inverse écrits en Go avec la bibliothèque standard. Limitation de débit par token bucket dans Redis, rendue atomique par un script Lua, un circuit breaker par service implémenté à la main, et des tableaux de bord Prometheus/Grafana. En tests de charge locaux, elle a traité 13 700 requêtes par seconde tout en appliquant les limites de débit.",
+      },
+      {
+        name: "Gestionnaire de contacts",
+        description:
+          "Un gestionnaire de contacts multi-utilisateur avec une API ASP.NET Core et une interface React. Authentification JWT avec isolation des données par utilisateur, groupes de contacts, téléversement de photos, suivi des anniversaires, import/export CSV avec rapport d'erreurs par ligne, et un carnet d'adresses PDF imprimable. Construit avec EF Core et SQL Server côté serveur, TypeScript, Tailwind CSS et TanStack Query côté client.",
       },
       {
         name: "Classification de types cellulaires à partir de données scRNA-seq",

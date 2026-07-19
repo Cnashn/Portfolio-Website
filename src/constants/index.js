@@ -28,7 +28,8 @@ import {
   springRabbitMQ,
   jobsRag,
   ai_agent,
-  goGateway
+  goGateway,
+  contactManager
 } from "../assets";
 
 
@@ -211,6 +212,27 @@ const projects = [
     ],
     image: goGateway,
     source_code_link: "https://github.com/Cnashn/gateway",
+  },
+  {
+    name: "Contact Manager",
+    description:
+      "A multi-user contact manager with an ASP.NET Core Web API backend and a React frontend. JWT authentication with per-user data isolation, contact groups, photo uploads, birthday tracking, CSV import/export with per-row error reporting, and a printable PDF address book. Built with EF Core and SQL Server on the backend, TypeScript, Tailwind CSS and TanStack Query on the client.",
+    tags: [
+      {
+        name: "ASP.NET Core",
+        color: "text-purple-400",
+      },
+      {
+        name: "SQL Server",
+        color: "text-cyan-400",
+      },
+      {
+        name: "React",
+        color: "text-green-500",
+      },
+    ],
+    image: contactManager,
+    source_code_link: "https://github.com/Cnashn/contact-manager",
   },
   {
     name: "Cell Type Classification from Single-Cell RNA-seq Data",
