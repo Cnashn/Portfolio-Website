@@ -94,7 +94,7 @@ export const t = {
       {
         name: "Contact Manager",
         description:
-          "A multi-user contact manager with an ASP.NET Core Web API backend and a React frontend. JWT authentication with per-user data isolation, contact groups, photo uploads, birthday tracking, CSV import/export with per-row error reporting, and a printable PDF address book. Built with EF Core and SQL Server on the backend, TypeScript, Tailwind CSS and TanStack Query on the client.",
+          "A multi-user contact manager with a .NET 10 Web API backend and a React frontend. JWT authentication with per-user data isolation, contact groups, photo uploads, birthday tracking, CSV import/export with per-row error reporting, and a printable PDF address book. Built with EF Core and SQL Server on the backend, TypeScript, Tailwind CSS and TanStack Query on the client.",
       },
       {
         name: "Cell Type Classification from Single-Cell RNA-seq Data",
@@ -204,7 +204,7 @@ export const t = {
       {
         name: "Gestionnaire de contacts",
         description:
-          "Un gestionnaire de contacts multi-utilisateur avec une API ASP.NET Core et une interface React. Authentification JWT avec isolation des données par utilisateur, groupes de contacts, téléversement de photos, suivi des anniversaires, import/export CSV avec rapport d'erreurs par ligne, et un carnet d'adresses PDF imprimable. Construit avec EF Core et SQL Server côté serveur, TypeScript, Tailwind CSS et TanStack Query côté client.",
+          "Un gestionnaire de contacts multi-utilisateur avec une API Web .NET 10 et une interface React. Authentification JWT avec isolation des données par utilisateur, groupes de contacts, téléversement de photos, suivi des anniversaires, import/export CSV avec rapport d'erreurs par ligne, et un carnet d'adresses PDF imprimable. Construit avec EF Core et SQL Server côté serveur, TypeScript, Tailwind CSS et TanStack Query côté client.",
       },
       {
         name: "Classification de types cellulaires à partir de données scRNA-seq",

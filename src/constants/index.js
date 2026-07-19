@@ -216,10 +216,10 @@ const projects = [
   {
     name: "Contact Manager",
     description:
-      "A multi-user contact manager with an ASP.NET Core Web API backend and a React frontend. JWT authentication with per-user data isolation, contact groups, photo uploads, birthday tracking, CSV import/export with per-row error reporting, and a printable PDF address book. Built with EF Core and SQL Server on the backend, TypeScript, Tailwind CSS and TanStack Query on the client.",
+      "A multi-user contact manager with a .NET 10 Web API backend and a React frontend. JWT authentication with per-user data isolation, contact groups, photo uploads, birthday tracking, CSV import/export with per-row error reporting, and a printable PDF address book. Built with EF Core and SQL Server on the backend, TypeScript, Tailwind CSS and TanStack Query on the client.",
     tags: [
       {
-        name: "ASP.NET Core",
+        name: ".NET",
         color: "text-purple-400",
       },
       {
