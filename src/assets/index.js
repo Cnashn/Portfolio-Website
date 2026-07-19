@@ -26,6 +26,8 @@ import redis from "./tech/redis.png";
 import rabbitmq from "./tech/rabbitmq.png";
 import kubernetes from "./tech/kubernetes.png";
 import github_actions from "./tech/github_actions.png";
+import csharp from "./tech/csharp.png";
+import dotnet from "./tech/dotnet.png";
 import uottawa from "./company/uottawa.png";
 import march_networks from "./company/march_networks.png";
 import portfolio_website from "./portfolio_website.png";
@@ -65,6 +67,8 @@ export {
   rabbitmq,
   kubernetes,
   github_actions,
+  csharp,
+  dotnet,
   react,
   uottawa,
   march_networks,

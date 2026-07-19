@@ -29,7 +29,9 @@ import {
   jobsRag,
   ai_agent,
   goGateway,
-  contactManager
+  contactManager,
+  csharp,
+  dotnet
 } from "../assets";
 
 
@@ -39,8 +41,10 @@ const technologies = [
   { name: "TypeScript", icon: typescript },
   { name: "Java", icon: java },
   { name: "C++", icon: cpp },
+  { name: "C#", icon: csharp },
   { name: "Go", icon: go },
   { name: "FastAPI", icon: fastapi },
+  { name: ".NET", icon: dotnet },
   { name: "PostgreSQL", icon: postgresql },
   { name: "Docker", icon: docker },
   { name: "AWS", icon: aws },
