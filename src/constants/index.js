@@ -227,7 +227,7 @@ const projects = [
         color: "text-purple-400",
       },
       {
-        name: "SQL Server",
+        name: "C#",
         color: "text-cyan-400",
       },
       {
