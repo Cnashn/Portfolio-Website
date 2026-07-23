@@ -77,7 +77,7 @@ const ProjectCard = ({index, name, description, tags, image, source_code_link, b
                 key={tag.name}
                 className={`text-[11px] font-medium tracking-wide px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/10 group-hover:border-white/20 transition-colors duration-300 ${tag.color}`}
               >
-                #{tag.name}
+                {tag.name}
               </span>
             ))}
           </div>
