@@ -77,7 +77,7 @@ const Hero = () => {
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className={`${styles.paddingX} absolute inset-0 top-[60px] max-w-7xl mx-auto flex flex-col items-center justify-center gap-6 sm:gap-8 lg:gap-12 lg:flex-row lg:justify-start`}
+        className={`${styles.paddingX} absolute inset-0 top-[76px] lg:top-[60px] max-w-7xl mx-auto flex flex-col items-center justify-start gap-6 sm:gap-8 lg:gap-12 lg:flex-row lg:justify-start`}
       >
         <div className="flex-none lg:flex-1 text-left">
           <h1 className={styles.heroHeadText}>

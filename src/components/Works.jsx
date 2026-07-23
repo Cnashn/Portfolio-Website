@@ -31,7 +31,7 @@ const ProjectCard = ({index, name, description, tags, image, source_code_link, b
       variants={cardVariant(index)}
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 260, damping: 24 }}
-      className="sm:w-[360px] w-full h-full"
+      className="sm:w-[360px] w-full"
     >
 
       <BackgroundGradient containerClassName="rounded-2xl p-[2px] h-full" className="h-full">
