@@ -4,8 +4,13 @@
 // assets (files.matsimon.dev). Thanks to Mat Simon for the approach and shapes.
 const SHAPE_NAMES = ["logo", "brackets", "imac"];
 const HEART_SHAPE = "heart"; // hidden shape revealed by the name-click easter egg
-const COLOR_TOP = "#804dee";
-const COLOR_BOTTOM = "#1cb9d7";
+const COLOR_PURPLE = "#804dee";
+const COLOR_BLUE = "#1cb9d7";
+// One of these is picked per page load, so the gradient reads either way up.
+const COLOR_PRESETS = [
+  { top: COLOR_PURPLE, bottom: COLOR_BLUE },
+  { top: COLOR_BLUE, bottom: COLOR_PURPLE },
+];
 
 const PARTICLE_COUNT = 30000;
 const Z_OFFSET = -7;
@@ -82,7 +87,7 @@ export class ParticleScene {
   #containerInfo;
   #dpr = 1;
   #reduced = false;
-  #colors = { top: COLOR_TOP, bottom: COLOR_BOTTOM };
+  #colors = COLOR_PRESETS[Math.floor(Math.random() * COLOR_PRESETS.length)];
   #history = [];
   #cache = new Map();
   #shape;
