@@ -9,6 +9,7 @@ const COLOR_BOTTOM = "#1cb9d7";
 
 const PARTICLE_COUNT = 30000;
 const Z_OFFSET = -7;
+const Z_DIST = -Z_OFFSET;
 const FOV = Math.PI / 4;
 const ROTATION_SPEED = 0.14;
 const JITTER_STRENGTH = 0.07;
@@ -19,7 +20,6 @@ const CONVERGE_RATE = 8.59;
 const MAX_DELTA = 1 / 30;
 const CURSOR_RADIUS_SQ = 0.5;
 const CURSOR_RADIUS = Math.sqrt(CURSOR_RADIUS_SQ);
-const CURSOR_EDGE_FADE = CURSOR_RADIUS * 0.25;
 const CURSOR_PUSH = 0.5;
 const SPAWN_SCALE = 1.4;
 const MODEL_SCALE = 1.5;
@@ -260,8 +260,14 @@ export class ParticleScene {
 
       for (let i = 0; i < shape.length / 3; i++) {
         const j = i * 3;
-        const toMouseX = positions[j] - mouseX;
-        const toMouseY = positions[j + 1] - mouseY;
+        const currentZ = positions[j + 2] - Z_OFFSET;
+        // The cursor field follows the view ray instead of the world Z axis. A
+        // world-aligned field meets the near and far sides of a shape at two
+        // different screen positions, which reads as two separate holes.
+        const depth = (Z_DIST - currentZ) / Z_DIST;
+        const cursorRadius = CURSOR_RADIUS * depth;
+        const toMouseX = positions[j] - mouseX * depth;
+        const toMouseY = positions[j + 1] - mouseY * depth;
         const mouseDistSq = toMouseX * toMouseX + toMouseY * toMouseY;
 
         // One new target per interval, not one per frame: easing toward a value
@@ -283,20 +289,24 @@ export class ParticleScene {
         const targetY = shape[j + 1] * MODEL_SCALE + jitterOffset[j + 1];
         const targetZ = (shape[j + 0] * sin + shape[j + 2] * cos) * MODEL_SCALE + jitterOffset[j + 2];
 
-        if (mouseDistSq < CURSOR_RADIUS_SQ) {
+        // Cursor influence tapers across the whole radius and is blended against
+        // the pull back to target rather than replacing it. Switching between the
+        // two left a zero-force surface at the rim that particles could reach but
+        // never leave, packing them into a tube spanning the depth of the cloud.
+        let influence = 0;
+        if (mouseDistSq < cursorRadius * cursorRadius) {
           const dist = Math.max(Math.sqrt(mouseDistSq), 1e-4);
-          // Fade the last sliver of the radius to zero, otherwise particles on the
-          // boundary get kicked out, spring back, and buzz in a ring round the cursor.
-          const edge = Math.min(1, (CURSOR_RADIUS - dist) / CURSOR_EDGE_FADE);
-          const push = (1 - dist) * CURSOR_PUSH * edge * edge * (3 - 2 * edge);
-          positions[j + 0] += (toMouseX / dist) * push + jitterOffset[j + 0] / 2;
-          positions[j + 1] += (toMouseY / dist) * push + jitterOffset[j + 1] / 2;
-        } else {
-          positions[j + 0] += (targetX - positions[j + 0]) * convergence;
-          positions[j + 1] += (targetY - positions[j + 1]) * convergence;
-          const currentZ = positions[j + 2] - Z_OFFSET;
-          positions[j + 2] = currentZ + (targetZ - currentZ) * convergence + Z_OFFSET;
+          const edge = 1 - dist / cursorRadius;
+          influence = edge * edge * (3 - 2 * edge);
+          const push = (1 - dist) * CURSOR_PUSH * influence;
+          positions[j + 0] += (toMouseX / dist) * push + (jitterOffset[j + 0] / 2) * influence;
+          positions[j + 1] += (toMouseY / dist) * push + (jitterOffset[j + 1] / 2) * influence;
         }
+
+        const pull = convergence * (1 - influence);
+        positions[j + 0] += (targetX - positions[j + 0]) * pull;
+        positions[j + 1] += (targetY - positions[j + 1]) * pull;
+        positions[j + 2] = currentZ + (targetZ - currentZ) * pull + Z_OFFSET;
       }
     };
 
