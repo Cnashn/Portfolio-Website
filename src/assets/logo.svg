@@ -5,16 +5,16 @@
     <linearGradient id="csFillC" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%"  stop-color="#00B1D2"/>
       <stop offset="50%" stop-color="#00B1D2"/>
-      <stop offset="58%" stop-color="#FDDB27"/>
-      <stop offset="100%" stop-color="#FDDB27"/>
+      <stop offset="58%" stop-color="#804dee"/>
+      <stop offset="100%" stop-color="#804dee"/>
     </linearGradient>
 
     <!-- S: less navy (push navy later) -->
     <linearGradient id="csFillS" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%"  stop-color="#00B1D2"/>
       <stop offset="50%" stop-color="#00B1D2"/>
-      <stop offset="58%" stop-color="#FDDB27"/>
-      <stop offset="100%" stop-color="#FDDB27"/>
+      <stop offset="58%" stop-color="#804dee"/>
+      <stop offset="100%" stop-color="#804dee"/>
     </linearGradient>
 
     <!-- Soft inner highlight -->
@@ -41,7 +41,7 @@
     <!-- Thin stroke gradient -->
     <linearGradient id="csStroke" x1="0" y1="1" x2="1" y2="0">
       <stop offset="0%" stop-color="#07163F" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#E5C100" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#5b32b8" stop-opacity="0.35"/>
     </linearGradient>
 
     <!-- Gloss mask -->

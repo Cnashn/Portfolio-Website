@@ -1,4 +1,3 @@
-import { AnnCanvas, BallCanvas} from './canvas';
 import Hero from './Hero';
 import Navbar from './Navbar';
 import Tech from './Tech';
@@ -15,8 +14,6 @@ export {
   Tech,
   Experience,
   Works,
-  BallCanvas,
-  AnnCanvas,
   AnimatedParticle,
   Contact,
   Footer,

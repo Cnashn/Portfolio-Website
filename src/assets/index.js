@@ -19,7 +19,6 @@ import fastapi from "./tech/fastapi.png";
 import spring from "./tech/spring.png";
 import javascript from "./tech/javascript.png";
 import go from "./tech/go.png";
-import vite from "./tech/Vite.js.png";
 import prometheus from "./tech/prometheus.png";
 import grafana from "./tech/grafana.png";
 import redis from "./tech/redis.png";
@@ -30,9 +29,8 @@ import csharp from "./tech/csharp.png";
 import dotnet from "./tech/dotnet.png";
 import uottawa from "./company/uottawa.png";
 import march_networks from "./company/march_networks.png";
-import portfolio_website from "./portfolio_website.png";
+import portfolio_website from "./portfolio_website.jpg";
 import scdeepinsight from "./scdeepinsight.png";
-import f1 from "./f1-race-predictor.png";
 import gymprog from "./gymprog.png";
 import semanticCache from "./semantic-cache.png";
 import springRabbitMQ from "./springrabbitmq.png";
@@ -60,7 +58,6 @@ export {
   spring,
   javascript,
   go,
-  vite,
   prometheus,
   grafana,
   redis,
@@ -74,7 +71,6 @@ export {
   march_networks,
   portfolio_website,
   scdeepinsight,
-  f1,
   java,
   typescript,
   gymprog,
