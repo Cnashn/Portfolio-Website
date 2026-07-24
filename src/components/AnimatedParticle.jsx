@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import ParticleWorker from "./particleWorker.js?worker";
 import { ParticleScene, dispatchSceneMessage } from "./particleScene";
 
+const RENDER_PAD = 1.8;
+
 const squareSize = () => {
   const width = window.innerWidth;
   if (width <= 480) return Math.min(320, width - 24);
@@ -16,17 +18,29 @@ const AnimatedParticle = () => {
     const host = hostRef.current;
     if (!host) return;
 
+    host.style.position = "relative";
+    host.style.overflow = "visible";
+
     const canvas = document.createElement("canvas");
-    canvas.className = "block w-full h-full cursor-crosshair";
+    canvas.className = "block";
+    canvas.style.position = "absolute";
+    canvas.style.left = "50%";
+    canvas.style.top = "50%";
+    canvas.style.transform = "translate(-50%, -50%)";
+    canvas.style.pointerEvents = "none";
     host.appendChild(canvas);
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isTouch = window.matchMedia("(hover: none)").matches;
 
     const applySize = () => {
       const size = squareSize();
       host.style.width = `${size}px`;
       host.style.height = `${size}px`;
-      return { width: size, height: size };
+      const padded = size * RENDER_PAD;
+      canvas.style.width = `${padded}px`;
+      canvas.style.height = `${padded}px`;
+      return { width: padded, height: padded, pad: RENDER_PAD };
     };
 
     let worker = null;
@@ -59,8 +73,8 @@ const AnimatedParticle = () => {
       const rect = canvas.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
       const aspect = rect.width / rect.height;
-      const x = ((event.clientX - rect.left) / rect.width) * aspect - aspect / 2;
-      const y = -((event.clientY - rect.top) / rect.height) * 1.25 + 0.625;
+      const x = (((event.clientX - rect.left) / rect.width) * aspect - aspect / 2) * RENDER_PAD;
+      const y = (-((event.clientY - rect.top) / rect.height) * 1.25 + 0.625) * RENDER_PAD;
       send({ type: "mouse", position: [x, y] });
     };
     const onPointerEnd = () => {
@@ -75,8 +89,13 @@ const AnimatedParticle = () => {
     const onVisibility = () => {
       send({ type: "visibility", visible: !document.hidden });
     };
+    const onBurst = () => {
+      send({ type: "burst" });
+    };
 
-    if (!reduced) {
+    document.addEventListener("hero-burst", onBurst);
+
+    if (!reduced && !isTouch) {
       window.addEventListener("pointermove", onPointerMove);
       window.addEventListener("pointerup", onPointerEnd);
       window.addEventListener("pointercancel", onPointerEnd);
@@ -92,6 +111,7 @@ const AnimatedParticle = () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", onVisibility);
+      document.removeEventListener("hero-burst", onBurst);
       if (worker) worker.terminate();
       if (scene) scene.destroy();
       canvas.remove();

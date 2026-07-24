@@ -1,17 +1,24 @@
-const SHAPE_NAMES = ["photo", "logo"];
-const PALETTE = ["#1cb9d7", "#6ee7ff", "#4c68d5", "#804dee"];
+// Interactive 3D particle hero built following Mat Simon's technique:
+// https://www.matsimon.dev/blog/building-an-interactive-3d-hero-animation
+// The curly-brackets, iMac and heart point clouds are Mat Simon's own shape
+// assets (files.matsimon.dev). Thanks to Mat Simon for the approach and shapes.
+const SHAPE_NAMES = ["logo", "brackets", "imac"];
+const HEART_SHAPE = "heart"; // hidden shape revealed by the name-click easter egg
+const COLOR_TOP = "#804dee";
+const COLOR_BOTTOM = "#1cb9d7";
 
-const PARTICLE_COUNT = 10000;
+const PARTICLE_COUNT = 30000;
 const Z_OFFSET = -7;
 const FOV = Math.PI / 4;
-const ROTATION_SPEED = 0.22;
+const ROTATION_SPEED = 0.14;
 const JITTER_STRENGTH = 0.07;
 const JITTER_EASE = 0.06;
 const JITTER_INTERVAL_BASE = 400;
 const JITTER_INTERVAL_SPREAD = 1000;
-const CURSOR_RADIUS_SQ = 1;
+const CURSOR_RADIUS_SQ = 0.5;
 const CURSOR_PUSH = 0.5;
 const SPAWN_SCALE = 1.4;
+const MODEL_SCALE = 1.5;
 const SHAPE_INTERVAL = 6000;
 
 const VERTEX_SHADER = `attribute vec3 a_position;
@@ -71,14 +78,16 @@ export class ParticleScene {
   #containerInfo;
   #dpr = 1;
   #reduced = false;
-  #colors = { top: PALETTE[0], bottom: PALETTE[1] };
+  #colors = { top: COLOR_TOP, bottom: COLOR_BOTTOM };
   #history = [];
   #cache = new Map();
   #shape;
+  #shapeName;
   #gl;
   #program;
   #projection = [];
   #shapeTimer;
+  #burstPending = false;
 
   async init({ canvas, containerInfo, scroll, devicePixelRatio, reduced }) {
     this.#canvas = canvas;
@@ -117,6 +126,18 @@ export class ParticleScene {
       this.#cache.set(name, new Float32Array(buffer));
     }
     this.#shape = this.#cache.get(name);
+    this.#shapeName = name;
+  }
+
+  burst() {
+    if (!this.#gl) return;
+    const heart = this.#cache.get(HEART_SHAPE);
+    if (heart) {
+      this.#shape = heart;
+      this.#shapeName = HEART_SHAPE;
+    }
+    this.#burstPending = true;
+    if (!this.#reduced) this.#scheduleNextShape();
   }
 
   destroy() {
@@ -128,7 +149,6 @@ export class ParticleScene {
 
   async #createScene() {
     const positions = new Float32Array(PARTICLE_COUNT * 3);
-    this.#pickColors();
 
     const gl = this.#canvas.getContext("webgl", { alpha: true, antialias: true });
     if (!gl) throw new Error("WebGL not supported");
@@ -158,16 +178,22 @@ export class ParticleScene {
     gl.useProgram(program);
 
     gl.uniform1f(gl.getUniformLocation(program, "u_z_offset"), Z_OFFSET);
-    gl.uniform1f(gl.getUniformLocation(program, "u_scale"), this.#dpr * 2);
+    gl.uniform1f(gl.getUniformLocation(program, "u_scale"), this.#dpr * 1.4);
     this.#applyColors();
 
     await this.loadNewShape();
     if (!this.#shape) throw new Error("Shape was not loaded.");
 
+    // Preload the hidden heart shape for the name-click easter egg.
+    fetch(`/points/${HEART_SHAPE}.dat`)
+      .then((r) => (r.ok ? r.arrayBuffer() : null))
+      .then((b) => b && this.#cache.set(HEART_SHAPE, new Float32Array(b)))
+      .catch(() => {});
+
     for (let i = 0; i < PARTICLE_COUNT; i++) {
-      positions[i * 3 + 0] = this.#shape[i * 3 + 0] * SPAWN_SCALE;
-      positions[i * 3 + 1] = this.#shape[i * 3 + 1] * SPAWN_SCALE;
-      positions[i * 3 + 2] = this.#shape[i * 3 + 2] + Z_OFFSET;
+      positions[i * 3 + 0] = this.#shape[i * 3 + 0] * SPAWN_SCALE * MODEL_SCALE;
+      positions[i * 3 + 1] = this.#shape[i * 3 + 1] * SPAWN_SCALE * MODEL_SCALE;
+      positions[i * 3 + 2] = this.#shape[i * 3 + 2] * MODEL_SCALE + Z_OFFSET;
     }
 
     const positionBuffer = gl.createBuffer();
@@ -187,14 +213,32 @@ export class ParticleScene {
     const updateParticles = (shape) => {
       const [delta, elapsed] = frameTime();
       angle += rotationSpeed * delta;
-      const convergence = Math.min(2, delta * 8);
+      const convergence = Math.min(1, delta * 8);
+
+      if (this.#burstPending) {
+        this.#burstPending = false;
+        for (let k = 0; k < positions.length; k += 3) {
+          const px = positions[k];
+          const py = positions[k + 1];
+          const pz = positions[k + 2] - Z_OFFSET;
+          const d = Math.hypot(px, py, pz) || 0.001;
+          const kick = 1.4 + Math.random() * 1.0;
+          positions[k] += (px / d) * kick;
+          positions[k + 1] += (py / d) * kick;
+          positions[k + 2] += (pz / d) * kick * 0.6;
+        }
+      }
+
+      // The CS logo never rotates (always front-facing, always readable);
+      // brackets and iMac keep the full spin.
+      const activeAngle = this.#shapeName === "logo" ? 0 : angle;
 
       let cos, sin;
-      if (this.scroll <= 0) {
-        cos = Math.cos(angle);
-        sin = Math.sin(angle);
+      if (this.#shapeName === "logo" || this.scroll <= 0) {
+        cos = Math.cos(activeAngle);
+        sin = Math.sin(activeAngle);
       } else {
-        const turned = angle + Math.min(this.scroll, 500) / 100;
+        const turned = activeAngle + Math.min(this.scroll, 500) / 100;
         cos = Math.cos(turned);
         sin = Math.sin(turned);
       }
@@ -218,9 +262,9 @@ export class ParticleScene {
         jitterOffset[j + 1] += (jitterTarget[j + 1] - jitterOffset[j + 1]) * JITTER_EASE;
         jitterOffset[j + 2] += (jitterTarget[j + 2] - jitterOffset[j + 2]) * JITTER_EASE;
 
-        const targetX = shape[j + 0] * cos - shape[j + 2] * sin + jitterOffset[j + 0];
-        const targetY = shape[j + 1] + jitterOffset[j + 1];
-        const targetZ = shape[j + 0] * sin + shape[j + 2] * cos + jitterOffset[j + 2];
+        const targetX = (shape[j + 0] * cos - shape[j + 2] * sin) * MODEL_SCALE + jitterOffset[j + 0];
+        const targetY = shape[j + 1] * MODEL_SCALE + jitterOffset[j + 1];
+        const targetZ = (shape[j + 0] * sin + shape[j + 2] * cos) * MODEL_SCALE + jitterOffset[j + 2];
 
         if (mouseDistSq < CURSOR_RADIUS_SQ) {
           const dist = Math.sqrt(mouseDistSq);
@@ -262,6 +306,7 @@ export class ParticleScene {
   #resize() {
     const gl = this.#gl;
     if (!gl || !this.#containerInfo || !this.#canvas) return;
+    const pad = this.#containerInfo.pad ?? 1;
     this.#canvas.width = this.#containerInfo.width * this.#dpr;
     this.#canvas.height = this.#containerInfo.height * this.#dpr;
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -273,6 +318,8 @@ export class ParticleScene {
       0.1,
       100
     );
+    this.#projection[0] *= 1 / pad;
+    this.#projection[5] *= 1 / pad;
   }
 
   #perspective(fov, aspect, near, far) {
@@ -297,11 +344,6 @@ export class ParticleScene {
       throw new Error(`Shader compile error: ${log}`);
     }
     return shader;
-  }
-
-  #pickColors() {
-    const colors = [...PALETTE].sort(() => Math.random() - 0.5);
-    this.#colors = { top: colors[0], bottom: colors[1] };
   }
 
   #applyColors() {
@@ -333,6 +375,9 @@ export const dispatchSceneMessage = (scene, data) => {
       break;
     case "visibility":
       scene.isVisible = data.visible;
+      break;
+    case "burst":
+      scene.burst();
       break;
   }
 };
