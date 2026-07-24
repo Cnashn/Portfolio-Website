@@ -68,7 +68,7 @@ const Hero = () => {
       />
       <div className="absolute inset-0 pointer-events-none opacity-50">
         <Aurora
-          colorStops={["#1cb9d7", "#7b95f4", "#804dee"]}
+          colorStops={["#1cb9d7", "#4c68d5", "#804dee"]}
           amplitude={1.0}
           blend={0.9}
           speed={1.2}
@@ -107,8 +107,8 @@ const Hero = () => {
                 className="inline-block cursor-pointer select-none"
               >
               <GradientText
-                colors={["#1cb9d7", "#6ee7ff","#4c68d5" ,"#804dee"]}
-                animationSpeed={3}
+                colors={["#1cb9d7" ,"#804dee"]}
+                animationSpeed={2}
                 yoyo = {false}
                 direction = "horizontal"
                 className="!inline-flex !m-0 !font-black !rounded-none ![backdrop-filter:none]"
