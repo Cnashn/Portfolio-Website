@@ -30,6 +30,47 @@ const HELLO_REPLIES = [
   "we need to talk about your social skills.",
 ];
 
+const FORTUNES = [
+  { text: "Talk is cheap. Show me the code.", by: "- Linus Torvalds" },
+  {
+    text: "Programs must be written for people to read, and only incidentally for machines to execute.",
+    by: "- Harold Abelson",
+  },
+  {
+    text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+    by: "- Martin Fowler",
+  },
+  { text: "Make it work, make it right, make it fast.", by: "- Kent Beck" },
+  {
+    text: "There are only two hard things in computer science: cache invalidation and naming things.",
+    by: "- Phil Karlton",
+  },
+  { text: "Premature optimization is the root of all evil.", by: "- Donald Knuth" },
+  { text: "Weeks of coding can save you hours of planning.", by: "- anonymous" },
+  { text: "It works on my machine.", by: "- every developer, ever" },
+  { text: "There's no place like 127.0.0.1.", by: "- anonymous" },
+  {
+    text: "To understand recursion, you must first understand recursion.",
+    by: "- anonymous",
+  },
+  {
+    text: "99 little bugs in the code. Take one down, patch it around... 127 little bugs in the code.",
+    by: "- anonymous",
+  },
+  {
+    text: "A good programmer looks both ways before crossing a one-way street.",
+    by: "- anonymous",
+  },
+  {
+    text: "Testing shows the presence, not the absence of bugs.",
+    by: "- Edsger W. Dijkstra",
+  },
+  {
+    text: "Debugging is twice as hard as writing the code in the first place.",
+    by: "- Brian Kernighan",
+  },
+];
+
 const TRAIN = String.raw`      ====        ________
   _D _|  |_______/        \__I_I_____===__|________
    |(_)---  |   H\________/ |   |        =|___ ___|
@@ -365,6 +406,12 @@ const Terminal = () => {
       case "sl":
         setMode("sl");
         return;
+      case "fortune": {
+        const f = FORTUNES[Math.floor(Math.random() * FORTUNES.length)];
+        print([f.text]);
+        print([f.by], "accent");
+        return;
+      }
       case "clear":
         setLines([]);
         return;
