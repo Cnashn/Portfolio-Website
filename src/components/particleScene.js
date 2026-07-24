@@ -12,10 +12,14 @@ const Z_OFFSET = -7;
 const FOV = Math.PI / 4;
 const ROTATION_SPEED = 0.14;
 const JITTER_STRENGTH = 0.07;
-const JITTER_EASE = 0.06;
+const JITTER_EASE_RATE = 3.71;
 const JITTER_INTERVAL_BASE = 400;
 const JITTER_INTERVAL_SPREAD = 1000;
+const CONVERGE_RATE = 8.59;
+const MAX_DELTA = 1 / 30;
 const CURSOR_RADIUS_SQ = 0.5;
+const CURSOR_RADIUS = Math.sqrt(CURSOR_RADIUS_SQ);
+const CURSOR_EDGE_FADE = CURSOR_RADIUS * 0.25;
 const CURSOR_PUSH = 0.5;
 const SPAWN_SCALE = 1.4;
 const MODEL_SCALE = 1.5;
@@ -157,12 +161,18 @@ export class ParticleScene {
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.DEPTH_TEST);
 
-    const start = performance.now();
-    let last = performance.now();
-    const frameTime = () => {
-      const delta = (performance.now() - last) / 1000;
-      last = performance.now();
-      return [delta, performance.now() - start];
+    // Seeded from the first frame timestamp: in a worker the rAF clock does not
+    // necessarily share an origin with performance.now().
+    let start = -1;
+    let last = -1;
+    const frameTime = (now) => {
+      if (start < 0) {
+        start = now;
+        last = now;
+      }
+      const delta = Math.min((now - last) / 1000, MAX_DELTA);
+      last = now;
+      return [delta, now - start];
     };
 
     const vertexShader = this.#compileShader(gl.VERTEX_SHADER, VERTEX_SHADER);
@@ -209,11 +219,13 @@ export class ParticleScene {
     const jitterStrength = this.#reduced ? 0 : JITTER_STRENGTH;
     const jitterOffset = new Float32Array(PARTICLE_COUNT * 3);
     const jitterTarget = new Float32Array(PARTICLE_COUNT * 3);
+    const jitterBucket = new Int32Array(PARTICLE_COUNT).fill(-1);
 
-    const updateParticles = (shape) => {
-      const [delta, elapsed] = frameTime();
+    const updateParticles = (shape, now) => {
+      const [delta, elapsed] = frameTime(now);
       angle += rotationSpeed * delta;
-      const convergence = Math.min(1, delta * 8);
+      const convergence = 1 - Math.exp(-CONVERGE_RATE * delta);
+      const jitterEase = 1 - Math.exp(-JITTER_EASE_RATE * delta);
 
       if (this.#burstPending) {
         this.#burstPending = false;
@@ -252,25 +264,33 @@ export class ParticleScene {
         const toMouseY = positions[j + 1] - mouseY;
         const mouseDistSq = toMouseX * toMouseX + toMouseY * toMouseY;
 
-        const interval = JITTER_INTERVAL_BASE + Math.sin(i) * JITTER_INTERVAL_SPREAD;
-        if (Math.floor(elapsed / interval) % 2 === 0) {
+        // One new target per interval, not one per frame: easing toward a value
+        // that is re-rolled every frame is what made the particles buzz.
+        const interval =
+          JITTER_INTERVAL_BASE + (Math.sin(i) * 0.5 + 0.5) * JITTER_INTERVAL_SPREAD;
+        const bucket = (elapsed / interval) | 0;
+        if (bucket !== jitterBucket[i]) {
+          jitterBucket[i] = bucket;
           jitterTarget[j + 0] = Math.pow(Math.random(), 2) * jitterStrength;
           jitterTarget[j + 1] = Math.pow(Math.random(), 2) * jitterStrength;
           jitterTarget[j + 2] = Math.pow(Math.random(), 2) * jitterStrength;
         }
-        jitterOffset[j + 0] += (jitterTarget[j + 0] - jitterOffset[j + 0]) * JITTER_EASE;
-        jitterOffset[j + 1] += (jitterTarget[j + 1] - jitterOffset[j + 1]) * JITTER_EASE;
-        jitterOffset[j + 2] += (jitterTarget[j + 2] - jitterOffset[j + 2]) * JITTER_EASE;
+        jitterOffset[j + 0] += (jitterTarget[j + 0] - jitterOffset[j + 0]) * jitterEase;
+        jitterOffset[j + 1] += (jitterTarget[j + 1] - jitterOffset[j + 1]) * jitterEase;
+        jitterOffset[j + 2] += (jitterTarget[j + 2] - jitterOffset[j + 2]) * jitterEase;
 
         const targetX = (shape[j + 0] * cos - shape[j + 2] * sin) * MODEL_SCALE + jitterOffset[j + 0];
         const targetY = shape[j + 1] * MODEL_SCALE + jitterOffset[j + 1];
         const targetZ = (shape[j + 0] * sin + shape[j + 2] * cos) * MODEL_SCALE + jitterOffset[j + 2];
 
         if (mouseDistSq < CURSOR_RADIUS_SQ) {
-          const dist = Math.sqrt(mouseDistSq);
-          const push = (1 - dist) * CURSOR_PUSH;
-          positions[j + 0] += (toMouseX / dist) * push + jitterTarget[j + 0] / 2;
-          positions[j + 1] += (toMouseY / dist) * push + jitterTarget[j + 1] / 2;
+          const dist = Math.max(Math.sqrt(mouseDistSq), 1e-4);
+          // Fade the last sliver of the radius to zero, otherwise particles on the
+          // boundary get kicked out, spring back, and buzz in a ring round the cursor.
+          const edge = Math.min(1, (CURSOR_RADIUS - dist) / CURSOR_EDGE_FADE);
+          const push = (1 - dist) * CURSOR_PUSH * edge * edge * (3 - 2 * edge);
+          positions[j + 0] += (toMouseX / dist) * push + jitterOffset[j + 0] / 2;
+          positions[j + 1] += (toMouseY / dist) * push + jitterOffset[j + 1] / 2;
         } else {
           positions[j + 0] += (targetX - positions[j + 0]) * convergence;
           positions[j + 1] += (targetY - positions[j + 1]) * convergence;
@@ -280,11 +300,11 @@ export class ParticleScene {
       }
     };
 
-    const render = () => {
+    const render = (now = performance.now()) => {
       if (!this.#gl || !this.#shape) return;
-      updateParticles(this.#shape);
+      updateParticles(this.#shape, now);
       gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-      gl.bufferData(gl.ARRAY_BUFFER, positions, gl.DYNAMIC_DRAW);
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, positions);
       gl.uniformMatrix4fv(matrixLocation, false, this.#projection);
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
       gl.drawArrays(gl.POINTS, 0, PARTICLE_COUNT);
