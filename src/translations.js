@@ -9,7 +9,7 @@ export const t = {
     },
     hero: {
       greeting: "Hi, I'm",
-      bio1: "I'm a backend and full-stack software engineer with an Honours BSc in Computer Science from the ",
+      bio1: "I'm a full-stack software engineer with an Honours BSc in Computer Science from the ",
       bioUni: "University of Ottawa",
       bio2: ". I build systems meant to run in production and stay reliable as they grow, and I'm currently looking for my next engineering role.",
     },
@@ -119,7 +119,7 @@ export const t = {
     },
     hero: {
       greeting: "Bonjour, je suis",
-      bio1: "Je suis un ingénieur logiciel backend et full-stack, titulaire d'un baccalauréat spécialisé en informatique de l'",
+      bio1: "Je suis un ingénieur logiciel full-stack, titulaire d'un baccalauréat spécialisé en informatique de l'",
       bioUni: "Université d'Ottawa",
       bio2: ". Je conçois des systèmes faits pour tourner en production et rester fiables à mesure qu'ils évoluent, et je suis actuellement à la recherche de mon prochain poste en génie logiciel.",
     },
