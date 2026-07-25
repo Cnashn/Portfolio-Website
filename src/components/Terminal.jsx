@@ -12,6 +12,11 @@ import SnakeGame from "./SnakeGame";
 import BrickBreakerGame from "./BrickBreakerGame";
 import { EncryptedText } from "./ui/encrypted-text";
 import { Button as MovingBorderButton } from "./ui/moving-border";
+import { WAVE_DURATION } from "./particleScene";
+
+// While the hero wave runs the panel drifts right and fades out, so it stops
+// covering the model without shrinking into a clipped stub.
+const TUCK_DRIFT = 56;
 
 const PROMPT = "guest@can.sh:~$";
 
@@ -172,6 +177,7 @@ const Terminal = () => {
   const [open, setOpen] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const [maximized, setMaximized] = useState(false);
+  const [tucked, setTucked] = useState(false);
   const [mode, setMode] = useState("shell"); // shell | vim | dino | snake | brick | matrix | sl
   const [lines, setLines] = useState([]);
   const [input, setInput] = useState("");
@@ -186,6 +192,7 @@ const Terminal = () => {
   const dragX = useMotionValue(0);
   const dragY = useMotionValue(0);
   const closeRef = useRef(() => {});
+  const tuckHomeRef = useRef(0);
 
   const snapHome = () => {
     animate(dragX, 0, { type: "spring", stiffness: 300, damping: 28 });
@@ -213,6 +220,23 @@ const Terminal = () => {
     snapHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [maximized]);
+
+  // Drift aside for the hero wave, then return to wherever it was dragged to.
+  useEffect(() => {
+    if (tucked) {
+      tuckHomeRef.current = dragX.get();
+      animate(dragX, tuckHomeRef.current + TUCK_DRIFT, {
+        duration: 0.4,
+        ease: [0.4, 0, 0.2, 1],
+      });
+    } else {
+      animate(dragX, tuckHomeRef.current, {
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1],
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tucked]);
 
   useEffect(() => {
     console.log(
@@ -406,6 +430,19 @@ const Terminal = () => {
       case "sl":
         setMode("sl");
         return;
+      case "chroma": {
+        print(["Warming up the RGB."], "accent");
+        // The hero is at the top of the page, so bring it back into view first
+        // and let the smooth scroll land before the wave starts.
+        const delay = window.scrollY > 0 ? 700 : 0;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setTimeout(() => document.dispatchEvent(new CustomEvent("hero-chroma")), delay);
+        // Leave the line on screen long enough to read before the panel gets
+        // out of the way; it stays in the scrollback once the panel returns.
+        setTimeout(() => setTucked(true), delay + 900);
+        setTimeout(() => setTucked(false), delay + WAVE_DURATION);
+        return;
+      }
       case "fortune": {
         const f = FORTUNES[Math.floor(Math.random() * FORTUNES.length)];
         print([f.text]);
@@ -491,6 +528,7 @@ const Terminal = () => {
     setOpen(false);
     setMode("shell");
     setMinimized(false);
+    setTucked(false);
     setVimMsg(null);
     dragX.set(0);
     dragY.set(0);
@@ -534,10 +572,12 @@ const Terminal = () => {
             dragElastic={0}
             style={{ x: dragX, y: dragY }}
             initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1, width: panelW }}
+            animate={{ opacity: tucked ? 0 : 1, scale: 1, width: panelW }}
             exit={{ opacity: 0, scale: 0.96 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="terminal-mono fixed bottom-[70px] right-5 z-40 max-w-[calc(100vw-2.5rem)] rounded-xl overflow-hidden border border-[#1cb9d7]/25 bg-[#010c2a]/95 backdrop-blur-xl shadow-[0_16px_60px_rgba(0,0,0,0.5),0_0_30px_rgba(28,185,215,0.08)]"
+            className={`terminal-mono fixed bottom-[70px] right-5 z-40 max-w-[calc(100vw-2.5rem)] rounded-xl overflow-hidden border border-[#1cb9d7]/25 bg-[#010c2a]/95 backdrop-blur-xl shadow-[0_16px_60px_rgba(0,0,0,0.5),0_0_30px_rgba(28,185,215,0.08)] ${
+              tucked ? "pointer-events-none" : ""
+            }`}
           >
             <div
               onPointerDown={(e) => dragControls.start(e)}

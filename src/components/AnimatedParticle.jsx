@@ -92,8 +92,12 @@ const AnimatedParticle = () => {
     const onBurst = () => {
       send({ type: "burst" });
     };
+    const onChroma = () => {
+      send({ type: "chroma" });
+    };
 
     document.addEventListener("hero-burst", onBurst);
+    document.addEventListener("hero-chroma", onChroma);
 
     if (!reduced && !isTouch) {
       window.addEventListener("pointermove", onPointerMove);
@@ -112,6 +116,7 @@ const AnimatedParticle = () => {
       window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", onVisibility);
       document.removeEventListener("hero-burst", onBurst);
+      document.removeEventListener("hero-chroma", onChroma);
       if (worker) worker.terminate();
       if (scene) scene.destroy();
       canvas.remove();

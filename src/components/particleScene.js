@@ -29,6 +29,51 @@ const CURSOR_PUSH = 0.5;
 const SPAWN_SCALE = 1.4;
 const MODEL_SCALE = 1.5;
 const SHAPE_INTERVAL = 6000;
+// `chroma` terminal command: light flowing up the model, colour only. A cosine
+// in model height scrolls upward, and the shader blends the resting gradient
+// coordinate toward it. Every colour produced is still a mix of the two preset
+// colours, so the wave never leaves the palette.
+const WAVE_PERIOD = 2800; // ms for one wavelength to travel the model
+const WAVE_CYCLES = 3;
+export const WAVE_DURATION = WAVE_PERIOD * WAVE_CYCLES;
+// Amplitude is how far the wave pulls the gradient off its resting shape.
+const WAVE_AMPLITUDE = 0.9;
+const WAVE_FADE = 600; // ms of eased ramp in and out, so it never pops
+// Stops the wave runs through, anchored at both ends by the brand colours. The
+// warm three are the terminal's own traffic-light colours, so the palette is
+// drawn from the site rather than invented. Only WAVE_SPAN of the ramp is on
+// the model at once, so it reads as light flowing through, not as fixed bands.
+export const WAVE_PALETTE = [
+  "#1cb9d7", // brand cyan
+  "#28c840", // green
+  "#febc2e", // yellow
+  "#ff8f3f", // orange
+  "#ff5f57", // red
+  "#804dee", // brand purple
+];
+const WAVE_SPAN = 0.5;
+
+const hexToRgb = (hex) => {
+  const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return match
+    ? [parseInt(match[1], 16), parseInt(match[2], 16), parseInt(match[3], 16)]
+    : null;
+};
+
+const glslVec3 = (hex) =>
+  `vec3(${hexToRgb(hex)
+    .map((value) => (value / 255).toFixed(4))
+    .join(", ")})`;
+
+// Cumulative mixes, each eased, so the ramp is smooth across stops rather than
+// showing a crease at every one. The last stop wraps to the first, which is
+// what lets the wave repeat without a seam.
+const WAVE_RAMP = WAVE_PALETTE.map(
+  (_, i) =>
+    `  c = mix(c, ${glslVec3(
+      WAVE_PALETTE[(i + 1) % WAVE_PALETTE.length]
+    )}, smoothstep(0.0, 1.0, clamp(t - ${i}.0, 0.0, 1.0)));`
+).join("\n");
 
 const VERTEX_SHADER = `attribute vec3 a_position;
 uniform mat4 u_matrix;
@@ -59,6 +104,17 @@ varying float v_gradient;
 
 uniform vec3 u_color_top;
 uniform vec3 u_color_bottom;
+uniform float u_wave_phase;
+uniform float u_wave_amp;
+
+const float WAVE_SPAN = ${WAVE_SPAN.toFixed(4)};
+
+vec3 wavePalette(float x) {
+  float t = fract(x) * ${WAVE_PALETTE.length}.0;
+  vec3 c = ${glslVec3(WAVE_PALETTE[0])};
+${WAVE_RAMP}
+  return c;
+}
 
 void main() {
   vec2 coord = gl_PointCoord - vec2(0.5, 0.5);
@@ -68,16 +124,18 @@ void main() {
   }
 
   vec3 color = mix(u_color_bottom, u_color_top, v_gradient);
+
+  // v_gradient is the particle's height in the model, 0 at the bottom, so
+  // subtracting the phase makes the ramp travel upward and each particle
+  // changes purely as a function of its own height. Uniform branch, so the
+  // resting colour path is untouched while the wave is not running.
+  if (u_wave_amp > 0.0) {
+    color = mix(color, wavePalette(v_gradient * WAVE_SPAN - u_wave_phase), u_wave_amp);
+  }
   float alpha = max(0.3, v_z);
   gl_FragColor = vec4(color * alpha, alpha);
 }`;
 
-const hexToRgb = (hex) => {
-  const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return match
-    ? [parseInt(match[1], 16), parseInt(match[2], 16), parseInt(match[3], 16)]
-    : null;
-};
 
 export class ParticleScene {
   mouse = [-1000, -1000];
@@ -97,6 +155,7 @@ export class ParticleScene {
   #projection = [];
   #shapeTimer;
   #burstPending = false;
+  #chromaPending = false;
 
   async init({ canvas, containerInfo, scroll, devicePixelRatio, reduced }) {
     this.#canvas = canvas;
@@ -149,6 +208,11 @@ export class ParticleScene {
     if (!this.#reduced) this.#scheduleNextShape();
   }
 
+  chroma() {
+    if (!this.#gl) return;
+    this.#chromaPending = true;
+  }
+
   destroy() {
     clearTimeout(this.#shapeTimer);
     this.#gl?.getExtension("WEBGL_lose_context")?.loseContext();
@@ -194,6 +258,10 @@ export class ParticleScene {
 
     gl.uniform1f(gl.getUniformLocation(program, "u_z_offset"), Z_OFFSET);
     gl.uniform1f(gl.getUniformLocation(program, "u_scale"), this.#dpr * 1.4);
+    const wavePhaseLocation = gl.getUniformLocation(program, "u_wave_phase");
+    const waveAmpLocation = gl.getUniformLocation(program, "u_wave_amp");
+    gl.uniform1f(wavePhaseLocation, 0);
+    gl.uniform1f(waveAmpLocation, 0);
     this.#applyColors();
 
     await this.loadNewShape();
@@ -220,6 +288,7 @@ export class ParticleScene {
     const matrixLocation = gl.getUniformLocation(program, "u_matrix");
 
     let angle = 0;
+    let waveStart = -1;
     const rotationSpeed = this.#reduced ? 0 : ROTATION_SPEED;
     const jitterStrength = this.#reduced ? 0 : JITTER_STRENGTH;
     const jitterOffset = new Float32Array(PARTICLE_COUNT * 3);
@@ -243,6 +312,27 @@ export class ParticleScene {
           positions[k] += (px / d) * kick;
           positions[k + 1] += (py / d) * kick;
           positions[k + 2] += (pz / d) * kick * 0.6;
+        }
+      }
+
+      // The rAF clock is the only timebase shared with the worker, so the wave
+      // is driven off `elapsed` rather than performance.now(). Re-triggering
+      // mid-wave would jump the phase, so a wave in flight swallows it.
+      if (this.#chromaPending) {
+        this.#chromaPending = false;
+        if (waveStart < 0) waveStart = elapsed;
+      }
+      if (waveStart >= 0) {
+        const t = elapsed - waveStart;
+        if (t >= WAVE_DURATION) {
+          waveStart = -1;
+          gl.uniform1f(waveAmpLocation, 0);
+        } else {
+          // Phase wraps every period; the cosine is 2*pi-periodic, so the wrap
+          // cannot be seen and each cycle flows into the next.
+          const ramp = Math.min(1, t / WAVE_FADE, (WAVE_DURATION - t) / WAVE_FADE);
+          gl.uniform1f(wavePhaseLocation, (t / WAVE_PERIOD) % 1);
+          gl.uniform1f(waveAmpLocation, ramp * ramp * (3 - 2 * ramp) * WAVE_AMPLITUDE);
         }
       }
 
@@ -413,6 +503,9 @@ export const dispatchSceneMessage = (scene, data) => {
       break;
     case "burst":
       scene.burst();
+      break;
+    case "chroma":
+      scene.chroma();
       break;
   }
 };

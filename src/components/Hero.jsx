@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useAnimationControls, useScroll, useTransform } from "framer-motion";
 import { styles } from "../styles";
 import AnimatedParticle from "./AnimatedParticle";
+import { WAVE_DURATION, WAVE_PALETTE } from "./particleScene";
 import Aurora from "./Aurora";
 import GradientText from "./GradientText/GradientText";
 import { useLang } from "../context/LanguageContext";
@@ -24,10 +25,30 @@ const wordVariant = {
   }),
 };
 
+const NAME_COLORS = ["#1cb9d7", "#804dee"];
+
 const Hero = () => {
   const { lang } = useLang();
   const tr = t[lang].hero;
   const sectionRef = useRef(null);
+
+  // The name picks up the wave's palette for as long as the wave runs. The
+  // terminal owns the trigger, so this listens for the same event the particle
+  // scene does rather than the two components talking to each other.
+  const [chroma, setChroma] = useState(false);
+  useEffect(() => {
+    let timer;
+    const onChroma = () => {
+      setChroma(true);
+      clearTimeout(timer);
+      timer = setTimeout(() => setChroma(false), WAVE_DURATION);
+    };
+    document.addEventListener("hero-chroma", onChroma);
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("hero-chroma", onChroma);
+    };
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -107,7 +128,7 @@ const Hero = () => {
                 className="inline-block cursor-pointer select-none"
               >
               <GradientText
-                colors={["#1cb9d7" ,"#804dee"]}
+                colors={chroma ? WAVE_PALETTE : NAME_COLORS}
                 animationSpeed={2}
                 yoyo = {false}
                 direction = "horizontal"
