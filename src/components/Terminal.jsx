@@ -226,7 +226,7 @@ const Terminal = () => {
     if (tucked) {
       tuckHomeRef.current = dragX.get();
       animate(dragX, tuckHomeRef.current + TUCK_DRIFT, {
-        duration: 0.4,
+        duration: 0.25,
         ease: [0.4, 0, 0.2, 1],
       });
     } else {
@@ -437,9 +437,9 @@ const Terminal = () => {
         const delay = window.scrollY > 0 ? 700 : 0;
         window.scrollTo({ top: 0, behavior: "smooth" });
         setTimeout(() => document.dispatchEvent(new CustomEvent("hero-chroma")), delay);
-        // Leave the line on screen long enough to read before the panel gets
-        // out of the way; it stays in the scrollback once the panel returns.
-        setTimeout(() => setTucked(true), delay + 900);
+        // Brief beat so the line registers, then the panel gets out of the way;
+        // it stays in the scrollback once the panel returns.
+        setTimeout(() => setTucked(true), delay + 250);
         setTimeout(() => setTucked(false), delay + WAVE_DURATION);
         return;
       }
