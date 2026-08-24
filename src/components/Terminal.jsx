@@ -348,7 +348,7 @@ const Terminal = () => {
       case "whoami":
         print([
           "guest",
-          "you're browsing the portfolio of Can Sahin: a software engineer with a backend lean, based in Ottawa.",
+          "you're browsing the portfolio of Can Şahin: a software engineer with a backend lean, based in Ottawa.",
         ]);
         return;
       case "stack":

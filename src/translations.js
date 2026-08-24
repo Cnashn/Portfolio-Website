@@ -1,9 +1,9 @@
 export const t = {
   en: {
     meta: {
-      title: "Can Sahin (Can Şahin) | Software Engineer",
+      title: "Can Şahin | Software Engineer",
       description:
-        "I'm Can Sahin (Can Şahin), a full-stack software engineer with an Honours BSc in Computer Science from the University of Ottawa.",
+        "I'm Can Şahin, a full-stack software engineer with an Honours BSc in Computer Science from the University of Ottawa.",
     },
     nav: {
       home: "Home",
@@ -116,9 +116,9 @@ export const t = {
 
   fr: {
     meta: {
-      title: "Can Sahin (Can Şahin) | Ingénieur logiciel",
+      title: "Can Şahin | Ingénieur logiciel",
       description:
-        "Je suis Can Sahin (Can Şahin), ingénieur logiciel full-stack titulaire d'un baccalauréat spécialisé en informatique de l'Université d'Ottawa.",
+        "Je suis Can Şahin, ingénieur logiciel full-stack titulaire d'un baccalauréat spécialisé en informatique de l'Université d'Ottawa.",
     },
     nav: {
       home: "Accueil",
