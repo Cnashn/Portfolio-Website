@@ -134,7 +134,7 @@ const Hero = () => {
                 direction = "horizontal"
                 className="!inline-flex !m-0 !font-black !rounded-none ![backdrop-filter:none]"
               >
-                Can
+                Can Şahin
               </GradientText>
               </motion.span>
             </motion.span>
