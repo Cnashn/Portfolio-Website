@@ -32,40 +32,68 @@ const block = (lang) => {
     )
     .join("");
 
+  // The hero fills the viewport so that during the load window a visitor sees
+  // only the name and bio, roughly where the real hero puts them. Everything
+  // else flows below the fold: still in the document, just not on screen.
   return (
     `<div id="seo-fallback">` +
+    `<div class="seo-hero">` +
     `<p class="seo-brand">${esc(NAME)}</p>` +
-    `<h1>${esc(tr.hero.greeting)} ${esc(NAME)}</h1>` +
+    `<div class="seo-hero-body">` +
+    `<h1>${esc(tr.hero.greeting)} <span class="seo-name">${esc(NAME)}</span></h1>` +
     `<p class="seo-bio">${esc(bio)}</p>` +
+    `</div>` +
+    `</div>` +
     `<h2>${esc(tr.experience.head)}</h2>${experiences}` +
     `<h2>${esc(tr.works.head)}</h2>${projects}` +
     `</div>`
   );
 };
 
+// Background is left transparent so the body gradient from the render-blocking
+// stylesheet shows through: the fallback then sits on the same ground the real
+// hero does, which keeps the handover to React from reading as a flash.
 const FALLBACK_CSS = `
 #seo-fallback {
-  min-height: 100vh;
-  padding: 2rem 1.5rem;
-  background: #010c2a;
+  padding: 1.5rem 1.5rem 4rem;
   color: #ffffff;
   font-family: "Space Grotesk", sans-serif;
 }
-#seo-fallback .seo-brand { font-weight: 700; }
+#seo-fallback .seo-hero {
+  min-height: calc(100vh - 3rem);
+  display: flex;
+  flex-direction: column;
+}
+#seo-fallback .seo-brand {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+#seo-fallback .seo-hero-body { margin-top: 22vh; max-width: 32rem; }
 #seo-fallback h1 {
   font-family: "Archivo", sans-serif;
   font-weight: 900;
-  font-size: clamp(34px, 6vw, 72px);
+  font-size: clamp(34px, 5vw, 72px);
   line-height: 1.2;
   letter-spacing: -0.02em;
-  margin: 6rem 0 1rem;
+  margin-bottom: 1.5rem;
+  max-width: 26rem;
 }
-#seo-fallback .seo-bio { max-width: 34rem; color: #a6afc3; line-height: 1.6; }
+#seo-fallback .seo-name {
+  display: block;
+  background-image: linear-gradient(to right, #1cb9d7, #804dee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+#seo-fallback .seo-bio { color: #a6afc3; line-height: 1.6; }
 #seo-fallback h2 { margin: 2rem 0 0.5rem; font-family: "Archivo", sans-serif; }
 #seo-fallback h3 { margin-top: 1rem; }
 #seo-fallback p, #seo-fallback li { color: #a6afc3; line-height: 1.6; }
 #seo-fallback ul { padding-left: 1.25rem; }
-@media (min-width: 1024px) { #seo-fallback { padding: 2rem 4rem; } }`;
+@media (min-width: 640px) {
+  #seo-fallback { padding-left: 4rem; padding-right: 4rem; }
+}`;
 
 const rewriteHeadForFr = (html) => {
   const { title, description } = t.fr.meta;
