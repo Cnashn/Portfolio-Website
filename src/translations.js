@@ -45,7 +45,7 @@ export const t = {
     },
     experiences: [
       {
-        title: "IT Analyst",
+        title: "Junior Solution Analyst",
         company_name: "University of Ottawa",
         date: "September 2023 - April 2024",
         points: [
@@ -59,9 +59,9 @@ export const t = {
         company_name: "March Networks",
         date: "January 2023 - April 2023",
         points: [
-          "Automated manual compliance review by ~80% for legal and R&D teams by automating Black Duck report generation and formatting in Python, replacing manual downloads and Excel macro workflows.",
+          "Ported the legal team's Excel macro formatting of Black Duck reports to Python, validated the output against the macros, and automated naming of the downloaded reports.",
           "Cut release license reviews from manual inspection of 3,000+ components to an automated diff by building a Python tool that compared component, version, and license IDs across release versions and surfaced only medium and high risk licenses for legal sign-off.",
-          "Reduced comparison runtime by ~50% on large releases by reworking the matching logic after one-by-one comparison proved too slow at scale.",
+          "Reworked the matching logic after one-by-one comparison proved too slow on releases with thousands of components.",
         ],
       },
     ],
@@ -160,7 +160,7 @@ export const t = {
     },
     experiences: [
       {
-        title: "Analyste TI",
+        title: "Analyste de solutions junior",
         company_name: "Université d'Ottawa",
         date: "Septembre 2023 - Avril 2024",
         points: [
@@ -174,9 +174,9 @@ export const t = {
         company_name: "March Networks",
         date: "Janvier 2023 - Avril 2023",
         points: [
-          "Automatisation du contrôle de conformité manuel à hauteur de ~80 % pour les équipes juridiques et R&D via le développement d'un outil Python de génération et de mise en forme de rapports Black Duck, remplaçant les téléchargements manuels et les flux de travail basés sur des macros Excel.",
+          "Portage en Python de la mise en forme des rapports Black Duck réalisée par les macros Excel de l'équipe juridique, avec validation des résultats par rapport aux macros, et automatisation du nommage des rapports téléchargés.",
           "Passage de l'inspection manuelle de plus de 3 000 composants à une comparaison automatisée pour les revues de licences en construisant un outil Python qui comparait les composants, versions et identifiants de licence entre les versions de release et ne faisait ressortir que les licences à risque moyen et élevé pour approbation juridique.",
-          "Réduction d'environ 50 % du temps de comparaison sur les grosses releases en retravaillant la logique de correspondance après que la comparaison un à un se soit révélée trop lente à grande échelle.",
+          "Refonte de la logique de correspondance après que la comparaison un à un s'est révélée trop lente sur des releases de plusieurs milliers de composants.",
         ],
       },
     ],

@@ -62,7 +62,7 @@ const technologies = [
 
 const experiences = [
   {
-    title: "IT Analyst",
+    title: "Junior Solution Analyst",
     company_name: "University of Ottawa",
     icon: uottawa,
     iconBg: "#ffffffff",
@@ -80,9 +80,9 @@ const experiences = [
     iconBg: "#ffffffff",
     date: "January 2023 - April 2023",
     points: [
-      "Automated manual compliance review by ~80% for legal and R&D teams by automating Black Duck report generation and formatting in Python, replacing manual downloads and Excel macro workflows.",
+      "Ported the legal team's Excel macro formatting of Black Duck reports to Python, validated the output against the macros, and automated naming of the downloaded reports.",
       "Cut release license reviews from manual inspection of 3,000+ components to an automated diff by building a Python tool that compared component, version, and license IDs across release versions and surfaced only medium and high risk licenses for legal sign-off.",
-      "Reduced comparison runtime by ~50% on large releases by reworking the matching logic after one-by-one comparison proved too slow at scale.",
+      "Reworked the matching logic after one-by-one comparison proved too slow on releases with thousands of components.",
     ],
   },
 ];
