@@ -33,7 +33,7 @@ export const t = {
     contact: {
       sub: "Get in Touch",
       head: "Contact",
-      email_label: "cansahin2001@gmail.com",
+      email_label: "cansahindev7@gmail.com",
       tagline: "Feel free to reach out with any inquiries or questions!",
       name: "Name",
       email: "Email Address",
@@ -148,7 +148,7 @@ export const t = {
     contact: {
       sub: "Me contacter",
       head: "Contact",
-      email_label: "cansahin2001@gmail.com",
+      email_label: "cansahindev7@gmail.com",
       tagline: "N'hésitez pas à me contacter pour toute question ou demande!",
       name: "Nom",
       email: "Adresse courriel",

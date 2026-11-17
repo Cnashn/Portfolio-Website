@@ -358,7 +358,7 @@ const Terminal = () => {
         print(projects.map((p) => `  * ${p.name}`));
         return;
       case "contact":
-        print(["cansahin2001@gmail.com", "or use the form in the contact section."]);
+        print(["cansahindev7@gmail.com", "or use the form in the contact section."]);
         return;
       case "sudo hire-me":
       case "sudo hire me":
